@@ -1,12 +1,13 @@
 <script setup>
-import CalendarView from './views/CalendarView.vue'
+import HomeHeader from './components/HomeHeader.vue'
 </script>
 
 <template>
-  <CalendarView />
-</template>
-<template>
   <HomeHeader />
+
+  <v-app>
+    <router-view />
+  </v-app>
 </template>
 
 <style scoped></style>
