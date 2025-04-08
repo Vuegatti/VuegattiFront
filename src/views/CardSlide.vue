@@ -1,17 +1,27 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useAccount } from '@/stores/account'
 
 //계좌 정보 임시로
-const datas = [
-  { bank: '국민은행', balance: 1000000 },
-  { bank: '신한은행', balance: 500000 },
-  { bank: '우리은행', balance: 300000 },
-  { bank: '하나은행', balance: 700000 },
-  { bank: '농협은행', balance: 200000 },
-]
-const cards = ref(datas)
+// const datas = [
+//   { bank: '국민은행', balance: 1000000 },
+//   { bank: '신한은행', balance: 500000 },
+//   { bank: '우리은행', balance: 300000 },
+//   { bank: '하나은행', balance: 700000 },
+//   { bank: '농협은행', balance: 200000 },
+// ]
+const cards = ref([]) //계좌 배열
+
+const { fetchAccount, accountInfo } = useAccount() // Pinia 스토어에서 가져온 계좌 정보에서 구조분해 할당
+const bankNames = {
+  KB: '국민은행',
+  Shinhan: '신한은행',
+  Woori: '우리은행',
+  Hana: '하나은행',
+  Nonghyup: '농협은행',
+}
 </script>
 
 <template>

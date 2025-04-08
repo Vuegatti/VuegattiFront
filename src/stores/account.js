@@ -16,5 +16,5 @@ export const useAccount = defineStore('accountInfo', () => {
     }
   }
 
-  return { history, fetchAccount }
+  return { accountInfo, fetchAccount }
 })

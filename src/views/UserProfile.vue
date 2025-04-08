@@ -50,6 +50,6 @@ const total = computed(() => income.value - expense.value)
 
 <style scoped>
 .profile {
-  color: #f8f4f2;
+  color: var(--color-text);
 }
 </style>

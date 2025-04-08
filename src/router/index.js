@@ -4,6 +4,11 @@ import HomePage from '@/views/HomePage.vue'
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    {
+      path: '/homepage',
+      name: 'HomePage',
+      component: HomePage,
+    },
     // { path: '/', component: () => import('@/views/Home.vue') },
     // { path: '/calendar', component: () => import('@/views/Calendar.vue') },
     // {
