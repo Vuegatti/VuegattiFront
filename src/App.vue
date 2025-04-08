@@ -1,10 +1,12 @@
 <script setup>
-import { ref } from 'vue'
 import CalendarView from './views/CalendarView.vue'
 </script>
 
 <template>
   <CalendarView />
+</template>
+<template>
+  <HomeHeader />
 </template>
 
 <style scoped></style>
