@@ -1,0 +1,40 @@
+<script setup>
+import BarChart from './BarChart.vue'
+import CardSlide from './CardSlide.vue'
+import PieChart from './PieChart.vue'
+import UserProfile from './UserProfile.vue'
+</script>
+
+<template>
+  <div class="container">
+    <div class="left">
+      <UserProfile />
+    </div>
+    <div class="right">
+      <CardSlide />
+      <BarChart />
+      <PieChart />
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.container {
+  display: flex;
+  background-color: var(--color-background);
+  /* main.css 적용되면 이것도 var ... 로 바꾸기 */
+  color: #f8f4f2;
+}
+
+/* 왼쪽 컬럼 */
+.left {
+  flex: 1;
+}
+
+/* 오른쪽 컬럼 */
+.right {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+</style>
