@@ -14,6 +14,7 @@ import { ref } from 'vue'
 
 <style scoped>
 footer {
+  font-size: 0.7rem;
   color: var(--color-text);
   padding: var(--space-m);
   display: flex;

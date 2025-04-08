@@ -5,8 +5,20 @@ import HomeFooter from './components/HomeFooter.vue'
 </script>
 
 <template>
-  <HomeHeader />
-  <HomeFooter />
+  <div class="layout">
+    <main><HomeHeader /></main>
+    <HomeFooter />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+</style>
