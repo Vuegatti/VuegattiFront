@@ -4,8 +4,7 @@ import axios from 'axios'
 
 const income = ref(0)
 const expense = ref(0)
-const fixedIncome = ref(2500000)
-const fixedExpense = ref(100000)
+
 const currentDate = ref(new Date(2025, 3))
 
 const daysInMonth = ref([])
@@ -95,6 +94,41 @@ const changeMonth = direction => {
   }
   fetchHistory()
 }
+const newItem = ref({
+  title: '',
+  amount: '',
+  category: '',
+  type: 'income',
+  bank: '',
+  details: '',
+})
+
+const addNewItem = async () => {
+  if (!selectedDate.value) return
+
+  const payload = {
+    ...newItem.value,
+    amount: Number(newItem.value.amount),
+    date: selectedDate.value,
+  }
+
+  await axios.post('http://localhost:5001/history', payload)
+
+  // 등록 후 새로고침
+  await fetchHistory()
+  selectDate(selectedDate.value)
+
+  // 입력 초기화
+  newItem.value = {
+    title: '',
+    amount: '',
+    category: '',
+    type: 'income',
+    bank: '',
+    details: '',
+  }
+}
+const showForm = ref(false)
 
 onMounted(fetchHistory)
 </script>
@@ -116,17 +150,14 @@ onMounted(fetchHistory)
                 수입:
                 <span class="income">{{ income.toLocaleString() }}원</span>
               </p>
-              <p>고정수입: {{ fixedIncome.toLocaleString() }}원</p>
-            </div>
-            <div>
               <p>
                 지출:
                 <span class="expense">{{ expense.toLocaleString() }}원</span>
               </p>
-              <p>고정지출: {{ fixedExpense.toLocaleString() }}원</p>
             </div>
+
             <div class="total">
-              <p>{{ (income - expense).toLocaleString() }}원</p>
+              <p>총 자산: {{ (income - expense).toLocaleString() }}원</p>
             </div>
           </div>
         </div>
@@ -173,7 +204,6 @@ onMounted(fetchHistory)
         <div class="memo-header">
           <h2>{{ selectedDate }}</h2>
         </div>
-
         <div class="memo-summary">
           <p>
             <span class="label">수입</span>
@@ -186,7 +216,6 @@ onMounted(fetchHistory)
             >
           </p>
         </div>
-
         <div class="memo-list">
           <div class="memo-item" v-for="item in selectedHistory" :key="item.id">
             <div class="memo-header-row">
@@ -207,6 +236,21 @@ onMounted(fetchHistory)
             <div class="memo-bank">{{ item.bank }}</div>
           </div>
         </div>
+        <button class="toggle-form-btn" @click="showForm = !showForm">
+          {{ showForm ? '닫기' : '새 내역 추가' }}
+        </button>
+        <div class="memo-form" v-if="showForm">
+          <input v-model="newItem.title" placeholder="제목" />
+          <input v-model="newItem.amount" type="number" placeholder="금액" />
+          <input v-model="newItem.category" placeholder="카테고리" />
+          <select v-model="newItem.type">
+            <option value="income">수입</option>
+            <option value="expense">지출</option>
+          </select>
+          <input v-model="newItem.bank" placeholder="은행" />
+          <input v-model="newItem.details" placeholder="상세 내용" />
+          <button class="add-btn" @click="addNewItem">내역 추가</button>
+        </div>
       </div>
     </div>
   </div>
@@ -219,7 +263,7 @@ onMounted(fetchHistory)
   justify-content: center;
   align-items: flex-start;
   background: var(--color-background);
-  color: white;
+  color: var(--color-text);
   min-height: 100vh;
   padding: 40px 100px;
   box-sizing: border-box;
@@ -257,15 +301,15 @@ onMounted(fetchHistory)
 }
 
 .income {
-  color: #6ec2ff;
+  color: var(--color-accent-blue);
 }
 .expense {
-  color: #ff6e6e;
+  color: var(--color-accent-red);
 }
 .total {
   font-size: 20px;
   font-weight: bold;
-  color: #aaffaa;
+  color: var(--success);
 }
 
 .weekdays {
@@ -276,10 +320,10 @@ onMounted(fetchHistory)
   text-align: center;
 }
 .weekday.sunday {
-  color: red;
+  color: var(--color-accent-red);
 }
 .weekday.saturday {
-  color: #6ec2ff;
+  color: var(--color-accent-blue);
 }
 
 .calendar-grid {
@@ -290,8 +334,8 @@ onMounted(fetchHistory)
 }
 
 .calendar-day {
-  background: white;
-  color: black;
+  background: var(--color-text);
+  color: var(--color-background);
   padding: 10px;
   border-radius: 8px;
   cursor: pointer;
@@ -307,25 +351,25 @@ onMounted(fetchHistory)
 }
 
 .calendar-day.sunday .date-label {
-  color: red;
+  color: var(--color-accent-red);
 }
 .calendar-day.saturday .date-label {
-  color: #6ec2ff;
+  color: var(--color-accent-blue);
 }
 .calendar-day.selected {
-  border: 2px solid #aaffaa;
-  box-shadow: 0 0 8px #aaffaa;
+  border: 2px solid var(--success);
+  box-shadow: 0 0 8px var(--success);
 }
 
 .date-label {
   font-weight: bold;
 }
 .daily-income {
-  color: #6ec2ff;
+  color: var(--color-accent-blue);
   font-size: 12px;
 }
 .daily-expense {
-  color: #ff6e6e;
+  color: var(--color-accent-red);
   font-size: 12px;
 }
 
@@ -338,7 +382,7 @@ onMounted(fetchHistory)
   background: #2b2b2b;
   padding: 20px;
   border-radius: 12px;
-  color: white;
+  color: var(--color-text);
   flex-shrink: 0;
 }
 .memo-summary {
@@ -366,13 +410,13 @@ onMounted(fetchHistory)
   font-weight: bold;
 }
 .memo-category {
-  color: #bbb;
+  color: var(--color-text);
 }
 .memo-amount.income {
-  color: #6ec2ff;
+  color: var(--color-accent-blue);
 }
 .memo-amount.expense {
-  color: #ff6e6e;
+  color: var(--color-accent-red);
 }
 .memo-title {
   font-size: 14px;
@@ -380,11 +424,11 @@ onMounted(fetchHistory)
 }
 .memo-details {
   font-size: 12px;
-  color: #999;
+  color: var(--color-text);
 }
 .memo-bank {
   font-size: 12px;
-  color: #aaa;
+  color: var(--color-text);
   text-align: right;
   margin-top: 8px;
 }
@@ -398,7 +442,7 @@ onMounted(fetchHistory)
 }
 .nav-btn {
   background: #444;
-  color: white;
+  color: var(--color-text);
   border: none;
   padding: 8px 12px;
   font-size: 16px;
@@ -407,5 +451,21 @@ onMounted(fetchHistory)
 }
 .nav-btn:hover {
   background: #666;
+}
+.toggle-form-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0;
+  padding: 8px;
+  background: #888;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--color-text);
+  font-weight: bold;
+}
+.toggle-form-btn:hover {
+  background: #aaa;
 }
 </style>

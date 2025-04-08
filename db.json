@@ -219,6 +219,16 @@
       "title": "아르바이트 정산",
       "details": "카페 알바 월급",
       "bank": "Shinhan"
+    },
+    {
+      "id": "7399",
+      "title": "월급",
+      "amount": 1500000,
+      "category": "월급",
+      "type": "income",
+      "bank": "Shinhan",
+      "details": "신한은행",
+      "date": "2025-04-01"
     }
   ],
   "account": [
