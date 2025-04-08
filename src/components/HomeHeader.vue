@@ -5,14 +5,14 @@
     <i class="logo"></i>
     <!-- <img src="../assets/vuegatti logo.png" alt="logo" /> -->
     <div class="iconContainer">
-      <font-awesome-icon
-        :icon="['far', 'calendar']"
+      <i
+        class="fa-regular fa-calendar"
         style="color: var(--color-text); font-size: 1.2rem"
-      />
-      <font-awesome-icon
-        :icon="['far', 'bell']"
+      ></i>
+      <i
+        class="fa-regular fa-bell"
         style="color: var(--color-text); font-size: 1.2rem"
-      />
+      ></i>
     </div>
   </header>
 </template>
