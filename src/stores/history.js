@@ -2,7 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import apiClient from '@/utils/axios'
 
-export const useHistory = defineStore('historyStory', () => {
+export const useHistory = defineStore('historyStore', () => {
   const history = ref([])
 
   const fetchHistory = async () => {
@@ -28,7 +28,7 @@ export const useHistory = defineStore('historyStory', () => {
       'Nov',
       'Dec',
     ]
-    return months[month] || '' // month 값이 0~11 범위를 벗어나면 빈 문자열 반환
+    return months[month] // month 값이 0~11 범위를 벗어나면 빈 문자열 반환
   }
 
   return { history, fetchHistory, monthCalc }

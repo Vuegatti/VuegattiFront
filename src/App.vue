@@ -6,7 +6,8 @@ import HomeFooter from './components/HomeFooter.vue'
 
 <template>
   <div class="layout">
-    <main><HomeHeader /></main>
+    <header><HomeHeader /></header>
+    <main><RouterView /></main>
     <HomeFooter />
   </div>
 </template>
