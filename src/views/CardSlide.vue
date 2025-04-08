@@ -16,15 +16,18 @@ const cards = ref(datas)
 
 <template>
   <div class="card-slide">
-    <swiper :slides-per-view="2" :space-between="16">
-      <swiper-slide
-        v-for="(data, index) in cards"
-        :key="index"
-        style="width: 50%"
-      >
+    <swiper :slides-per-view="2" :space-between="16" class="mySwiper">
+      <swiper-slide v-for="(data, index) in cards" :key="index">
         <div class="card">
           <p class="bank">{{ data.bank }}</p>
           <p class="balance">{{ data.balance.toLocaleString() }}</p>
+        </div>
+      </swiper-slide>
+
+      <swiper-slide>
+        <div class="plus">
+          <!-- + 아이콘 font-awesome에서 가져오기 -->
+          <span>+</span>
         </div>
       </swiper-slide>
     </swiper>
