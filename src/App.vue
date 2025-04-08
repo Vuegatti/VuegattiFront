@@ -1,4 +1,5 @@
 <script setup>
+import SideBar from './components/SideBar.vue'
 import HomeHeader from './components/HomeHeader.vue'
 import HomeFooter from './components/HomeFooter.vue'
 </script>
@@ -8,6 +9,8 @@ import HomeFooter from './components/HomeFooter.vue'
     <header><HomeHeader /></header>
     <main><RouterView /></main>
     <HomeFooter />
+    <SideBar />
+    <router-view />
   </div>
 </template>
 

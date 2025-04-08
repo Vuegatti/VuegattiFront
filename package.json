@@ -12,12 +12,14 @@
     "db": "json-server --watch db.json --port 5001"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.7.2",
     "axios": "^1.8.4",
     "bootstrap": "^5.3.5",
     "bootstrap5": "^1.1.9",
     "pinia": "^3.0.1",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "vue-sidebar-menu": "^5.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
@@ -26,6 +28,7 @@
     "eslint": "^9.21.0",
     "eslint-plugin-vue": "~10.0.0",
     "globals": "^16.0.0",
+    "json-server": "^1.0.0-beta.3",
     "prettier": "3.5.3",
     "vite": "^6.2.1",
     "vite-plugin-vue-devtools": "^7.7.2"
