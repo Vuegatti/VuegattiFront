@@ -4,6 +4,10 @@ const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: '/',
+      name: 'Home',
+    },
+    {
       path: '/list',
       name: 'historyList',
       component: () => import('@/views/HistoryList.vue'),

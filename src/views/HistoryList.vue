@@ -2,6 +2,7 @@
 import { useHistory } from '@/stores/history'
 import { useAccount } from '@/stores/account'
 import { onMounted, computed, ref } from 'vue'
+// import HomeHeader from '@/components/HomeHeader.vue'
 
 const historyList = useHistory()
 
@@ -32,6 +33,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <HomeHeader />
   <h2>{{ monthCal }}</h2>
   <div class="historypage">
     <ul>
