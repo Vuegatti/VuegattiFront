@@ -1,7 +1,33 @@
 <script setup>
-import { ref } from 'vue'
+import SideBar from './components/SideBar.vue'
+import HomeHeader from './components/HomeHeader.vue'
+import HomeFooter from './components/HomeFooter.vue'
+import HomePage from './views/HomePage.vue'
 </script>
 
-<template></template>
+<template>
+  <div class="layout">
+    <header><HomeHeader /></header>
 
-<style scoped></style>
+    <main>
+      <SideBar />
+      <HomePage />
+    </main>
+    <footer>
+      <HomeFooter />
+    </footer>
+    <!-- <router-view /> -->
+  </div>
+</template>
+
+<style scoped>
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
+</style>
