@@ -11,6 +11,15 @@ const router = createRouter({
     // },
     // { path: '/mypage', component: () => import('@/views/MyPage.vue') },
     // { path: '/exit', component: () => import('@/views/Exit.vue') },
+    // {
+    //   path: '/',
+    //   name: 'Home',
+    // },
+    // {
+    //   path: '/list',
+    //   name: 'historyList',
+    //   component: () => import('@/views/HistoryList.vue'),
+    // },
   ],
 })
 
