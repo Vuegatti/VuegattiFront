@@ -1,4 +1,6 @@
-import { ref, computed } from 'vue'
+// 회원정보 불러오는 코드
+// 필요 시 함수 추가하여 사용
+import { ref } from 'vue' //computed 지웠음 - computed 속성 사용하게 되면 다시 추가
 import { defineStore } from 'pinia'
 import apiClient from '@/utils/axios'
 
@@ -14,5 +16,5 @@ export const useAccount = defineStore('accountInfo', () => {
     }
   }
 
-  return { history, fetchAccount }
+  return { accountInfo, fetchAccount }
 })
