@@ -26,7 +26,7 @@ header {
 
 .logo::after {
   content: '';
-  background-image: url('../assets/vuegatti logo.png');
+  background-image: url('@/assets/image/vuegatti_logo.png');
   background-size: cover;
   width: 100px;
   height: 30px;
