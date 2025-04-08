@@ -22,12 +22,17 @@
   --space-l: 32px;
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: var(--color-background);
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: none;
-}
-
-body {
-  background-color: var(--color-background);
 }
