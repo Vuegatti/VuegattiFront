@@ -22,19 +22,22 @@ import UserProfile from './UserProfile.vue'
 .container {
   display: flex;
   background-color: var(--color-background);
-  /* main.css 적용되면 이것도 var ... 로 바꾸기 */
   color: #f8f4f2;
+  width: 100%;
 }
 
 /* 왼쪽 컬럼 */
 .left {
   flex: 1;
+  padding: 1rem;
 }
 
 /* 오른쪽 컬럼 */
 .right {
   flex: 2;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 </style>

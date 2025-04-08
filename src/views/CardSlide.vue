@@ -22,6 +22,8 @@ const cards = ref(datas)
           <p class="bank">{{ data.bank }}</p>
           <p class="balance">{{ data.balance.toLocaleString() }}</p>
         </div>
+        <!-- <swiper-slide>slide1</swiper-slide>
+      <swiper-slide>slide2</swiper-slide> -->
       </swiper-slide>
 
       <swiper-slide>
@@ -37,24 +39,30 @@ const cards = ref(datas)
 <style scoped>
 .card-slide {
   padding: 1rem 0;
-  /* overflow: hidden; */
+  overflow: hidden;
+  width: 960px;
 }
 
 .mySwiper {
   width: 100%;
+  /* max-width: 100%;
+  overflow: hidden;  */
 }
 
 .swiper-slide {
   display: flex;
+  justify-content: center;
+  padding: 0; /* 혹시 패딩 들어가 있으면 제거 */
 }
 
 .card {
-  flex: 1;
+  /* flex: 1; */
   background: linear-gradient(to right, #fed4b4, #ff7576);
   border-radius: 16px;
   color: #f8f4f2;
   padding: 1.5rem;
   height: 120px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

@@ -1,7 +1,7 @@
-<script setup>
-import { ref } from 'vue'
-</script>
+<script setup></script>
 
-<template></template>
+<template>
+  <router-view />
+</template>
 
 <style scoped></style>
