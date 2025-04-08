@@ -1,7 +1,11 @@
 <script setup>
 import { ref } from 'vue'
+import SideBar from './components/SideBar.vue'
 </script>
 
-<template></template>
+<template>
+  <SideBar />
+  <router-view />
+</template>
 
 <style scoped></style>
