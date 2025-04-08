@@ -2,6 +2,8 @@
 import { ref } from 'vue'
 </script>
 
-<template></template>
+<template>
+  <RouterView />
+</template>
 
 <style scoped></style>
