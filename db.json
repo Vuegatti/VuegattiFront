@@ -297,6 +297,18 @@
         "Shinhan": 900000,
         "Woori": 300000
       }
+    },
+    {
+      "userID": "saeyeon",
+      "password": "123123",
+      "username": "안세연",
+      "email": "sking1109s@gmail.com",
+      "phoneNumber": "010-1234-5678",
+      "avatarNumber": 1,
+      "bank": {
+        "KB": 1000000,
+        "Shinhan": 1000000
+      }
     }
   ]
 }

@@ -37,9 +37,9 @@ const save = () => {
         <input v-model="phonenumber" type="tel" placeholder="Phonenumber" />
 
         <!-- 버튼 -->
-        <div><BaseButton type="primary">Edit Account</BaseButton></div>
+        <div><BaseButton color="primary">Edit Account</BaseButton></div>
         <div>
-          <BaseButton type="secondary" @click="save">Confirm</BaseButton>
+          <BaseButton color="secondary" @click="save">Confirm</BaseButton>
         </div>
       </form>
     </div>
