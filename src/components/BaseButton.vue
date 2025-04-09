@@ -1,6 +1,6 @@
 <script setup>
 defineProps({
-  type: {
+  color: {
     type: String,
     default: 'primary',
     validator: value => ['primary', 'secondary'].includes(value),
@@ -9,7 +9,7 @@ defineProps({
 </script>
 
 <template>
-  <button :class="['button', type]">
+  <button :class="['button', color]" type="submit">
     <slot></slot>
   </button>
 </template>
