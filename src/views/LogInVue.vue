@@ -1,5 +1,13 @@
 <script setup>
 import BaseButton from '@/components/BaseButton.vue'
+import { useAccount } from '@/stores/account.js'
+import { ref } from 'vue'
+const accountStore = useAccount()
+const Username = ref('')
+const setUser = () => {
+  const logInUsername = Username.value
+  accountStore.logIn(logInUsername)
+}
 </script>
 
 <template>
@@ -9,9 +17,11 @@ import BaseButton from '@/components/BaseButton.vue'
         <h1>Login</h1>
         <p>Glad you're back!</p>
         <form action="">
-          <input type="text" placeholder="Username" />
+          <input type="text" placeholder="Username" v-model="Username" />
           <input type="password" placeholder="Password" />
-          <BaseButton type="primary">Log In</BaseButton>
+          <BaseButton type="primary" @click.prevent="setUser"
+            >Log In</BaseButton
+          >
         </form>
         <p style="text-align: center">
           Don't have an account? <a href="#">Sign Up</a>
@@ -25,15 +35,17 @@ import BaseButton from '@/components/BaseButton.vue'
 </template>
 
 <style scoped>
-* {
+/* * {
   color: var(--color-text);
 }
+
 .loginPage {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5vw;
 }
+
 .logInWrapper {
   display: flex;
   flex-direction: column;
@@ -43,32 +55,28 @@ import BaseButton from '@/components/BaseButton.vue'
   width: 20vw;
   height: 60vh;
   padding: var(--space-l);
-  /* box-shadow: 1 10px 10px rgb(20, 22, 35); */
-  /* background: linear-gradient(
-    90deg,
-    var(--color-background) 0%,
-    rgb(41, 44, 63) 80%
-  ); */
+
 }
 
 .loginPage h1 {
   font-size: 3rem;
   margin-bottom: 0;
 }
+
 .loginPage p {
   font-size: 1rem;
   margin-top: var(--space-s);
 }
+
 .formContainer {
-  /* border: 1px solid var(--color-primary); */
   width: 100%;
 }
+
 .formContainer form {
   display: flex;
   flex-direction: column;
   gap: var(--space-m);
   width: 100%;
-  gap: var(--space-m);
 }
 
 .formContainer form * {
@@ -78,15 +86,18 @@ import BaseButton from '@/components/BaseButton.vue'
   font-size: 1.2rem;
   font-family: 'Noto Sans', sans-serif;
 }
+
 .formContainer form input {
   border: 1px solid rgba(248, 244, 242, 0.503);
   color: var(--color-text);
 }
+
 input::placeholder {
   color: var(--color-text);
   opacity: 1;
 }
+
 .formContainer p:nth-child(1) {
   text-align: center;
-}
+} */
 </style>
