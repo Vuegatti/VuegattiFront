@@ -1,25 +1,25 @@
 <script setup>
 import { ref, computed } from 'vue'
+import Avatar from '@/components/AvatarPicture.vue'
 
-// 월 이름을 다 표시할건지?
 const monthNames = [
-  'January',
-  'February',
-  'March',
-  'April',
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
   'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
 ]
 const now = new Date()
 const currentMonth = ref(monthNames[now.getMonth()])
 
-// 임시 고정값
+// 임시 고정값 --------도현오빠의 함수 사용
 const income = ref(1000000) //db에서 불러와야함
 const expense = ref(1000000) //db에서 불러와야함
 
@@ -28,23 +28,61 @@ const expense = ref(1000000) //db에서 불러와야함
 const total = computed(() => income.value - expense.value)
 </script>
 
+<!-- 아바타 프로필 -->
 <template>
   <div class="profile">
-    <div class="user-profile">
-      <!-- 프로필 이미지 (나중에 라이브러리 연동) -->
-      <!-- 임시 이미지 -->
-      <img src="https://picsum.photos/100/100" alt="profile" />
+    <div
+      class="user-profile"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+      "
+    >
+      <Avatar :toyNumber="1" :size="230" :rounded="24" />
     </div>
     <!-- 몇 월 인지 -->
-    <h2 class="month">{{ currentMonth }}<span>의 내 소비</span></h2>
+    <h2
+      class="month"
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+      "
+    >
+      {{ currentMonth }}<span>의 내 소비</span>
+    </h2>
     <!-- 수입/지출 -->
-    <div>
+    <div
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+        border-bottom: 1px solid var(--color-text);
+        padding-bottom: 2rem;
+      "
+    >
       <p>+ {{ income.toLocaleString() }}</p>
       <p>- {{ expense.toLocaleString() }}</p>
     </div>
-    <!-- <hr /> -->
+
     <!-- 남은 금액 -->
-    <div>{{ total.toLocaleString() }}<span>원</span></div>
+    <div
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 4rem;
+      "
+    >
+      {{ total.toLocaleString() }}<span>₩</span>
+    </div>
   </div>
 </template>
 

@@ -6,7 +6,7 @@ import UserProfile from './UserProfile.vue'
 // import HomeHeader from '../components/HomeHeader.vue'
 // import HomeFooter from '../components/HomeFooter.vue'
 // import SideBar from '../components/SideBar.vue'
-console.log('홈페이지 실행')
+// console.log('홈페이지 실행')
 </script>
 
 <template>
@@ -38,7 +38,9 @@ console.log('홈페이지 실행')
 /* 왼쪽 컬럼 */
 .left {
   flex: 1;
-  padding: 1rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: flex-end;
 }
 
 /* 오른쪽 컬럼 */
@@ -47,6 +49,7 @@ console.log('홈페이지 실행')
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
 }
 </style>
