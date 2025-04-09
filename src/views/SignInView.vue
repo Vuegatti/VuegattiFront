@@ -90,11 +90,11 @@ const validatePhoneNumber = () => {
               placeholder="Username"
               v-model="Username"
             />
-            <i
+            <!-- <i
               class="fa-solid fa-circle-exclamation"
               style="color: var(--danger); padding: 0.7rem"
               v-show="!isUsernameValid"
-            ></i>
+            ></i> -->
           </div>
           <input type="password" placeholder="Password" v-model="Password" />
           <input type="password" placeholder="Confirm Password" />
