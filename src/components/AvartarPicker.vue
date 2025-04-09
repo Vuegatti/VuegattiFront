@@ -1,3 +1,16 @@
+<script setup>
+import { ref } from 'vue'
+import Avatar from '@/components/AvatarPicture.vue'
+
+const selected = ref(1)
+const emit = defineEmits(['update:selectedAvatar'])
+
+const selectAvatar = i => {
+  selected.value = i
+  emit('update:selectedAvatar', i) // 부모에게 알림
+}
+</script>
+
 <template>
   <div class="avatar-picker">
     <!-- 선택된 아바타 크게 보여주기 -->
@@ -17,24 +30,11 @@
         :size="76"
         :rounded="12"
         :class="{ selected: i === selected }"
-        @click="selected = i"
+        @click="selectAvatar(i)"
       />
     </div>
   </div>
 </template>
-
-<script>
-import Avatar from '@/components/AvatarPicture.vue'
-
-export default {
-  components: { Avatar },
-  data() {
-    return {
-      selected: 1,
-    }
-  },
-}
-</script>
 
 <style scoped>
 .avatar-picker {

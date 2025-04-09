@@ -11,7 +11,7 @@ import vuetify from './plugins/vuetify'
 import MainView from '@/views/MainView.vue'
 import LogInVue from './views/LogInVue.vue'
 import SignInVue from './views/SignInVue.vue'
-const app = createApp(App)
+const app = createApp(LogInVue)
 
 app.use(createPinia())
 app.use(router)
