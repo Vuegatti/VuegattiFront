@@ -94,14 +94,20 @@ const changeMonth = direction => {
   }
   fetchHistory()
 }
+
 const newItem = ref({
+  userID: 'bikdh',
   title: '',
   amount: '',
   category: '',
-  type: 'income',
+  type: '',
   bank: '',
   details: '',
 })
+
+const selectCategory = category => {
+  newItem.value.category = category
+}
 
 const addNewItem = async () => {
   if (!selectedDate.value) return
@@ -114,11 +120,9 @@ const addNewItem = async () => {
 
   await axios.post('http://localhost:5001/history', payload)
 
-  // 등록 후 새로고침
   await fetchHistory()
   selectDate(selectedDate.value)
 
-  // 입력 초기화
   newItem.value = {
     title: '',
     amount: '',
@@ -129,6 +133,11 @@ const addNewItem = async () => {
   }
 }
 const showForm = ref(false)
+const deleteItem = async id => {
+  await axios.delete(`http://localhost:5001/history/${id}`)
+  await fetchHistory()
+  selectDate(selectedDate.value)
+}
 
 onMounted(fetchHistory)
 </script>
@@ -146,54 +155,55 @@ onMounted(fetchHistory)
 
           <div class="summary">
             <div>
-              <p>
+              <p class="income">
                 수입:
-                <span class="income">{{ income.toLocaleString() }}원</span>
+                <span>{{ income.toLocaleString() }}원</span>
               </p>
-              <p>
+              <p class="expense">
                 지출:
-                <span class="expense">{{ expense.toLocaleString() }}원</span>
+                <span>{{ expense.toLocaleString() }}원</span>
               </p>
-            </div>
-
-            <div class="total">
-              <p>총 자산: {{ (income - expense).toLocaleString() }}원</p>
+              <p class="total">
+                총 결산:
+                <span> {{ (income - expense).toLocaleString() }}원</span>
+              </p>
             </div>
           </div>
         </div>
 
-        <div class="weekdays">
-          <div
-            v-for="(day, index) in ['일', '월', '화', '수', '목', '금', '토']"
-            :key="index"
-            class="weekday"
-            :class="{ sunday: index === 0, saturday: index === 6 }"
-          >
-            {{ day }}
+        <div class="calendar-main">
+          <div class="weekdays">
+            <div
+              v-for="(day, index) in ['일', '월', '화', '수', '목', '금', '토']"
+              :key="index"
+              class="weekday"
+              :class="{ sunday: index === 0, saturday: index === 6 }"
+            >
+              {{ day }}
+            </div>
           </div>
-        </div>
-
-        <div class="calendar-grid">
-          <div
-            v-for="(day, index) in daysInMonth"
-            :key="index"
-            class="calendar-day"
-            :class="{
-              empty: day.empty,
-              selected: selectedDate === day.date,
-              sunday: index % 7 === 0,
-              saturday: index % 7 === 6,
-            }"
-            @click="!day.empty && selectDate(day.date)"
-          >
-            <div v-if="!day.empty" class="date-label">{{ day.day }}</div>
-            <div v-if="!day.empty" class="amounts">
-              <p class="daily-income" v-if="day.income">
-                +{{ day.income.toLocaleString() }}
-              </p>
-              <p class="daily-expense" v-if="day.expense">
-                -{{ day.expense.toLocaleString() }}
-              </p>
+          <div class="calendar-grid">
+            <div
+              v-for="(day, index) in daysInMonth"
+              :key="index"
+              class="calendar-day"
+              :class="{
+                empty: day.empty,
+                selected: selectedDate === day.date,
+                sunday: index % 7 === 0,
+                saturday: index % 7 === 6,
+              }"
+              @click="!day.empty && selectDate(day.date)"
+            >
+              <div v-if="!day.empty" class="date-label">{{ day.day }}</div>
+              <div v-if="!day.empty" class="amounts">
+                <p class="daily-income" v-if="day.income">
+                  +{{ day.income.toLocaleString() }}
+                </p>
+                <p class="daily-expense" v-if="day.expense">
+                  -{{ day.expense.toLocaleString() }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -234,22 +244,56 @@ onMounted(fetchHistory)
             <div class="memo-title">{{ item.title }}</div>
             <div class="memo-details">{{ item.details }}</div>
             <div class="memo-bank">{{ item.bank }}</div>
+            <button class="delete-btn" @click="deleteItem(item.id)">
+              삭제
+            </button>
           </div>
-        </div>
-        <button class="toggle-form-btn" @click="showForm = !showForm">
-          {{ showForm ? '닫기' : '새 내역 추가' }}
-        </button>
-        <div class="memo-form" v-if="showForm">
-          <input v-model="newItem.title" placeholder="제목" />
-          <input v-model="newItem.amount" type="number" placeholder="금액" />
-          <input v-model="newItem.category" placeholder="카테고리" />
-          <select v-model="newItem.type">
-            <option value="income">수입</option>
-            <option value="expense">지출</option>
-          </select>
-          <input v-model="newItem.bank" placeholder="은행" />
-          <input v-model="newItem.details" placeholder="상세 내용" />
-          <button class="add-btn" @click="addNewItem">내역 추가</button>
+
+          <div class="memo-plus">
+            <button class="toggle-form-btn" @click="showForm = !showForm">
+              {{ showForm ? '닫기' : '새 내역 추가' }}
+            </button>
+            <div class="memo-form" v-if="showForm">
+              <input v-model="newItem.title" placeholder="제목" />
+              <input
+                v-model="newItem.amount"
+                type="number"
+                placeholder="금액"
+              />
+              <input v-model="newItem.category" placeholder="카테고리" />
+              <select v-model="newItem.type">
+                <option value="" disabled>선택하세요</option>
+                <option value="income">수입</option>
+                <option value="expense">지출</option>
+              </select>
+              <div class="category-buttons">
+                <div class="grid-income" v-if="newItem.type === 'income'">
+                  <p @click="selectCategory('월급')">💰 월급</p>
+                  <p @click="selectCategory('부수입')">💵 부수입</p>
+                  <p @click="selectCategory('금융소득')">📈 금융소득</p>
+                  <p @click="selectCategory('용돈')">🤑 용돈</p>
+                  <p @click="selectCategory('상여')">💸 상여</p>
+                  <p @click="selectCategory('기타')">기타</p>
+                </div>
+                <div class="grid-expense" v-if="newItem.type === 'expense'">
+                  <p @click="selectCategory('식비')">🍜 식비</p>
+                  <p @click="selectCategory('교통')">🚗 교통</p>
+                  <p @click="selectCategory('부모님')">👪 부모님</p>
+                  <p @click="selectCategory('회비')">💰 회비</p>
+                  <p @click="selectCategory('건강')">😷 건강</p>
+                  <p @click="selectCategory('구독료')">💱 구독료</p>
+                  <p @click="selectCategory('교육')">📚 교육</p>
+                  <p @click="selectCategory('미용')">💈 미용</p>
+                  <p @click="selectCategory('생활용품')">🏠 생활용품</p>
+                  <p @click="selectCategory('기타')">기타</p>
+                </div>
+              </div>
+              <br />
+              <input v-model="newItem.bank" placeholder="은행" />
+              <input v-model="newItem.details" placeholder="상세 내용" />
+              <button class="add-btn" @click="addNewItem">내역 추가</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -257,6 +301,29 @@ onMounted(fetchHistory)
 </template>
 
 <style scoped>
+.category-buttons {
+  margin: 10px 0;
+}
+.grid-income,
+.grid-expense {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+.grid-income p,
+.grid-expense p {
+  background: #444;
+  padding: 6px;
+  border-radius: 8px;
+  text-align: center;
+  cursor: pointer;
+  color: white;
+}
+.grid-income p:hover,
+.grid-expense p:hover {
+  background: #666;
+}
 .calendar-wrapper {
   position: relative;
   display: flex;
@@ -275,6 +342,7 @@ onMounted(fetchHistory)
   max-width: 1200px;
   width: 100%;
   justify-content: center;
+  justify-content: space-between;
 }
 .calendar-box {
   width: 1000px;
@@ -294,20 +362,34 @@ onMounted(fetchHistory)
 
 .summary {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   font-size: 14px;
   flex-wrap: wrap;
   padding: 0 20px;
 }
 
 .income {
+  font-size: 15px;
+  font-weight: bold;
+}
+.income > span {
+  font-size: 15px;
   color: var(--color-accent-blue);
 }
 .expense {
+  font-weight: bold;
+  font-size: 15px;
+}
+.expense > span {
+  font-size: 15px;
   color: var(--color-accent-red);
 }
 .total {
-  font-size: 20px;
+  font-size: 30px;
+  font-weight: bold;
+}
+.total > span {
+  font-size: 30px;
   font-weight: bold;
   color: var(--success);
 }
@@ -331,6 +413,7 @@ onMounted(fetchHistory)
   grid-template-columns: repeat(7, 1fr);
   gap: 5px;
   width: 100%;
+  opacity: 75%;
 }
 
 .calendar-day {
@@ -377,7 +460,7 @@ onMounted(fetchHistory)
   position: absolute;
   top: 40px;
   right: 0;
-  height: calc(100% - 80px); /* 위아래 padding 고려 */
+  height: calc(100% - 80px);
   width: 350px;
   background: #2b2b2b;
   padding: 20px;
@@ -403,6 +486,7 @@ onMounted(fetchHistory)
   background: #1f1f1f;
   padding: 15px;
   border-radius: 10px;
+  gap: 10px;
 }
 .memo-header-row {
   display: flex;
@@ -433,6 +517,17 @@ onMounted(fetchHistory)
   margin-top: 8px;
 }
 
+.memo-plus {
+  background: #1f1f1f;
+  padding: 15px;
+  border-radius: 10px;
+  gap: 10px;
+}
+.memo-form > input,
+select {
+  color: var(--color-text);
+  opacity: 30%;
+}
 .header-top {
   display: flex;
   justify-content: center;
@@ -453,6 +548,7 @@ onMounted(fetchHistory)
   background: #666;
 }
 .toggle-form-btn {
+  left: -10;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -462,10 +558,22 @@ onMounted(fetchHistory)
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  color: var(--color-text);
-  font-weight: bold;
+  color: white;
 }
 .toggle-form-btn:hover {
   background: #aaa;
+}
+.delete-btn {
+  margin-top: 8px;
+  background: #c62828;
+  color: var(--color-text);
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.delete-btn:hover {
+  background: #e53935;
 }
 </style>
