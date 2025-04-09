@@ -16,7 +16,6 @@ import HomePage from './views/HomePage.vue'
     <footer>
       <HomeFooter />
     </footer>
-    <!-- <router-view /> -->
   </div>
 </template>
 
