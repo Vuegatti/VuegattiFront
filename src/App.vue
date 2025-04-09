@@ -24,6 +24,9 @@ import LogIn from './views/LogInVue.vue'
 </template>
 
 <style scoped>
+.layout > header {
+  position: sticky;
+}
 .layout {
   display: flex;
   flex-direction: column;
