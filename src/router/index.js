@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import CalendarView from '@/views/CalendarView.vue'
+import MyPageProFile from '@/views/MyPageProFile.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -15,7 +16,12 @@ const router = createRouter({
       name: 'Calendar',
       component: CalendarView,
     },
-    // { path: '/', component: () => import('@/views/Home.vue') },
+    {
+      path: '/MyPageProFile',
+      name: 'MyPageProFile',
+      component: MyPageProFile,
+    },
+    // { path: '/' component: () => import('@/views/Home.vue') },
     // { path: '/calendar', component: () => import('@/views/Calendar.vue') },
     // {
     //   path: '/consumption',
