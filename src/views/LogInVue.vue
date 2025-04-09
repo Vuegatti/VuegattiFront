@@ -46,7 +46,7 @@ import BaseButton from '@/components/BaseButton.vue'
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid var(--color-text);
+  border: 1px solid rgba(248, 244, 242, 0.503);
   border-radius: 10px;
   width: 20vw;
   height: 60vh;
@@ -87,7 +87,7 @@ import BaseButton from '@/components/BaseButton.vue'
   font-family: 'Noto Sans', sans-serif;
 }
 .formContainer form input {
-  border: 1px solid var(--color-text);
+  border: 1px solid rgba(248, 244, 242, 0.503);
   color: var(--color-text);
 }
 input::placeholder {

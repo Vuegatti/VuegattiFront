@@ -65,6 +65,9 @@ i::after {
   flex-direction: column;
   align-items: flex-start;
   gap: 1.5rem;
+  border-radius: 10px;
+  padding: 2rem;
+  border: 1px solid rgba(248, 244, 242, 0.503);
 }
 
 .signInContainer h1 {
@@ -84,7 +87,7 @@ form {
 input {
   padding: 0.75rem 1rem;
   border-radius: 10px;
-  border: 1px solid var(--color-text);
+  border: 1px solid rgba(248, 244, 242, 0.503);
   background-color: transparent;
   color: white;
   font-size: 1rem;
