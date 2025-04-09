@@ -13,9 +13,9 @@ import LogIn from './views/LogInVue.vue'
     </header>
 
     <main>
-      <!-- <SideBar /> -->
-      <!-- <HomePage /> -->
-      <LogIn />
+      <SideBar />
+      <HomePage />
+      <!-- <LogIn /> -->
     </main>
 
     <footer>
