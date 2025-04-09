@@ -1,7 +1,7 @@
 <script setup>
 import BarChart from './BarChart.vue'
 import CardSlide from './CardSlide.vue'
-import PieChart from './PieChart.vue'
+// import PieChart from './PieChart.vue'
 import UserProfile from './UserProfile.vue'
 // import HomeHeader from '../components/HomeHeader.vue'
 // import HomeFooter from '../components/HomeFooter.vue'
@@ -22,7 +22,7 @@ console.log('홈페이지 실행')
     <div class="right">
       <CardSlide />
       <BarChart />
-      <PieChart />
+      <!-- <PieChart /> -->
     </div>
   </div>
 </template>
@@ -47,6 +47,7 @@ console.log('홈페이지 실행')
   padding: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1rem;
 }
 </style>
