@@ -189,14 +189,13 @@
     },
     {
       "id": "18",
-      "userID": "bikdh",
-      "date": "2025-04-03",
-      "amount": 4500,
+      "amount": 55555,
       "type": "expense",
       "category": "식비",
       "title": "편의점 간식",
-      "details": "삼각김밥+우유",
-      "bank": "Shinhan"
+      "details": "삼각김밥",
+      "date": "2025-04-03",
+      "bank": "KB"
     },
     {
       "id": "19",

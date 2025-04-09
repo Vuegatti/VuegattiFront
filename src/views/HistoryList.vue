@@ -2,6 +2,7 @@
 import { useHistory } from '@/stores/history'
 import { useAccount } from '@/stores/account'
 import ListForm from './ListForm.vue'
+import ModifyForm from './ModifyForm.vue'
 import { onMounted, computed, ref } from 'vue'
 
 const historyList = useHistory()
@@ -22,6 +23,17 @@ const openForm = () => {
 const closeForm = isSubmitted => {
   if (isSubmitted) {
     showModal.value = false
+  }
+}
+
+const selectedItem = ref(null)
+
+const openModify = item => {
+  selectedItem.value = item
+}
+const closeModify = isSubmitted => {
+  if (isSubmitted) {
+    selectedItem.value = null
   }
 }
 
@@ -65,6 +77,7 @@ onMounted(() => {
     </div>
   </div>
   <ListForm v-if="showModal" @close="closeForm" />
+  <ModifyForm v-if="selectedItem" :list="selectedItem" @close="closeModify" />
   <div class="historypage">
     <div class="history-header">
       <button>유형</button>
@@ -96,7 +109,10 @@ onMounted(() => {
 
         <p>{{ list.details }}</p>
         <div class="icon-zip">
-          <i class="fa-solid fa-pen-to-square"></i>
+          <i
+            class="fa-solid fa-pen-to-square"
+            @click.stop="openModify(list)"
+          ></i>
           <i class="fa-solid fa-trash" @click="deleteItem(list.id)"></i>
         </div>
       </li>
@@ -184,12 +200,21 @@ h2 {
   gap: 1rem;
 }
 .fa-trash {
+  cursor: pointer;
   transition: 0.3s;
 }
 
 .fa-trash:hover {
   color: var(--color-primary);
   opacity: 0.8;
+}
+.fa-pen-to-square {
+  cursor: pointer;
+  transition: 0.3s;
+}
+.fa-pen-to-square:hover {
+  color: var(--success);
+  opacity: 0.9;
 }
 
 button {

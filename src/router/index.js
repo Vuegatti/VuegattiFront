@@ -28,7 +28,7 @@ const router = createRouter({
     //   name: 'Home',
     // },
     {
-      path: '/list',
+      path: '/consumption',
       name: 'historyList',
       component: () => import('@/views/HistoryList.vue'),
     },

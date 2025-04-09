@@ -1,7 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import apiClient from '@/utils/axios'
-import { applescript } from 'globals'
 
 export const useHistory = defineStore('historyStore', () => {
   const history = ref([])
@@ -32,6 +31,16 @@ export const useHistory = defineStore('historyStore', () => {
       history.value = history.value.filter(item => item.id !== id)
     } catch (err) {
       console.log('거래내역 삭제 에러: ', err)
+    }
+  }
+
+  const modifyHistory = async updatedItem => {
+    try {
+      await apiClient.put(`/history/${updatedItem.id}`, updatedItem)
+      const response = await apiClient.get('/history')
+      history.value = response.data
+    } catch (error) {
+      console.error('거래 내역 수정 실패:', error)
     }
   }
 
@@ -100,5 +109,6 @@ export const useHistory = defineStore('historyStore', () => {
     currentMonthName,
     getHistoryByMonth,
     currentMonth,
+    modifyHistory,
   }
 })
