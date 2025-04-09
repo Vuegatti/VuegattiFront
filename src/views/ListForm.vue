@@ -3,19 +3,24 @@
 <script setup>
 import { useHistory } from '@/stores/history'
 import { useAccount } from '@/stores/account'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, onUnmounted } from 'vue'
 
 const historyList = useHistory()
 const AccountInfo = useAccount()
 
-const date = ref('')
-const amount = ref(0)
+const amount = ref('')
 const type = ref('')
 const title = ref('')
 const details = ref('')
 
+const emit = defineEmits(['close'])
+
 onMounted(() => {
   AccountInfo.fetchAccount()
+  document.body.style.overflow = 'hidden'
+})
+onUnmounted(() => {
+  document.body.style.overflow = ''
 })
 
 const showIncomeGrid = ref(false) // 수입 그리드 표시 여부
@@ -30,23 +35,60 @@ const selectCategory = category => {
 // 수입 버튼 클릭 시 수입 그리드만 표시
 const toggleIncomeGrid = () => {
   showIncomeGrid.value = true
-  showExpenseGrid.value = false // 지출 그리드 숨기기
-  showCategoryGrid.value = false // 카테고리 목록 숨기기
+  showExpenseGrid.value = false
+  showCategoryGrid.value = false
   selectedCategory.value = ''
-  type.value = '수입'
+  type.value = 'income'
 }
 
 // 지출 버튼 클릭 시 지출 그리드만 표시
 const toggleExpenseGrid = () => {
-  showIncomeGrid.value = false // 수입 그리드 숨기기
+  showIncomeGrid.value = false
   showExpenseGrid.value = true
-  showCategoryGrid.value = false // 카테고리 목록 숨기기
+  showCategoryGrid.value = false
   selectedCategory.value = ''
-  type.value = '지출'
+  type.value = 'expense'
 }
 // 카테고리 선택 버튼 클릭 시 카테고리 그리드 표시
 const toggleCategoryGrid = () => {
   showCategoryGrid.value = !showCategoryGrid.value
+}
+
+const handleSubmit = async () => {
+  try {
+    const date = new Date()
+    console.log(date)
+    console.log(date.toLocaleDateString())
+    const newData = {
+      id: Date.now(),
+      username: 'bikdh',
+      date: date.toLocaleDateString(),
+      amount: amount.value,
+      type: type.value,
+      category: selectedCategory.value,
+      title: title.value,
+      details: details.value,
+      bank: 'KB',
+    }
+    await historyList.updateHistory(newData)
+
+    amount.value = ''
+    type.value = ''
+    selectedCategory.value = ''
+    title.value = ''
+    details.value = ''
+    showIncomeGrid.value = false
+    showExpenseGrid.value = false
+    showCategoryGrid.value = false
+
+    emit('close')
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const handleClose = () => {
+  emit('close')
 }
 </script>
 <template>
@@ -60,7 +102,7 @@ const toggleCategoryGrid = () => {
       </button>
     </div>
 
-    <form class="form-container" action="">
+    <form class="form-container" @submit.prevent="handleSubmit">
       <label for="">금액 : </label>
       <input
         type="text"
@@ -117,8 +159,8 @@ const toggleCategoryGrid = () => {
         v-model="details"
       ></textarea>
       <div class="button-container">
-        <button>등록</button>
-        <button>닫기</button>
+        <button type="submit">등록</button>
+        <button @click="handleClose">닫기</button>
       </div>
     </form>
   </div>
@@ -130,12 +172,13 @@ const toggleCategoryGrid = () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
-  margin: var(--space-s) auto;
+  width: 40%;
+  margin: 0 auto;
   padding: 2rem;
   background-color: #f9f9f9;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  z-index: 100;
 }
 
 .button-container {

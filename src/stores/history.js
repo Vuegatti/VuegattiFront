@@ -1,6 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import apiClient from '@/utils/axios'
+import { applescript } from 'globals'
 
 export const useHistory = defineStore('historyStore', () => {
   const history = ref([])
@@ -13,6 +14,18 @@ export const useHistory = defineStore('historyStore', () => {
       console.log('거래내역 로딩 에러: ', err)
     }
   }
+
+  // const filtered = history.value.filter(item => item.date.startsWith(yearMonth))
+  const updateHistory = async data => {
+    try {
+      const response = await apiClient.post('/history', data)
+      history.value = response.data
+    } catch (error) {
+      console.error('거래 내역 추가 실패:', error)
+      console.log(error)
+    }
+  }
+
   const monthCalc = month => {
     const months = [
       'Jan',
@@ -53,5 +66,12 @@ export const useHistory = defineStore('historyStore', () => {
       .reduce((sum, item) => sum + item.amount, 0)
   })
 
-  return { history, fetchHistory, monthCalc, monthlyIncome, monthlyExpense }
+  return {
+    history,
+    fetchHistory,
+    monthCalc,
+    monthlyIncome,
+    monthlyExpense,
+    updateHistory,
+  }
 })

@@ -34,10 +34,14 @@ const monthlyExpense = computed(() =>
   historyList.monthlyExpense.toLocaleString(),
 )
 
-const isClick = ref(false)
+const showModal = ref(false)
 
 const openForm = () => {
-  isClick.value = true
+  showModal.value = true
+}
+
+const closeForm = () => {
+  showModal.value = false
 }
 
 onMounted(() => {
@@ -58,9 +62,8 @@ onMounted(() => {
       <p>{{ monthlyExpense }} 입니다.</p>
     </div>
   </div>
-
+  <ListForm v-if="showModal" @close="closeForm" />
   <div class="historypage">
-    <ListForm v-if="isClick" />
     <div class="history-header">
       <button>유형</button>
       <p>날짜</p>
@@ -70,6 +73,7 @@ onMounted(() => {
       <p>상세</p>
       <div style="visibility: hidden">icon</div>
     </div>
+
     <ul>
       <li
         v-for="(list, index) in historyList.history"
