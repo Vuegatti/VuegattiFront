@@ -60,7 +60,7 @@ const handleSubmit = async () => {
     console.log(date)
     console.log(date.toLocaleDateString())
     const newData = {
-      id: Date.now(),
+      id: Date.now().toString(),
       username: 'bikdh',
       date: date.toLocaleDateString(),
       amount: amount.value,
@@ -71,7 +71,7 @@ const handleSubmit = async () => {
       bank: 'KB',
     }
     await historyList.updateHistory(newData)
-
+    emit('close', true)
     amount.value = ''
     type.value = ''
     selectedCategory.value = ''
@@ -80,15 +80,13 @@ const handleSubmit = async () => {
     showIncomeGrid.value = false
     showExpenseGrid.value = false
     showCategoryGrid.value = false
-
-    emit('close')
   } catch (err) {
     console.log(err)
   }
 }
 
 const handleClose = () => {
-  emit('close')
+  emit('close', true)
 }
 </script>
 <template>

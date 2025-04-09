@@ -15,14 +15,23 @@ export const useHistory = defineStore('historyStore', () => {
     }
   }
 
-  // const filtered = history.value.filter(item => item.date.startsWith(yearMonth))
   const updateHistory = async data => {
     try {
-      const response = await apiClient.post('/history', data)
+      await apiClient.post('/history', data)
+      const response = await apiClient.get('/history')
       history.value = response.data
     } catch (error) {
       console.error('거래 내역 추가 실패:', error)
       console.log(error)
+    }
+  }
+
+  const deleteHistory = async id => {
+    try {
+      await apiClient.delete(`/history/${id}`)
+      history.value = history.value.filter(item => item.id !== id)
+    } catch (err) {
+      console.log('거래내역 삭제 에러: ', err)
     }
   }
 
@@ -44,24 +53,27 @@ export const useHistory = defineStore('historyStore', () => {
     return months[month] // month 값이 0~11 범위를 벗어나면 빈 문자열 반환
   }
 
-  const currentMonth = new Date().getMonth() + 1
+  const currentDate = ref(new Date())
+
+  const currentMonth = computed(() => currentDate.value.getMonth() + 1)
+
   const monthlyIncome = computed(() => {
     return history.value
       .filter(
         item =>
           item.type === 'income' &&
-          new Date(item.date).getMonth() + 1 === currentMonth,
+          new Date(item.date).getMonth() + 1 === currentMonth.value,
       )
       .reduce((sum, item) => sum + item.amount, 0)
   })
 
-  // ✨ 이번 달 지출 총합
+  //  이번 달 지출 총합
   const monthlyExpense = computed(() => {
     return history.value
       .filter(
         item =>
           item.type === 'expense' &&
-          new Date(item.date).getMonth() + 1 === currentMonth,
+          new Date(item.date).getMonth() + 1 === currentMonth.value,
       )
       .reduce((sum, item) => sum + item.amount, 0)
   })
@@ -73,5 +85,6 @@ export const useHistory = defineStore('historyStore', () => {
     monthlyIncome,
     monthlyExpense,
     updateHistory,
+    deleteHistory,
   }
 })

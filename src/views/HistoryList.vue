@@ -6,23 +6,7 @@ import { onMounted, computed, ref } from 'vue'
 
 const historyList = useHistory()
 
-const buttonInfo = computed(() => {
-  return historyList.history.map(list => {
-    if (list.type === 'expense') {
-      return {
-        text: '지출',
-        class: 'expense-button',
-        color: 'primary',
-      }
-    } else if (list.type === 'income') {
-      return {
-        text: '수입',
-        class: 'income-button',
-        color: 'secondary',
-      }
-    }
-  })
-})
+const { fetchHistory, deleteHistory } = useHistory()
 
 const thisMonth = new Date().getMonth()
 const currentMonthName = computed(() => {
@@ -40,12 +24,19 @@ const openForm = () => {
   showModal.value = true
 }
 
-const closeForm = () => {
-  showModal.value = false
+const closeForm = isSubmitted => {
+  if (isSubmitted) {
+    showModal.value = false
+  }
+}
+
+const deleteItem = async id => {
+  console.log(id)
+  await deleteHistory(id)
 }
 
 onMounted(() => {
-  historyList.fetchHistory()
+  fetchHistory()
 })
 </script>
 
@@ -55,11 +46,11 @@ onMounted(() => {
   <div class="text-container">
     <div class="text-income">
       <p>이번달 총 수입은</p>
-      <p>{{ monthlyIncome }} 입니다.</p>
+      <p>{{ monthlyIncome }} 원 입니다.</p>
     </div>
     <div class="text-expense">
       <p>이번달 총 지출은</p>
-      <p>{{ monthlyExpense }} 입니다.</p>
+      <p>{{ monthlyExpense }} 원 입니다.</p>
     </div>
   </div>
   <ListForm v-if="showModal" @close="closeForm" />
@@ -76,24 +67,26 @@ onMounted(() => {
 
     <ul>
       <li
-        v-for="(list, index) in historyList.history"
+        v-for="list in historyList.history"
         :key="list.id"
         class="history-container"
       >
-        <button :class="buttonInfo[index].class">
-          {{ buttonInfo[index].text }}
+        <button
+          :class="list.type === 'expense' ? 'expense-button' : 'income-button'"
+        >
+          {{ list.type === 'expense' ? '지출' : '수입' }}
         </button>
         <p>{{ list.date }}</p>
         <p>{{ list.category }}</p>
         <p>{{ list.title }}</p>
-        <p :class="buttonInfo[index].color">
+        <p :class="list.type === 'expense' ? 'primary' : 'secondary'">
           {{ list.amount.toLocaleString() }}
         </p>
 
         <p>{{ list.details }}</p>
         <div class="icon-zip">
           <i class="fa-solid fa-pen-to-square"></i>
-          <i class="fa-solid fa-trash"></i>
+          <i class="fa-solid fa-trash" @click="deleteItem(list.id)"></i>
         </div>
       </li>
     </ul>
@@ -161,6 +154,12 @@ h2 {
   margin: 0 auto;
   line-height: var(--space-l);
 }
+
+.history-container:hover {
+  background-color: var(--color-text);
+  opacity: 0.8;
+}
+
 .history-container p {
   margin: 0 10px;
   flex: 1;
@@ -170,6 +169,14 @@ h2 {
 .icon-zip {
   display: flex;
   gap: 1rem;
+}
+.fa-trash {
+  transition: 0.3s;
+}
+
+.fa-trash:hover {
+  color: var(--color-primary);
+  opacity: 0.8;
 }
 
 button {

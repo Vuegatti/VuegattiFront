@@ -229,61 +229,6 @@
       "bank": "Shinhan",
       "details": "신한은행",
       "date": "2025-04-01"
-    },
-    {
-      "id": 1744173617024,
-      "username": "bikdh",
-      "date": "2025. 4. 9.",
-      "amount": 15000,
-      "type": "expense",
-      "category": "식비",
-      "title": "테스트",
-      "details": "테스트",
-      "bank": "KB"
-    },
-    {
-      "id": 1744174070472,
-      "username": "bikdh",
-      "date": "2025. 4. 9.",
-      "amount": "",
-      "type": "",
-      "category": "",
-      "title": "",
-      "details": "",
-      "bank": "KB"
-    },
-    {
-      "id": 1744174071383,
-      "username": "bikdh",
-      "date": "2025. 4. 9.",
-      "amount": "",
-      "type": "",
-      "category": "",
-      "title": "",
-      "details": "",
-      "bank": "KB"
-    },
-    {
-      "id": 1744174072463,
-      "username": "bikdh",
-      "date": "2025. 4. 9.",
-      "amount": "",
-      "type": "",
-      "category": "",
-      "title": "",
-      "details": "",
-      "bank": "KB"
-    },
-    {
-      "id": 1744174073054,
-      "username": "bikdh",
-      "date": "2025. 4. 9.",
-      "amount": "",
-      "type": "",
-      "category": "",
-      "title": "",
-      "details": "",
-      "bank": "KB"
     }
   ],
   "account": [

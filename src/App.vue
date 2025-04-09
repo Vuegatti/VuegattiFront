@@ -15,6 +15,7 @@ import LogIn from './views/LogInVue.vue'
     <main>
       <SideBar />
       <HomePage />
+      <RouterView />
       <!-- <LogIn /> -->
     </main>
 
