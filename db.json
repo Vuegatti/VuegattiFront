@@ -1,9 +1,9 @@
 {
   "history": [
     {
-      "id": 1,
-      "userID": "bikdh",
-      "date": "2025-03-01",
+      "id": "1",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-01",
       "amount": 15000,
       "type": "expense",
       "category": "식비",
@@ -12,9 +12,9 @@
       "bank": "KB"
     },
     {
-      "id": 2,
-      "userID": "bikdh",
-      "date": "2025-03-03",
+      "id": "2",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-03",
       "amount": 2500000,
       "type": "income",
       "category": "월급",
@@ -23,9 +23,9 @@
       "bank": "Shinhan"
     },
     {
-      "id": 3,
-      "userID": "bikdh",
-      "date": "2025-03-05",
+      "id": "3",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-05",
       "amount": 20000,
       "type": "expense",
       "category": "교통",
@@ -34,9 +34,9 @@
       "bank": "KB"
     },
     {
-      "id": 4,
-      "userID": "bikdh",
-      "date": "2025-03-06",
+      "id": "4",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-06",
       "amount": 8000,
       "type": "expense",
       "category": "식비",
@@ -45,9 +45,9 @@
       "bank": "Shinhan"
     },
     {
-      "id": 5,
-      "userID": "bikdh",
-      "date": "2025-03-08",
+      "id": "5",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-08",
       "amount": 100000,
       "type": "income",
       "category": "부모님",
@@ -56,9 +56,9 @@
       "bank": "KB"
     },
     {
-      "id": 6,
-      "userID": "bikdh",
-      "date": "2025-03-10",
+      "id": "6",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-10",
       "amount": 15000,
       "type": "expense",
       "category": "구독료",
@@ -67,9 +67,9 @@
       "bank": "Shinhan"
     },
     {
-      "id": 7,
-      "userID": "bikdh",
-      "date": "2025-03-11",
+      "id": "7",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-11",
       "amount": 30000,
       "type": "expense",
       "category": "회비",
@@ -78,9 +78,9 @@
       "bank": "KB"
     },
     {
-      "id": 8,
-      "userID": "bikdh",
-      "date": "2025-03-13",
+      "id": "8",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-13",
       "amount": 35000,
       "type": "expense",
       "category": "건강",
@@ -89,9 +89,9 @@
       "bank": "Shinhan"
     },
     {
-      "id": 9,
-      "userID": "bikdh",
-      "date": "2025-03-15",
+      "id": "9",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-15",
       "amount": 55000,
       "type": "expense",
       "category": "생활용품",
@@ -100,9 +100,9 @@
       "bank": "KB"
     },
     {
-      "id": 10,
-      "userID": "bikdh",
-      "date": "2025-03-17",
+      "id": "10",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-17",
       "amount": 7000,
       "type": "expense",
       "category": "교통",
@@ -111,9 +111,9 @@
       "bank": "Shinhan"
     },
     {
-      "id": 11,
-      "userID": "bikdh",
-      "date": "2025-03-19",
+      "id": "11",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-19",
       "amount": 60000,
       "type": "income",
       "category": "부수입",
@@ -122,9 +122,9 @@
       "bank": "KB"
     },
     {
-      "id": 12,
-      "userID": "bikdh",
-      "date": "2025-03-21",
+      "id": "12",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-21",
       "amount": 42000,
       "type": "expense",
       "category": "미용",
@@ -133,9 +133,9 @@
       "bank": "Shinhan"
     },
     {
-      "id": 13,
-      "userID": "bikdh",
-      "date": "2025-03-23",
+      "id": "13",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-23",
       "amount": 12000,
       "type": "expense",
       "category": "식비",
@@ -144,9 +144,9 @@
       "bank": "KB"
     },
     {
-      "id": 14,
-      "userID": "bikdh",
-      "date": "2025-03-25",
+      "id": "14",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-25",
       "amount": 7500,
       "type": "expense",
       "category": "교통",
@@ -155,9 +155,9 @@
       "bank": "Shinhan"
     },
     {
-      "id": 15,
-      "userID": "bikdh",
-      "date": "2025-03-27",
+      "id": "15",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-27",
       "amount": 33000,
       "type": "expense",
       "category": "식비",
@@ -166,9 +166,9 @@
       "bank": "KB"
     },
     {
-      "id": 16,
-      "userID": "bikdh",
-      "date": "2025-03-29",
+      "id": "16",
+      "username": "bikdh",
+      "phoneNumber": "2025-03-29",
       "amount": 200000,
       "type": "income",
       "category": "부수입",
@@ -177,9 +177,9 @@
       "bank": "Shinhan"
     },
     {
-      "id": 17,
-      "userID": "bikdh",
-      "date": "2025-04-01",
+      "id": "17",
+      "username": "bikdh",
+      "phoneNumber": "2025-04-01",
       "amount": 13000,
       "type": "expense",
       "category": "교육",
@@ -188,9 +188,9 @@
       "bank": "KB"
     },
     {
-      "id": 18,
-      "userID": "bikdh",
-      "date": "2025-04-03",
+      "id": "18",
+      "username": "bikdh",
+      "phoneNumber": "2025-04-03",
       "amount": 4500,
       "type": "expense",
       "category": "식비",
@@ -199,9 +199,9 @@
       "bank": "Shinhan"
     },
     {
-      "id": 19,
-      "userID": "kxxheehxxn",
-      "date": "2025-03-30",
+      "id": "19",
+      "username": "kxxheehxxn",
+      "phoneNumber": "2025-03-30",
       "amount": 23000,
       "type": "expense",
       "category": "식비",
@@ -210,9 +210,9 @@
       "bank": "KB"
     },
     {
-      "id": 20,
-      "userID": "kxxheehxxn",
-      "date": "2025-04-04",
+      "id": "20",
+      "username": "kxxheehxxn",
+      "phoneNumber": "2025-04-04",
       "amount": 1500000,
       "type": "income",
       "category": "월급",
@@ -228,15 +228,15 @@
       "type": "income",
       "bank": "Shinhan",
       "details": "신한은행",
-      "date": "2025-04-01"
+      "phoneNumber": "2025-04-01"
     }
   ],
   "account": [
     {
-      "userID": "bikdh",
+      "username": "bikdh",
       "password": "123123",
-      "username": "김도현",
       "email": "sking1109s@gmail.com",
+      "phoneNumber": "010-1234-5678",
       "bank": {
         "KB": 1000000,
         "Shinhan": 1000000

@@ -1,12 +1,13 @@
-// 회원정보 불러오는 코드
-// 필요 시 함수 추가하여 사용
-import { ref } from 'vue' //computed 지웠음 - computed 속성 사용하게 되면 다시 추가
+// stores/account.js
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 import apiClient from '@/utils/axios'
 
-export const useAccount = defineStore('accountInfo', () => {
+export const useAccount = defineStore('account', () => {
+  // 1. 상태 선언
   const accountInfo = ref([])
 
+  // 2. 회원정보 불러오기
   const fetchAccount = async () => {
     try {
       const response = await apiClient.get('/account')
@@ -16,5 +17,22 @@ export const useAccount = defineStore('accountInfo', () => {
     }
   }
 
-  return { accountInfo, fetchAccount }
+  // 3. 회원정보 업데이트
+  const updateAccount = async accountData => {
+    console.log('updateAccount 함수 호출됨', accountData) //
+    try {
+      const response = await apiClient.post('/account', accountData)
+      accountInfo.value = response.data
+      console.log('회원정보 업데이트 성공: ', response.data)
+    } catch (err) {
+      console.log('회원정보 업데이트 에러: ', err)
+    }
+  }
+
+  // 4. 외부에서 사용할 수 있도록 반환
+  return {
+    accountInfo,
+    fetchAccount,
+    updateAccount,
+  }
 })

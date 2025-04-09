@@ -19,14 +19,6 @@ import BaseButton from '@/components/BaseButton.vue'
       </div>
     </div>
     <div>
-      <!-- <dotlottie-player
-        src="https://lottie.host/854c5717-84ac-4a7e-a572-10767cdd7ad9/lvot0zuptc.lottie"
-        background="transparent"
-        speed="1"
-        style="width: 300px; height: 300px"
-        loop
-        autoplay
-      ></dotlottie-player> -->
       <img src="@/assets/image/Vuegatti_main.png" alt="Vuegatti" />
     </div>
   </div>
