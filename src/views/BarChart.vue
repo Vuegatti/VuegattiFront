@@ -87,10 +87,19 @@ const chartOptions = {
 <template>
   <div class="bar-chart">
     <div class="chart-container">
-      <Bar :data="chartData" :options="chartOptions" />
-
-      <div class="message-box">
-        <span style="color: var(--color-primary)">소비</span>가 더 많아요!
+      <div class="chart-box">
+        <Bar :data="chartData" :options="chartOptions" />
+      </div>
+      <div class="message-box" style="text-align: center">
+        <div>지난 달에 비해...</div>
+        <div>
+          <span
+            class="subtle-glitter"
+            style="color: var(--color-primary); font-weight: bold"
+          >
+            소비 </span
+          >가 많아요!
+        </div>
       </div>
     </div>
   </div>
@@ -99,26 +108,55 @@ const chartOptions = {
 <style scoped>
 .bar-chart {
   display: flex;
+  justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .chart-container {
-  flex: 1;
+  display: flex; /* ✅ 가로 배치 */
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
   border: 1px solid var(--color-text);
   border-radius: 20px;
-  flex-direction: row;
+  width: 960px;
+  max-width: 100%;
+  gap: 2rem; /* ✅ 두 요소 사이 간격 */
+}
+
+.chart-box {
+  flex: 1;
+  max-width: 480px; /* ✅ 막대 차트 너비 제한 */
 }
 
 .message-box {
   flex: 1;
   display: flex;
+  flex-direction: column; /* 줄바꿈 허용!!!!! 이거때문에 줄바꿈 안됐음 */
   align-items: center;
   justify-content: center;
   color: var(--color-text);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  padding: 1rem;
   text-align: center;
+}
+@keyframes subtle-glitter {
+  0%,
+  100% {
+    opacity: 1;
+    text-shadow: 0 0 1px #ffb5b7;
+  }
+  50% {
+    opacity: 0.95;
+    text-shadow:
+      0 0 2px #ffc1c3,
+      0 0 3px #ff9a9e;
+  }
+}
+
+.subtle-glitter {
+  animation: subtle-glitter 2.5s infinite ease-in-out;
 }
 </style>
