@@ -7,20 +7,22 @@ import LogIn from './views/LogInVue.vue'
 </script>
 
 <template>
-  <div class="layout">
+  <!-- <div class="layout">
     <header>
       <HomeHeader />
-    </header>
+    </header> -->
 
-    <main>
+   <main>
       <SideBar />
+
+
       <RouterView />
     </main>
 
     <footer>
       <HomeFooter />
     </footer>
-  </div>
+  </div> -->
 </template>
 
 <style scoped>
