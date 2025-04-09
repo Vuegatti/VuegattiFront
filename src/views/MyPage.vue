@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import VueToyFace from 'vue-toy-face'
+import Avatar from '@/components/AvatarPicture.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
 // 폼 입력
@@ -27,7 +27,8 @@ const save = () => {
       <p>Edit your information</p>
 
       <!-- 프로필 이미지 -->
-      <vue-toy-face :size="100" />
+      <Avatar :toyNumber="1" :size="150" :rounded="24" />
+
       <form action="">
         <!-- 입력 폼 -->
         <input v-model="username" type="text" placeholder="Username" />
@@ -36,8 +37,10 @@ const save = () => {
         <input v-model="phonenumber" type="tel" placeholder="Phonenumber" />
 
         <!-- 버튼 -->
-        <div><BaseButton type="secondary">Edit Account</BaseButton></div>
-        <div><BaseButton type="primary" @click="save">Confirm</BaseButton></div>
+        <div><BaseButton type="primary">Edit Account</BaseButton></div>
+        <div>
+          <BaseButton type="secondary" @click="save">Confirm</BaseButton>
+        </div>
       </form>
     </div>
   </div>
@@ -53,14 +56,19 @@ const save = () => {
   align-items: center;
   /* height: 100%; */
   color: white;
+  gap: 5vw;
 }
 
 .mypage-box {
-  background: #2b2d3a;
-  border-radius: 12px;
-  padding: 30px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(248, 244, 242, 0.503);
+  border-radius: 10px;
   text-align: center;
-  width: 400px;
+  width: 50%;
+  height: 60%;
+  padding: var(--space-l);
 }
 
 .mypage-box h2 {
@@ -88,7 +96,20 @@ form input {
   border: 1px solid var(--color-text);
   color: var(--color-text);
   border-radius: 6px;
-  background: #1e1f2c;
+}
+
+form div {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 5px;
+  color: var(--color-text);
+}
+
+form div > * {
+  width: 100%;
+  padding: 10px; /* ✅ 높이 맞추기 */
+  box-sizing: border-box;
 }
 
 input::placeholder {
