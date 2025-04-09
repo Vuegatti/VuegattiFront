@@ -229,6 +229,17 @@
       "bank": "Shinhan",
       "details": "신한은행",
       "date": "2025-04-01"
+    },
+    {
+      "id": "a9f3",
+      "userID": "bikdh",
+      "title": "월급",
+      "amount": 1800000,
+      "category": "월급",
+      "type": "income",
+      "bank": "Shinhan",
+      "details": "아르바이트",
+      "date": "2025-04-02"
     }
   ],
   "account": [
