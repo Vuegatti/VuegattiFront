@@ -1,6 +1,7 @@
 <script setup>
 import { useHistory } from '@/stores/history'
 import { useAccount } from '@/stores/account'
+import ListForm from './ListForm.vue'
 import { onMounted, computed, ref } from 'vue'
 
 const historyList = useHistory()
@@ -28,6 +29,17 @@ const currentMonthName = computed(() => {
   return historyList.monthCalc(thisMonth)
 })
 
+const monthlyIncome = computed(() => historyList.monthlyIncome.toLocaleString())
+const monthlyExpense = computed(() =>
+  historyList.monthlyExpense.toLocaleString(),
+)
+
+const isClick = ref(false)
+
+const openForm = () => {
+  isClick.value = true
+}
+
 onMounted(() => {
   historyList.fetchHistory()
 })
@@ -39,15 +51,16 @@ onMounted(() => {
   <div class="text-container">
     <div class="text-income">
       <p>이번달 총 수입은</p>
-      <p>2,000,000 입니다.</p>
+      <p>{{ monthlyIncome }} 입니다.</p>
     </div>
     <div class="text-expense">
       <p>이번달 총 지출은</p>
-      <p>2,000,000 입니다.</p>
+      <p>{{ monthlyExpense }} 입니다.</p>
     </div>
   </div>
 
   <div class="historypage">
+    <ListForm v-if="isClick" />
     <div class="history-header">
       <button>유형</button>
       <p>날짜</p>
@@ -80,7 +93,10 @@ onMounted(() => {
         </div>
       </li>
     </ul>
-    <i class="fa-solid fa-circle-plus fa-2xl circle-button"></i>
+    <i
+      class="fa-solid fa-circle-plus fa-2xl circle-button"
+      @click="openForm"
+    ></i>
   </div>
 </template>
 
@@ -96,7 +112,7 @@ h2 {
   justify-content: center;
   gap: var(--space-l);
   font-size: 25px;
-  line-height: var(--space-s);
+  line-height: var(--space-l);
 }
 .text-income {
   color: var(--color-text);
@@ -105,13 +121,16 @@ h2 {
 .text-expense {
   color: var(--color-text);
 }
+.historypage {
+  margin: var(--space-l);
+}
 
 .history-header {
   display: flex;
   justify-content: space-around;
   width: 900px;
   padding: 0 var(--space-s);
-  margin: 0 auto;
+  margin: var(--space-s) auto;
   font-weight: bold;
   background-color: var(--color-text);
   border-radius: var(--space-s);

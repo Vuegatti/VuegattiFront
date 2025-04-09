@@ -2,7 +2,7 @@
 import SideBar from './components/SideBar.vue'
 import HomeHeader from './components/HomeHeader.vue'
 import HomeFooter from './components/HomeFooter.vue'
-import HomePage from './views/HomePage.vue'
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
@@ -10,8 +10,8 @@ import HomePage from './views/HomePage.vue'
     <header><HomeHeader /></header>
 
     <main>
-      <SideBar />
-      <HomePage />
+      <!-- <SideBar /> -->
+      <RouterView />
     </main>
     <footer>
       <HomeFooter />

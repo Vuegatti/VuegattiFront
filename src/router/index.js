@@ -27,11 +27,11 @@ const router = createRouter({
     //   path: '/',
     //   name: 'Home',
     // },
-    // {
-    //   path: '/list',
-    //   name: 'historyList',
-    //   component: () => import('@/views/HistoryList.vue'),
-    // },
+    {
+      path: '/list',
+      name: 'historyList',
+      component: () => import('@/views/HistoryList.vue'),
+    },
   ],
 })
 
