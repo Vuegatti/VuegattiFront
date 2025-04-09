@@ -29,10 +29,16 @@ export const useAccount = defineStore('account', () => {
     }
   }
 
+  const logIn = logInUsername => {
+    localStorage.setItem('userId', logInUsername)
+    console.log('로그인 성공: ', logInUsername)
+  }
+
   // 4. 외부에서 사용할 수 있도록 반환
   return {
     accountInfo,
     fetchAccount,
     updateAccount,
+    logIn,
   }
 })

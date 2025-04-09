@@ -3,10 +3,8 @@ import { ref } from 'vue'
 import Avatar from '@/components/AvatarPicture.vue'
 
 const selected = ref(1)
-// ✅ emit 함수 선언
 const emit = defineEmits(['update:selectedAvatar'])
 
-// ✅ selected 값이 바뀔 때마다 emit 호출
 const selectAvatar = i => {
   selected.value = i
   emit('update:selectedAvatar', i) // 부모에게 알림
