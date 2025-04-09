@@ -130,7 +130,7 @@ const addNewItem = async () => {
     title: '',
     amount: '',
     category: '',
-    type: 'income',
+    type: '',
     bank: '',
     details: '',
   }
