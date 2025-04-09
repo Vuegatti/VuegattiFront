@@ -3,7 +3,7 @@ import SideBar from './components/SideBar.vue'
 import HomeHeader from './components/HomeHeader.vue'
 import HomeFooter from './components/HomeFooter.vue'
 import HomePage from './views/HomePage.vue'
-import LogIn from './views/LogInVue.vue'
+import LogIn from './views/LogInView.vue'
 </script>
 
 <template>

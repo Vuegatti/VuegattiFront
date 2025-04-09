@@ -1,13 +1,37 @@
 <script setup>
 import BaseButton from '@/components/BaseButton.vue'
 import { useAccount } from '@/stores/account.js'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 const accountStore = useAccount()
 const Username = ref('')
+const Password = ref('')
+const users = ref([])
+
 const setUser = () => {
   const logInUsername = Username.value
   accountStore.logIn(logInUsername)
 }
+const validateUser = () => {
+  const foundUser = users.value.find(user => user.userID === Username.value)
+  if (!foundUser) {
+    alert('아이디가 존재하지 않습니다.')
+    return
+  }
+  console.log(foundUser)
+  if (foundUser.password !== Password.value) {
+    alert('비밀번호가 일치하지 않습니다.')
+    return
+  }
+  console.log('로그인 성공')
+  setUser()
+}
+
+onMounted(async () => {
+  await accountStore.fetchAccount()
+  users.value = accountStore.accountInfo
+  console.log('가져온 회원정보: ', users.value[0].userID)
+})
 </script>
 
 <template>
@@ -16,15 +40,24 @@ const setUser = () => {
       <div class="formContainer">
         <h1>Login</h1>
         <p>Glad you're back!</p>
-        <form action="">
-          <input type="text" placeholder="Username" v-model="Username" />
-          <input type="password" placeholder="Password" />
-          <BaseButton type="primary" @click.prevent="setUser"
-            >Log In</BaseButton
-          >
+        <form @submit.prevent="validateUser">
+          <input
+            type="text"
+            placeholder="Username"
+            v-model="Username"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            v-model="Password"
+            required
+          />
+          <BaseButton color="primary">Log In</BaseButton>
         </form>
         <p style="text-align: center">
           Don't have an account? <a href="#">Sign Up</a>
+          <!-- 기능 구현 추가 필요 -->
         </p>
       </div>
     </div>
@@ -35,7 +68,7 @@ const setUser = () => {
 </template>
 
 <style scoped>
-/* * {
+* {
   color: var(--color-text);
 }
 
@@ -44,32 +77,39 @@ const setUser = () => {
   align-items: center;
   justify-content: center;
   gap: 5vw;
+  min-height: 100vh;
 }
-
+.loginPage img {
+  max-height: 80vh;
+  max-width: 100%;
+  object-fit: contain;
+}
 .logInWrapper {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   border: 1px solid rgba(248, 244, 242, 0.503);
   border-radius: 10px;
-  width: 20vw;
+  width: 30vw;
   height: 60vh;
   padding: var(--space-l);
-
 }
 
 .loginPage h1 {
-  font-size: 3rem;
+  font-size: 2rem;
   margin-bottom: 0;
 }
 
 .loginPage p {
   font-size: 1rem;
   margin-top: var(--space-s);
+  margin-bottom: var(--space-m);
 }
 
 .formContainer {
   width: 100%;
+  justify-content: center;
 }
 
 .formContainer form {
@@ -83,7 +123,7 @@ const setUser = () => {
   background-color: transparent;
   padding: 1rem;
   border-radius: 5px;
-  font-size: 1.2rem;
+  font-size: 1rem;
   font-family: 'Noto Sans', sans-serif;
 }
 
@@ -99,5 +139,5 @@ input::placeholder {
 
 .formContainer p:nth-child(1) {
   text-align: center;
-} */
+}
 </style>

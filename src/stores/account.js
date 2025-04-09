@@ -12,11 +12,11 @@ export const useAccount = defineStore('account', () => {
     try {
       const response = await apiClient.get('/account')
       accountInfo.value = response.data
+      console.log('회원정보 로딩 성공: ', response.data)
     } catch (err) {
       console.log('회원정보 로딩 에러: ', err)
     }
   }
-
   // 3. 회원정보 업데이트
   const updateAccount = async accountData => {
     console.log('updateAccount 함수 호출됨', accountData) //

@@ -9,8 +9,8 @@ import router from './router'
 import vuetify from './plugins/vuetify'
 
 import MainView from '@/views/MainView.vue'
-import LogInVue from './views/LogInVue.vue'
-import SignInVue from './views/SignInVue.vue'
+import LogInVue from './views/LogInView.vue'
+import SignInVue from './views/SignInView.vue'
 const app = createApp(LogInVue)
 
 app.use(createPinia())
