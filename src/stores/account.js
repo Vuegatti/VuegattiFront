@@ -4,9 +4,11 @@ import { ref, computed } from 'vue' //computed 지웠음 - computed 속성 사�
 import { defineStore } from 'pinia'
 import apiClient from '@/utils/axios'
 
-export const useAccount = defineStore('accountInfo', () => {
+export const useAccount = defineStore('account', () => {
+  // 1. 상태 선언
   const accountInfo = ref([])
 
+  // 2. 회원정보 불러오기
   const fetchAccount = async () => {
     try {
       const response = await apiClient.get('/account')
@@ -17,6 +19,19 @@ export const useAccount = defineStore('accountInfo', () => {
     }
   }
 
+  // 3. 회원정보 업데이트
+  const updateAccount = async accountData => {
+    console.log('updateAccount 함수 호출됨', accountData) //
+    try {
+      const response = await apiClient.post('/account', accountData)
+      accountInfo.value = response.data
+      console.log('회원정보 업데이트 성공: ', response.data)
+    } catch (err) {
+      console.log('회원정보 업데이트 에러: ', err)
+    }
+  }
+
+  // 4. 외부에서 사용할 수 있도록 반환
   // bank정보만 불러오게
   const userID = ref('bikdh') // userID는 로그인 시 받아온 값으로 설정해야 함
   // 로그인 시 받아온 userID를 사용하여 필터링
@@ -31,5 +46,10 @@ export const useAccount = defineStore('accountInfo', () => {
     return bankInfo
   })
 
-  return { accountInfo, fetchAccount, bankInfo }
+  return {
+    accountInfo,
+    fetchAccount,
+    bankInfo,
+    updateAccount,
+  }
 })

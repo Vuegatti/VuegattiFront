@@ -8,7 +8,7 @@
 :root {
   --color-primary: #fe0d49;
   --color-secondary: #5cd1c7;
-  --color-background: #1a1c2c;
+  --color-background: rgb(26, 29, 45);
   --color-text: #f8f4f2;
 
   --color-accent-red: #ff5b5d;

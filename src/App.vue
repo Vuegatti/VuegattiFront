@@ -3,20 +3,25 @@ import SideBar from './components/SideBar.vue'
 import HomeHeader from './components/HomeHeader.vue'
 import HomeFooter from './components/HomeFooter.vue'
 import HomePage from './views/HomePage.vue'
+import LogIn from './views/LogInVue.vue'
 </script>
 
 <template>
   <div class="layout">
-    <header><HomeHeader /></header>
+    <header>
+      <HomeHeader />
+    </header>
 
     <main>
       <SideBar />
-      <HomePage />
+      <!-- <HomePage /> -->
+      <!-- <LogIn /> -->
+      <RouterView />
     </main>
+
     <footer>
       <HomeFooter />
     </footer>
-    <!-- <router-view /> -->
   </div>
 </template>
 

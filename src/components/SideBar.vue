@@ -10,7 +10,6 @@ const handleMouseLeave = () => {
   isExpanded.value = false
 }
 
-// 메뉴 항목 정의 (라우터 연결용)
 const menu = [
   { to: '/', label: 'Home', icon: 'fa fa-home' },
   { to: '/calendar', label: 'Calendar', icon: 'fa fa-calendar' },
@@ -43,13 +42,16 @@ const menu = [
 
 <style scoped>
 .sidebar-wrapper {
-  position: relative;
+  position: fixed;
+  top: 60px;
+  left: 0;
   width: 50px;
-  transition: width 0.2s;
-  background-color: #383838;
-  color: white;
   height: 100vh;
-  overflow: hidden;
+  background-color: #383838;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: width 0.2s;
+  color: var(--color-text);
 }
 .sidebar-wrapper.expanded {
   width: 200px;
@@ -64,10 +66,10 @@ const menu = [
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 0.75em 1em;
   color: white;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 }
 .menu-item:hover {
   background-color: #505050;
