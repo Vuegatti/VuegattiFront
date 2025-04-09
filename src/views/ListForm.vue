@@ -56,13 +56,17 @@ const toggleCategoryGrid = () => {
 
 const handleSubmit = async () => {
   try {
-    const date = new Date()
-    console.log(date)
-    console.log(date.toLocaleDateString())
+    const date = new Date().toLocaleDateString()
+
     const newData = {
       id: Date.now().toString(),
       username: 'bikdh',
-      date: date.toLocaleDateString(),
+      date: date
+        .replace(/\.\s?/g, '-')
+        .replace(/-\s?$/, '')
+        .split('-')
+        .map((v, i) => (i > 0 ? v.padStart(2, '0') : v))
+        .join('-'),
       amount: amount.value,
       type: type.value,
       category: selectedCategory.value,
@@ -146,7 +150,7 @@ const handleClose = () => {
         </div>
       </div>
       <label for="">내용 : </label>
-      <input type="text" v-model.trim="title" />
+      <input type="text" v-model.trim="title" placeholder="내용을 입력하세요" />
 
       <label for="">세부 정보 : </label>
       <textarea
@@ -173,9 +177,10 @@ const handleClose = () => {
   width: 40%;
   margin: 0 auto;
   padding: 2rem;
-  background-color: #f9f9f9;
+  background-color: var(--color-text);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  border: 1px solid black;
   z-index: 100;
 }
 

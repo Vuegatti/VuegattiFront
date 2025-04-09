@@ -35,7 +35,22 @@ export const useHistory = defineStore('historyStore', () => {
     }
   }
 
-  const monthCalc = month => {
+  const currentDate = ref(new Date())
+
+  const moveMonth = direction => {
+    const current = new Date(currentDate.value)
+    current.setMonth(current.getMonth() + direction)
+    currentDate.value = current
+  }
+
+  const getHistoryByMonth = month => {
+    return history.value.filter(
+      item => new Date(item.date).getMonth() === month,
+    )
+  }
+
+  const currentMonth = computed(() => currentDate.value.getMonth())
+  const currentMonthName = computed(() => {
     const months = [
       'Jan',
       'Feb',
@@ -50,19 +65,15 @@ export const useHistory = defineStore('historyStore', () => {
       'Nov',
       'Dec',
     ]
-    return months[month] // month 값이 0~11 범위를 벗어나면 빈 문자열 반환
-  }
-
-  const currentDate = ref(new Date())
-
-  const currentMonth = computed(() => currentDate.value.getMonth() + 1)
+    return months[currentMonth.value]
+  })
 
   const monthlyIncome = computed(() => {
     return history.value
       .filter(
         item =>
           item.type === 'income' &&
-          new Date(item.date).getMonth() + 1 === currentMonth.value,
+          new Date(item.date).getMonth() === currentMonth.value,
       )
       .reduce((sum, item) => sum + item.amount, 0)
   })
@@ -73,7 +84,7 @@ export const useHistory = defineStore('historyStore', () => {
       .filter(
         item =>
           item.type === 'expense' &&
-          new Date(item.date).getMonth() + 1 === currentMonth.value,
+          new Date(item.date).getMonth() === currentMonth.value,
       )
       .reduce((sum, item) => sum + item.amount, 0)
   })
@@ -81,10 +92,13 @@ export const useHistory = defineStore('historyStore', () => {
   return {
     history,
     fetchHistory,
-    monthCalc,
+    moveMonth,
     monthlyIncome,
     monthlyExpense,
     updateHistory,
     deleteHistory,
+    currentMonthName,
+    getHistoryByMonth,
+    currentMonth,
   }
 })

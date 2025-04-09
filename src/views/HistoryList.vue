@@ -6,12 +6,7 @@ import { onMounted, computed, ref } from 'vue'
 
 const historyList = useHistory()
 
-const { fetchHistory, deleteHistory } = useHistory()
-
-const thisMonth = new Date().getMonth()
-const currentMonthName = computed(() => {
-  return historyList.monthCalc(thisMonth)
-})
+const { fetchHistory, deleteHistory, moveMonth } = useHistory()
 
 const monthlyIncome = computed(() => historyList.monthlyIncome.toLocaleString())
 const monthlyExpense = computed(() =>
@@ -35,21 +30,37 @@ const deleteItem = async id => {
   await deleteHistory(id)
 }
 
+const moveToPreviousMonth = () => {
+  moveMonth(-1)
+}
+const moveToNextMonth = () => {
+  moveMonth(1)
+}
+
+const filteredHistory = computed(() => {
+  const month = historyList.currentMonth // 현재 월 (0부터 시작)
+  return historyList.getHistoryByMonth(month)
+})
+
 onMounted(() => {
   fetchHistory()
 })
 </script>
 
 <template>
-  <HomeHeader />
-  <h2>{{ currentMonthName }}</h2>
+  <h2>
+    <button class="move-month" @click="moveToPreviousMonth">◀</button>
+    {{ historyList.currentMonthName }}
+    <button class="move-month" @click="moveToNextMonth">▶</button>
+  </h2>
+
   <div class="text-container">
     <div class="text-income">
-      <p>이번달 총 수입은</p>
+      <p>총 수입은</p>
       <p>{{ monthlyIncome }} 원 입니다.</p>
     </div>
     <div class="text-expense">
-      <p>이번달 총 지출은</p>
+      <p>총 지출은</p>
       <p>{{ monthlyExpense }} 원 입니다.</p>
     </div>
   </div>
@@ -67,7 +78,7 @@ onMounted(() => {
 
     <ul>
       <li
-        v-for="list in historyList.history"
+        v-for="list in filteredHistory"
         :key="list.id"
         class="history-container"
       >
@@ -104,10 +115,12 @@ h2 {
   font-size: 80px;
   margin: 0;
 }
+.listHead {
+  display: flex;
+}
 .text-container {
   display: flex;
-  justify-content: center;
-  gap: var(--space-l);
+  justify-content: space-evenly;
   font-size: 25px;
   line-height: var(--space-l);
 }
@@ -183,8 +196,17 @@ button {
   padding: 2px var(--space-s);
   font-size: 16px;
   border: none;
-  color: white;
+  color: var(--color-text);
   cursor: default;
+}
+
+.move-month {
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.3s;
+}
+.move-month:hover {
+  font-size: 25px;
 }
 
 .expense-button {
