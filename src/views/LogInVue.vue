@@ -19,14 +19,6 @@ import BaseButton from '@/components/BaseButton.vue'
       </div>
     </div>
     <div>
-      <!-- <dotlottie-player
-        src="https://lottie.host/854c5717-84ac-4a7e-a572-10767cdd7ad9/lvot0zuptc.lottie"
-        background="transparent"
-        speed="1"
-        style="width: 300px; height: 300px"
-        loop
-        autoplay
-      ></dotlottie-player> -->
       <img src="@/assets/image/Vuegatti_main.png" alt="Vuegatti" />
     </div>
   </div>
@@ -46,7 +38,7 @@ import BaseButton from '@/components/BaseButton.vue'
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid var(--color-text);
+  border: 1px solid rgba(248, 244, 242, 0.503);
   border-radius: 10px;
   width: 20vw;
   height: 60vh;
@@ -87,7 +79,7 @@ import BaseButton from '@/components/BaseButton.vue'
   font-family: 'Noto Sans', sans-serif;
 }
 .formContainer form input {
-  border: 1px solid var(--color-text);
+  border: 1px solid rgba(248, 244, 242, 0.503);
   color: var(--color-text);
 }
 input::placeholder {
