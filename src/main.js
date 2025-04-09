@@ -8,7 +8,11 @@ import { createPinia } from 'pinia'
 import router from './router'
 import vuetify from './plugins/vuetify'
 
-const app = createApp(App)
+import MainView from '@/views/MainView.vue'
+import LogInVue from './views/LogInVue.vue'
+
+const app = createApp(LogInVue)
+
 app.use(createPinia())
 app.use(router)
 app.use(vuetify)
