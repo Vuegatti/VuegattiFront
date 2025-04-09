@@ -31,6 +31,11 @@ export const useAccount = defineStore('account', () => {
     }
   }
 
+  const logIn = logInUsername => {
+    localStorage.setItem('userId', logInUsername)
+    console.log('로그인 성공: ', logInUsername)
+  }
+
   // 4. 외부에서 사용할 수 있도록 반환
   // bank정보만 불러오게
   const userID = ref('bikdh') // userID는 로그인 시 받아온 값으로 설정해야 함
@@ -51,5 +56,6 @@ export const useAccount = defineStore('account', () => {
     fetchAccount,
     bankInfo,
     updateAccount,
+    logIn,
   }
 })

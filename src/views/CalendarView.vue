@@ -2,11 +2,12 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
+const ID = localStorage.getItem('userId')
+console.log(ID)
+
 const income = ref(0)
 const expense = ref(0)
-
 const currentDate = ref(new Date(2025, 3))
-
 const daysInMonth = ref([])
 const selectedDate = ref(null)
 const selectedHistory = ref([])
@@ -27,7 +28,9 @@ const fetchHistory = async () => {
   const prefix = `${year}-${month}`
 
   const res = await axios.get('http://localhost:5001/history')
-  const history = res.data.filter(h => h.date.startsWith(prefix))
+  const history = res.data.filter(
+    h => h.userID === ID && h.date.startsWith(prefix),
+  )
 
   income.value = 0
   expense.value = 0
@@ -75,7 +78,7 @@ const fetchHistory = async () => {
 const selectDate = date => {
   selectedDate.value = date
   axios.get('http://localhost:5001/history').then(res => {
-    const filtered = res.data.filter(h => h.date === date)
+    const filtered = res.data.filter(h => h.userID === ID && h.date === date)
     selectedHistory.value = filtered
     selectedIncome.value = filtered
       .filter(i => i.type === 'income')
@@ -96,7 +99,7 @@ const changeMonth = direction => {
 }
 
 const newItem = ref({
-  userID: 'bikdh',
+  userID: ID,
   title: '',
   amount: '',
   category: '',
@@ -119,11 +122,11 @@ const addNewItem = async () => {
   }
 
   await axios.post('http://localhost:5001/history', payload)
-
   await fetchHistory()
   selectDate(selectedDate.value)
 
   newItem.value = {
+    userID: ID,
     title: '',
     amount: '',
     category: '',
@@ -132,7 +135,9 @@ const addNewItem = async () => {
     details: '',
   }
 }
+
 const showForm = ref(false)
+
 const deleteItem = async id => {
   await axios.delete(`http://localhost:5001/history/${id}`)
   await fetchHistory()

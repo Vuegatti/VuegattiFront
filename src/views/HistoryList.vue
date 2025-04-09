@@ -1,52 +1,70 @@
 <script setup>
 import { useHistory } from '@/stores/history'
 import { useAccount } from '@/stores/account'
+import ListForm from './ListForm.vue'
 import { onMounted, computed, ref } from 'vue'
 
 const historyList = useHistory()
 
-const buttonInfo = computed(() => {
-  return historyList.history.map(list => {
-    if (list.type === 'expense') {
-      return {
-        text: '지출',
-        class: 'expense-button',
-        color: 'primary',
-      }
-    } else if (list.type === 'income') {
-      return {
-        text: '수입',
-        class: 'income-button',
-        color: 'secondary',
-      }
-    }
-  })
-})
+const { fetchHistory, deleteHistory, moveMonth } = useHistory()
 
-const thisMonth = new Date().getMonth()
-const currentMonthName = computed(() => {
-  return historyList.monthCalc(thisMonth)
+const monthlyIncome = computed(() => historyList.monthlyIncome.toLocaleString())
+const monthlyExpense = computed(() =>
+  historyList.monthlyExpense.toLocaleString(),
+)
+
+const showModal = ref(false)
+
+const openForm = () => {
+  showModal.value = true
+}
+
+const closeForm = isSubmitted => {
+  if (isSubmitted) {
+    showModal.value = false
+  }
+}
+
+const deleteItem = async id => {
+  console.log(id)
+  await deleteHistory(id)
+}
+
+const moveToPreviousMonth = () => {
+  moveMonth(-1)
+}
+const moveToNextMonth = () => {
+  moveMonth(1)
+}
+
+const filteredHistory = computed(() => {
+  const month = historyList.currentMonth // 현재 월 (0부터 시작)
+  return historyList.getHistoryByMonth(month)
 })
 
 onMounted(() => {
-  historyList.fetchHistory()
+  fetchHistory()
 })
 </script>
 
 <template>
-  <HomeHeader />
-  <h2>{{ currentMonthName }}</h2>
+  <h2>
+    <button class="move-month" @click="moveToPreviousMonth">◀</button>
+    {{ historyList.currentMonthName }}
+    <button class="move-month" @click="moveToNextMonth">▶</button>
+  </h2>
+
   <div class="text-container">
     <div class="text-income">
-      <p>이번달 총 수입은</p>
-      <p>2,000,000 입니다.</p>
+      <p>총 수입은</p>
+      <p>{{ monthlyIncome }} 원 입니다.</p>
     </div>
     <div class="text-expense">
-      <p>이번달 총 지출은</p>
-      <p>2,000,000 입니다.</p>
+      <p>총 지출은</p>
+      <p>{{ monthlyExpense }} 원 입니다.</p>
     </div>
   </div>
-
+  <ListForm v-if="showModal" @close="closeForm" />
   <div class="historypage">
     <div class="history-header">
       <button>유형</button>
@@ -57,30 +75,36 @@ onMounted(() => {
       <p>상세</p>
       <div style="visibility: hidden">icon</div>
     </div>
+
     <ul>
       <li
-        v-for="(list, index) in historyList.history"
+        v-for="list in filteredHistory"
         :key="list.id"
         class="history-container"
       >
-        <button :class="buttonInfo[index].class">
-          {{ buttonInfo[index].text }}
+        <button
+          :class="list.type === 'expense' ? 'expense-button' : 'income-button'"
+        >
+          {{ list.type === 'expense' ? '지출' : '수입' }}
         </button>
         <p>{{ list.date }}</p>
         <p>{{ list.category }}</p>
         <p>{{ list.title }}</p>
-        <p :class="buttonInfo[index].color">
+        <p :class="list.type === 'expense' ? 'primary' : 'secondary'">
           {{ list.amount.toLocaleString() }}
         </p>
 
         <p>{{ list.details }}</p>
         <div class="icon-zip">
           <i class="fa-solid fa-pen-to-square"></i>
-          <i class="fa-solid fa-trash"></i>
+          <i class="fa-solid fa-trash" @click="deleteItem(list.id)"></i>
         </div>
       </li>
     </ul>
-    <i class="fa-solid fa-circle-plus fa-2xl circle-button"></i>
+    <i
+      class="fa-solid fa-circle-plus fa-2xl circle-button"
+      @click="openForm"
+    ></i>
   </div>
 </template>
 
@@ -91,12 +115,14 @@ h2 {
   font-size: 80px;
   margin: 0;
 }
+.listHead {
+  display: flex;
+}
 .text-container {
   display: flex;
-  justify-content: center;
-  gap: var(--space-l);
+  justify-content: space-evenly;
   font-size: 25px;
-  line-height: var(--space-s);
+  line-height: var(--space-l);
 }
 .text-income {
   color: var(--color-text);
@@ -105,13 +131,16 @@ h2 {
 .text-expense {
   color: var(--color-text);
 }
+.historypage {
+  margin: var(--space-l);
+}
 
 .history-header {
   display: flex;
   justify-content: space-around;
   width: 900px;
   padding: 0 var(--space-s);
-  margin: 0 auto;
+  margin: var(--space-s) auto;
   font-weight: bold;
   background-color: var(--color-text);
   border-radius: var(--space-s);
@@ -138,6 +167,12 @@ h2 {
   margin: 0 auto;
   line-height: var(--space-l);
 }
+
+.history-container:hover {
+  background-color: var(--color-text);
+  opacity: 0.8;
+}
+
 .history-container p {
   margin: 0 10px;
   flex: 1;
@@ -148,13 +183,30 @@ h2 {
   display: flex;
   gap: 1rem;
 }
+.fa-trash {
+  transition: 0.3s;
+}
+
+.fa-trash:hover {
+  color: var(--color-primary);
+  opacity: 0.8;
+}
 
 button {
   padding: 2px var(--space-s);
   font-size: 16px;
   border: none;
-  color: white;
+  color: var(--color-text);
   cursor: default;
+}
+
+.move-month {
+  cursor: pointer;
+  font-size: 20px;
+  transition: 0.3s;
+}
+.move-month:hover {
+  font-size: 25px;
 }
 
 .expense-button {

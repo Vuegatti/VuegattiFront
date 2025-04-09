@@ -1,6 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import CalendarView from '@/views/CalendarView.vue'
+import MyPage from '@/views/MyPage.vue'
+import LogInVue from '@/views/LogInVue.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -14,6 +16,16 @@ const router = createRouter({
       path: '/calendar',
       name: 'Calendar',
       component: CalendarView,
+    },
+    {
+      path: '/mypage',
+      name: 'MyPage',
+      component: MyPage,
+    },
+    {
+      path: '/loginvue',
+      name: 'LogInVue',
+      component: LogInVue,
     },
     // { path: '/', component: () => import('@/views/Home.vue') },
     // { path: '/calendar', component: () => import('@/views/Calendar.vue') },
