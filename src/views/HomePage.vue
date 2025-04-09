@@ -1,7 +1,7 @@
 <script setup>
 import BarChart from './BarChart.vue'
 import CardSlide from './CardSlide.vue'
-// import PieChart from './PieChart.vue'
+import PieChart from './PieChart.vue'
 import UserProfile from './UserProfile.vue'
 // import HomeHeader from '../components/HomeHeader.vue'
 // import HomeFooter from '../components/HomeFooter.vue'
@@ -22,7 +22,7 @@ import UserProfile from './UserProfile.vue'
     <div class="right">
       <CardSlide />
       <BarChart />
-      <!-- <PieChart /> -->
+      <PieChart />
     </div>
   </div>
 </template>
