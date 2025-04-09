@@ -64,10 +64,10 @@ const menu = [
 .menu-item {
   display: flex;
   align-items: center;
-  padding: 12px 16px;
+  padding: 0.75em 1em;
   color: white;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 }
 .menu-item:hover {
   background-color: #505050;
