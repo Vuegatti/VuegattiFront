@@ -16,7 +16,7 @@ const setUser = () => {
 }
 
 const validateUser = () => {
-  const foundUser = users.value.find(user => user.username === Username.value)
+  const foundUser = users.value.find(user => user.userID === Username.value)
   if (!foundUser) {
     alert('아이디가 존재하지 않습니다.')
     return

@@ -37,7 +37,6 @@ const closeModify = isSubmitted => {
 }
 
 const deleteItem = async id => {
-  console.log(id)
   await deleteHistory(id)
 }
 
@@ -50,7 +49,6 @@ const moveToNextMonth = () => {
 
 const filteredHistory = computed(() => {
   const month = historyList.currentMonth
-  console.log('함수') // 현재 월 (0부터 시작)
   return historyList.getHistoryByMonth(month)
 })
 
