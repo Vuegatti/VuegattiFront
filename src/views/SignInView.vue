@@ -2,7 +2,7 @@
 import AvartarPicker from '@/components/AvartarPicker.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import { useAccount } from '@/stores/account.js'
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
 const accountStore = useAccount()
@@ -35,6 +35,11 @@ const updateUser = () => {
     email: Email.value,
     phoneNumber: PhoneNumber.value,
     avatarNumber: avatarNumber.value,
+  }
+
+  if (accountStore.accountInfo.some(user => user.id === Username.value)) {
+    alert('이미 존재하는 아이디입니다.')
+    return
   }
 
   accountStore.updateAccount(user)
@@ -84,6 +89,10 @@ const validatePhoneNumber = () => {
   isPhoneNumberValid.value = true
   return true
 }
+
+onMounted(async () => {
+  await accountStore.fetchAccount()
+})
 </script>
 
 <template>
@@ -93,12 +102,12 @@ const validatePhoneNumber = () => {
       <div><AvartarPicker @update:selectedAvatar="handleSelectedAvatar" /></div>
       <div class="signInContainer">
         <h1>Sign In</h1>
-        <form action="">
+        <form @submit.prevent="updateUser">
           <div class="usernameWrapper">
             <input
               type="text"
               class="username"
-              placeholder="Username"
+              placeholder="ID"
               v-model="Username"
               required
               @blur="validateUsername"
@@ -183,7 +192,7 @@ const validatePhoneNumber = () => {
               </div>
             </div>
           </div>
-          <BaseButton type="primary" @click="updateUser">Sign In</BaseButton>
+          <BaseButton type="primary">Sign In</BaseButton>
         </form>
       </div>
     </div>

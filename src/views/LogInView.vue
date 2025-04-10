@@ -42,12 +42,7 @@ onMounted(async () => {
         <h1>Login</h1>
         <p>Glad you're back!</p>
         <form @submit.prevent="validateUser">
-          <input
-            type="text"
-            placeholder="Username"
-            v-model="Username"
-            required
-          />
+          <input type="text" placeholder="ID" v-model="Username" required />
           <input
             type="password"
             placeholder="Password"

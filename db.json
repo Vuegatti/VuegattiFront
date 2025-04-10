@@ -285,12 +285,23 @@
       "title": "주식",
       "details": "비트코인",
       "bank": "KB"
+    },
+    {
+      "id": "f6e8",
+      "userID": "kxxheehxxn",
+      "amount": 6000,
+      "type": "expense",
+      "category": "부수입",
+      "title": "ㄷㄷ",
+      "details": "",
+      "date": "2025-04-05",
+      "bank": "Nonghyup"
     }
   ],
   "account": [
     {
       "id": "bikdh",
-      "password": "123123",
+      "password": "111111",
       "email": "sking1109s@gmail.com",
       "phoneNumber": "010-1234-5678",
       "avatarNumber": 3,
@@ -300,7 +311,8 @@
         "Woori": 369800,
         "Hana": 1000000,
         "Nonghyup": 500000,
-        "Kakao": 200000
+        "Kakao": 200000,
+        "MG": 123
       }
     },
     {
@@ -313,6 +325,34 @@
         "KB": 1000000,
         "Shinhan": 1000000
       }
+    },
+    {
+      "id": "kxxheehxxn",
+      "password": "123123",
+      "email": "kxxheehxxn@sample.com",
+      "phoneNumber": "010-1234-5678",
+      "avatarNumber": 18,
+      "bank": {
+        "MG": 3000
+      }
+    },
+    {
+      "id": "seyeon",
+      "password": "123123",
+      "email": "sad@ased.ccc",
+      "phoneNumber": "010-0000-0000",
+      "avatarNumber": 1,
+      "bank": {
+        "Woori": 123123123,
+        "Nonghyup": 123123123
+      }
+    },
+    {
+      "id": "se",
+      "password": "123123",
+      "email": "adksfj@akdsf.bbb",
+      "phoneNumber": "010-0000-0000",
+      "avatarNumber": 1
     }
   ]
 }
