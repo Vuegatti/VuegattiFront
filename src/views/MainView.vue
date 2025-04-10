@@ -3,8 +3,12 @@
 <template>
   <div class="viewWrapper">
     <div class="buttonContainer">
-      <button class="logInButton">LogIn</button>
-      <button class="SignInButton">SignIn</button>
+      <router-link to="/logIn"
+        ><button class="logInButton">LogIn</button></router-link
+      >
+      <router-link to="/signIn"
+        ><button class="SignInButton">SignIn</button></router-link
+      >
     </div>
     <div class="logoContainer">
       <i class="logo"></i>

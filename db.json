@@ -177,17 +177,6 @@
       "bank": "Shinhan"
     },
     {
-      "id": "17",
-      "userID": "bikdh",
-      "date": "2025-04-01",
-      "amount": 13000,
-      "type": "expense",
-      "category": "교육",
-      "title": "인강 결제",
-      "details": "패스트캠퍼스",
-      "bank": "KB"
-    },
-    {
       "id": "18",
       "userID": "bikdh",
       "date": "2025-04-03",
@@ -195,8 +184,8 @@
       "type": "expense",
       "category": "식비",
       "title": "편의점 간식",
-      "details": "삼각김밥+우유",
-      "bank": "Shinhan"
+      "details": "삼각김밥",
+      "bank": "KB"
     },
     {
       "id": "19",
@@ -221,17 +210,7 @@
       "bank": "Shinhan"
     },
     {
-      "id": "7399",
-      "title": "월급",
-      "amount": 1500000,
-      "category": "월급",
-      "type": "income",
-      "bank": "Shinhan",
-      "details": "신한은행",
-      "date": "2025-04-01"
-    },
-    {
-      "id": "a9f3",
+      "id": "1744250799942",
       "userID": "bikdh",
       "title": "월급",
       "amount": 1800000,
@@ -362,51 +341,30 @@
       "avatarNumber": 1,
       "bank": {
         "KB": 1000000,
-        "Shinhan": 1000000,
-        "Woori": 500000,
-        "Hana": 300000,
-        "Nonghyup": 390000
-      }
+        "Shinhan": 1000000
+      },
+      "id": "1ccf"
     },
     {
-      "userID": "kxxheehxxn",
-      "password": "123456",
-      "username": "구석현",
-      "email": "ksh456@example.com",
-      "bank": {
-        "KB": 500000,
-        "Shinhan": 750000
-      }
-    },
-    {
-      "userID": "ych789",
-      "password": "123789",
-      "username": "유채현",
-      "email": "ych789@example.com",
-      "bank": {
-        "Hana": 820000,
-        "Woori": 430000
-      }
-    },
-    {
-      "userID": "asy101",
-      "password": "101101",
+      "userID": "saeyeon",
+      "password": "123123",
       "username": "안세연",
-      "email": "asy101@example.com",
+      "email": "sking1109s@gmail.com",
+      "phoneNumber": "010-1234-5678",
+      "avatarNumber": 1,
       "bank": {
-        "Nonghyup": 390000,
-        "KB": 600000
-      }
+        "KB": 1000000,
+        "Shinhan": 1000000
+      },
+      "id": "e87a"
     },
     {
-      "userID": "kky202",
-      "password": "202202",
-      "username": "김규연",
-      "email": "kky202@example.com",
-      "bank": {
-        "Shinhan": 900000,
-        "Woori": 300000
-      }
+      "id": "16f5",
+      "username": "kxxheehxxn",
+      "password": "123123",
+      "email": "fpqk79@example.com",
+      "phoneNumber": "010-7623-9951",
+      "avatarNumber": 4
     }
   ]
 }

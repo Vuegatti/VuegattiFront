@@ -9,7 +9,8 @@ import router from './router'
 
 import MainView from '@/views/MainView.vue'
 import LogInView from './views/LogInView.vue'
-import SignInVue from './views/SignInVue.vue'
+import SignInView from './views/SignInView.vue'
+
 const app = createApp(App)
 
 app.use(createPinia())

@@ -1,15 +1,28 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import CalendarView from '@/views/CalendarView.vue'
+import MyPageProFile from '@/views/MyPageProFile.vue'
 import MyPage from '@/views/MyPage.vue'
+
 import LogInView from '@/views/LogInView.vue'
+import SignInView from '@/views/SignInView.vue'
+import AccountReg from '@/views/AccountReg.vue'
+import BankAccountSelect from '@/views/BankAccountSelect.vue'
+// import HistoryList from '@/views/HistoryList.vue'
+import MainView from '@/views/MainView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: '/',
+      name: 'MainPage',
+      redirect: '/main',
+      component: MainView,
+    },
+    {
       path: '/homepage',
-      name: 'HomePage',
+      name: 'Homepage',
       component: HomePage,
     },
     {
@@ -18,14 +31,40 @@ const router = createRouter({
       component: CalendarView,
     },
     {
+      path: '/MyPageProFile',
+      name: 'MyPageProFile',
+      component: MyPageProFile,
+    },
+    {
+      // { path: '/' component: () => import('@/views/Home.vue') },
       path: '/mypage',
       name: 'MyPage',
       component: MyPage,
     },
     {
-      path: '/loginview',
-      name: 'LogInView',
+      path: '/AccountReg',
+      name: 'AccountReg',
+      component: AccountReg,
+    },
+    {
+      path: '/BankAccountSelect',
+      name: 'BankAccountSelect',
+      component: BankAccountSelect,
+    },
+    {
+      path: '/logIn',
+      name: 'LogIn',
       component: LogInView,
+    },
+    {
+      path: '/signIn',
+      name: 'SignIn',
+      component: SignInView,
+    },
+    {
+      path: '/main',
+      name: 'Main',
+      component: MainView,
     },
     // { path: '/', component: () => import('@/views/Home.vue') },
     // { path: '/calendar', component: () => import('@/views/Calendar.vue') },
@@ -39,11 +78,11 @@ const router = createRouter({
     //   path: '/',
     //   name: 'Home',
     // },
-    // {
-    //   path: '/list',
-    //   name: 'historyList',
-    //   component: () => import('@/views/HistoryList.vue'),
-    // },
+    {
+      path: '/consumption',
+      name: 'Consumption',
+      component: () => import('@/views/HistoryList.vue'),
+    },
   ],
 })
 

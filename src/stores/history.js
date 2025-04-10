@@ -4,11 +4,22 @@ import apiClient from '@/utils/axios'
 
 export const useHistory = defineStore('historyStore', () => {
   const history = ref([])
+  const ID = localStorage.getItem('userId')
+  const currentDate = ref(new Date())
 
   const fetchHistory = async () => {
     try {
-      const response = await apiClient.get('/history')
-      history.value = response.data
+      const year = currentDate.value.getFullYear()
+      const month = (currentDate.value.getMonth() + 1)
+        .toString()
+        .padStart(2, '0')
+      const prefix = `${year}-${month}`
+
+      const response = await apiClient.get(`/history`)
+      console.log(ID)
+      history.value = response.data.filter(
+        h => h.userID === ID && h.date.startsWith(prefix),
+      )
     } catch (err) {
       console.log('거래내역 로딩 에러: ', err)
     }
@@ -17,8 +28,7 @@ export const useHistory = defineStore('historyStore', () => {
   const updateHistory = async data => {
     try {
       await apiClient.post('/history', data)
-      const response = await apiClient.get('/history')
-      history.value = response.data
+      fetchHistory()
     } catch (error) {
       console.error('거래 내역 추가 실패:', error)
       console.log(error)
@@ -33,13 +43,20 @@ export const useHistory = defineStore('historyStore', () => {
       console.log('거래내역 삭제 에러: ', err)
     }
   }
-
-  const currentDate = ref(new Date())
+  const modifyHistory = async updatedItem => {
+    try {
+      await apiClient.put(`/history/${updatedItem.id}`, updatedItem)
+      fetchHistory()
+    } catch (error) {
+      console.error('거래 내역 수정 실패:', error)
+    }
+  }
 
   const moveMonth = direction => {
     const current = new Date(currentDate.value)
     current.setMonth(current.getMonth() + direction)
     currentDate.value = current
+    fetchHistory()
   }
 
   const getHistoryByMonth = month => {
@@ -67,6 +84,7 @@ export const useHistory = defineStore('historyStore', () => {
     return months[currentMonth.value]
   })
 
+  // 이번 달 수입 총합
   const monthlyIncome = computed(() => {
     return history.value
       .filter(
@@ -166,10 +184,12 @@ export const useHistory = defineStore('historyStore', () => {
     deleteHistory,
     currentMonthName,
     getHistoryByMonth,
+    modifyHistory,
     currentMonth,
     getCategories,
     currentDate,
     beforemonthlyIncome,
     beforemonthlyExpense,
+    ID,
   }
 })

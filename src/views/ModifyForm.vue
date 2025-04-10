@@ -2,34 +2,40 @@
 import { useHistory } from '@/stores/history'
 import { useAccount } from '@/stores/account'
 import { onMounted, ref, onUnmounted } from 'vue'
-import BaseButton from '@/components/BaseButton.vue'
+const props = defineProps({
+  list: {
+    type: Object,
+    required: true,
+  },
+})
+
+const showIncomeGrid = ref(false)
+const showExpenseGrid = ref(false)
+const showCategoryGrid = ref(false)
 
 const historyList = useHistory()
-const accountStore = useAccount()
-
-const amount = ref('')
-const type = ref('')
-const title = ref('')
-const details = ref('')
-
+const { modifyHistory } = historyList
+const id = ref(props.list.id)
+const amount = ref(props.list.amount)
+const type = ref(props.list.type)
+const title = ref(props.list.title)
+const details = ref(props.list.details)
+const selectedCategory = ref(props.list.category)
+const date = ref(props.list.date)
+const bank = ref(props.list.bank || 'KB')
 const emit = defineEmits(['close'])
-const userid = historyList.ID
-const bank = ref('')
-
-console.log('id는', userid)
+const userID = historyList.ID
 
 onMounted(() => {
-  accountStore.fetchAccount()
   document.body.style.overflow = 'hidden'
+
+  if (type.value === 'income') showIncomeGrid.value = true
+  else if (type.value === 'expense') showExpenseGrid.value = true
 })
 onUnmounted(() => {
   document.body.style.overflow = ''
 })
 
-const showIncomeGrid = ref(false) // 수입 그리드 표시 여부
-const showExpenseGrid = ref(true) // 지출 그리드 표시 여부
-const showCategoryGrid = ref(false) // 카테고리 그리드 표시 여부
-const selectedCategory = ref('')
 const selectCategory = category => {
   selectedCategory.value = category
   showCategoryGrid.value = false
@@ -59,35 +65,19 @@ const toggleCategoryGrid = () => {
 
 const handleSubmit = async () => {
   try {
-    const date = new Date().toLocaleDateString()
-
     const newData = {
-      id: Date.now().toString(),
-      userID: userid,
-      date: date
-        .replace(/\.\s?/g, '-')
-        .replace(/-\s?$/, '')
-        .split('-')
-        .map((v, i) => (i > 0 ? v.padStart(2, '0') : v))
-        .join('-'),
+      id: id.value,
+      userID: userID,
       amount: amount.value,
       type: type.value,
       category: selectedCategory.value,
       title: title.value,
       details: details.value,
-      bank: 'KB',
+      date: date.value,
+      bank: bank.value,
     }
-
-    await historyList.updateHistory(newData)
+    await modifyHistory(newData)
     emit('close', true)
-    amount.value = ''
-    type.value = ''
-    selectedCategory.value = ''
-    title.value = ''
-    details.value = ''
-    showIncomeGrid.value = false
-    showExpenseGrid.value = false
-    showCategoryGrid.value = false
   } catch (err) {
     console.log(err)
   }
@@ -177,7 +167,9 @@ const handleClose = () => {
         v-model="details"
       ></textarea>
       <div class="button-container">
-        <button type="sumit" class="submit-button">등록</button>
+        <button type="submit" class="submit-button" @click="handleSubmit">
+          등록
+        </button>
         <button @click="handleClose" class="close-button">닫기</button>
       </div>
     </form>
@@ -235,7 +227,6 @@ button {
   background-color: var(--color-primary);
   font-weight: bold;
 }
-
 .submit-button,
 .close-button {
   border-radius: 5px;
@@ -261,6 +252,7 @@ button {
 .close-button:hover {
   filter: brightness(1.2);
 }
+
 .form-container {
   display: flex;
   flex-direction: column;
@@ -286,19 +278,16 @@ textarea {
   background-color: var(--color-background);
   border: 1px solid rgba(248, 244, 242, 0.503);
 }
-
 input::placeholder {
   color: var(--color-text);
   opacity: 1;
 }
-
 textarea {
   resize: none;
 }
 textare::placeholder {
   color: var(--color-text);
 }
-
 .grid-container {
   width: 100%;
   margin-top: 2rem;
@@ -324,7 +313,7 @@ textare::placeholder {
 .grid-income p {
   margin: 0;
   padding: 10px;
-  background-color: var(--color-text);
+  background-color: #f1f1f1;
   border-radius: 5px;
   text-align: center;
   cursor: pointer;
