@@ -8,15 +8,16 @@ import LogInView from '@/views/LogInView.vue'
 import SignInView from '@/views/SignInView.vue'
 import AccountReg from '@/views/AccountReg.vue'
 import BankAccountSelect from '@/views/BankAccountSelect.vue'
+import MainView from '@/views/MainView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: '/',
-      name: 'Home',
-      redirect: '/homepage',
-      component: HomePage,
+      name: 'MainPage',
+      redirect: '/main',
+      component: MainView,
     },
     {
       path: '/homepage',
@@ -58,6 +59,11 @@ const router = createRouter({
       path: '/signIn',
       name: 'SignIn',
       component: SignInView,
+    },
+    {
+      path: '/main',
+      name: 'Main',
+      component: MainView,
     },
     // { path: '/', component: () => import('@/views/Home.vue') },
     // { path: '/calendar', component: () => import('@/views/Calendar.vue') },
