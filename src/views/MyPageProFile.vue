@@ -1,10 +1,26 @@
 <script setup>
-import Avatar from '@/components/AvatarPicture.vue'
+import AvartarPicker from '@/components/AvartarPicker.vue'
+import { ref } from 'vue'
+
+// const handleSelectedAvatar = value => {
+//   avatarNumber.value = value
+//   console.log('선택된 아바타 번호:', value)
+// }
 </script>
 
 <template>
-  <Avatar />
-  <!-- <Avatar :toyNumber="1" :size="200" :rounded="24" /> -->
+  <div class="container">
+    <h2>My Profile</h2>
+    <div><AvartarPicker @update:selectedAvatar="handleSelectedAvatar" /></div>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+* {
+  color: var(--color-text);
+}
+
+.container h2 {
+  text-align: center;
+}
+</style>

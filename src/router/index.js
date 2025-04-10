@@ -5,6 +5,7 @@ import MyPageProFile from '@/views/MyPageProFile.vue'
 import MyPage from '@/views/MyPage.vue'
 
 import LogInView from '@/views/LogInView.vue'
+import SignInView from '@/views/SignInView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -30,7 +31,8 @@ const router = createRouter({
       name: 'MyPageProFile',
       component: MyPageProFile,
     },
-    // { path: '/' component: () => import('@/views/Home.vue') },
+    {
+      // { path: '/' component: () => import('@/views/Home.vue') },
       path: '/mypage',
       name: 'MyPage',
       component: MyPage,
@@ -40,6 +42,11 @@ const router = createRouter({
       path: '/logIn',
       name: 'LogIn',
       component: LogInView,
+    },
+    {
+      path: '/SignInView',
+      name: 'SignInView',
+      component: SignInView,
     },
     // { path: '/', component: () => import('@/views/Home.vue') },
     // { path: '/calendar', component: () => import('@/views/Calendar.vue') },
