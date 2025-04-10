@@ -6,6 +6,7 @@ export const useHistory = defineStore('historyStore', () => {
   const history = ref([])
   const ID = localStorage.getItem('userId')
   const currentDate = ref(new Date())
+  const prehistory = ref([])
 
   const fetchHistory = async () => {
     try {
@@ -18,6 +19,21 @@ export const useHistory = defineStore('historyStore', () => {
       const response = await apiClient.get(`/history`)
       console.log(ID)
       history.value = response.data.filter(
+        h => h.userID === ID && h.date.startsWith(prefix),
+      )
+    } catch (err) {
+      console.log('거래내역 로딩 에러: ', err)
+    }
+  }
+
+  const fetchpreHistory = async () => {
+    try {
+      const year = currentDate.value.getFullYear()
+      const month = currentDate.value.getMonth().toString().padStart(2, '0')
+      const prefix = `${year}-${month}`
+      console.log('prefix', prefix)
+      const response = await apiClient.get(`/history`)
+      prehistory.value = response.data.filter(
         h => h.userID === ID && h.date.startsWith(prefix),
       )
     } catch (err) {
@@ -107,7 +123,7 @@ export const useHistory = defineStore('historyStore', () => {
   })
 
   const beforemonthlyIncome = computed(() => {
-    return history.value
+    return prehistory.value
       .filter(
         item =>
           item.type === 'income' &&
@@ -117,7 +133,7 @@ export const useHistory = defineStore('historyStore', () => {
   })
 
   const beforemonthlyExpense = computed(() => {
-    return history.value
+    return prehistory.value
       .filter(
         item =>
           item.type === 'expense' &&
@@ -191,5 +207,7 @@ export const useHistory = defineStore('historyStore', () => {
     beforemonthlyIncome,
     beforemonthlyExpense,
     ID,
+    fetchpreHistory,
+    prehistory,
   }
 })

@@ -232,17 +232,6 @@
       "bank": "Shinhan"
     },
     {
-      "id": "22",
-      "userID": "bikdh",
-      "date": "2025-04-04",
-      "amount": 750000,
-      "type": "income",
-      "category": "부수입",
-      "title": "아르바이트",
-      "details": "카페 알바",
-      "bank": "KB"
-    },
-    {
       "id": "23",
       "userID": "bikdh",
       "amount": 12500,
@@ -300,19 +289,23 @@
   ],
   "account": [
     {
+      "id": "bikdh",
       "userID": "bikdh",
       "password": "123123",
       "email": "sking1109s@gmail.com",
       "phoneNumber": "010-1234-5678",
-      "avatarNumber": 8,
+      "avatarNumber": 15,
       "bank": {
         "KB": 3032500,
-        "Shinhan": 2435000
-      },
-      "id": "e73d"
+        "Shinhan": 2435000,
+        "Woori": 369800,
+        "Hana": 1000000,
+        "Nonghyup": 500000,
+        "Kakao": 200000
+      }
     },
     {
-      "userID": "saeyeon",
+      "id": "saeyeon",
       "password": "123123",
       "email": "sking1109s@gmail.com",
       "phoneNumber": "010-1234-5678",
@@ -320,8 +313,7 @@
       "bank": {
         "KB": 1000000,
         "Shinhan": 1000000
-      },
-      "id": "fc4d"
+      }
     }
   ]
 }
