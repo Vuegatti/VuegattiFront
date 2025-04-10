@@ -244,6 +244,7 @@
   ],
   "account": [
     {
+      "id": "1",
       "userID": "bikdh",
       "password": "123123",
       "username": "김도현",
@@ -259,6 +260,7 @@
       }
     },
     {
+      "id": "2",
       "userID": "kxxheehxxn",
       "password": "123456",
       "username": "구석현",
@@ -266,9 +268,12 @@
       "bank": {
         "KB": 500000,
         "Shinhan": 750000
-      }
+      },
+      "phoneNumber": "010-7623-9951",
+      "avatarNumber": 1
     },
     {
+      "id": "3",
       "userID": "ych789",
       "password": "123789",
       "username": "유채현",
@@ -279,6 +284,7 @@
       }
     },
     {
+      "id": "4",
       "userID": "asy101",
       "password": "101101",
       "username": "안세연",
@@ -289,6 +295,7 @@
       }
     },
     {
+      "id": "5",
       "userID": "kky202",
       "password": "202202",
       "username": "김규연",
@@ -299,6 +306,7 @@
       }
     },
     {
+      "id": "6",
       "userID": "saeyeon",
       "password": "123123",
       "username": "안세연",

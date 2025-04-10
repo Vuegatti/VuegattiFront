@@ -7,23 +7,27 @@ import LogIn from './views/LogInView.vue'
 </script>
 
 <template>
-  <!-- <div class="layout">
+  <div class="layout">
     <header>
       <HomeHeader />
-    </header> </div> -->
+    </header>
 
-  <main>
-    <SideBar />
+    <main>
+      <SideBar />
 
-    <RouterView />
-  </main>
+      <RouterView />
+    </main>
 
-  <footer>
-    <HomeFooter />
-  </footer>
+    <footer>
+      <HomeFooter />
+    </footer>
+  </div>
 </template>
 
 <style scoped>
+.layout > header {
+  position: sticky;
+}
 .layout {
   display: flex;
   flex-direction: column;

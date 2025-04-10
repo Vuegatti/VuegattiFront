@@ -2,14 +2,21 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import CalendarView from '@/views/CalendarView.vue'
 import MyPage from '@/views/MyPage.vue'
-import LogInVue from '@/views/LogInVue.vue'
+
+import LogInView from '@/views/LogInView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: '/',
+      name: 'Home',
+      redirect: '/homepage',
+      component: HomePage,
+    },
+    {
       path: '/homepage',
-      name: 'HomePage',
+      name: 'Homepage',
       component: HomePage,
     },
     {
@@ -22,15 +29,11 @@ const router = createRouter({
       name: 'MyPage',
       component: MyPage,
     },
-    {
-      path: '/loginvue',
-      name: 'LogInVue',
-      component: LogInVue,
-    },
+
     {
       path: '/logIn',
       name: 'LogIn',
-      component: () => import('@/views/LogInView.vue'),
+      component: LogInView,
     },
     // { path: '/', component: () => import('@/views/Home.vue') },
     // { path: '/calendar', component: () => import('@/views/Calendar.vue') },
@@ -44,11 +47,11 @@ const router = createRouter({
     //   path: '/',
     //   name: 'Home',
     // },
-    // {
-    //   path: '/list',
-    //   name: 'historyList',
-    //   component: () => import('@/views/HistoryList.vue'),
-    // },
+    {
+      path: '/consumption',
+      name: 'Consumption',
+      component: () => import('@/views/HistoryList.vue'),
+    },
   ],
 })
 

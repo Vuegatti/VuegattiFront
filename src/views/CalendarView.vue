@@ -130,7 +130,7 @@ const addNewItem = async () => {
     title: '',
     amount: '',
     category: '',
-    type: 'income',
+    type: '',
     bank: '',
     details: '',
   }
@@ -213,91 +213,83 @@ onMounted(fetchHistory)
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="sidebar" v-if="selectedDate">
-        <button class="close" @click="selectedDate = null">닫기</button>
-        <div class="memo-header">
-          <h2>{{ selectedDate }}</h2>
-        </div>
-        <div class="memo-summary">
-          <p>
-            <span class="label">수입</span>
-            <span class="income">{{ selectedIncome.toLocaleString() }}원</span>
-          </p>
-          <p>
-            <span class="label">지출</span>
-            <span class="expense"
-              >{{ selectedExpense.toLocaleString() }}원</span
+    <div class="sidebar" v-if="selectedDate">
+      <button class="close" @click="selectedDate = null">닫기</button>
+      <div class="memo-header">
+        <h2>{{ selectedDate }}</h2>
+      </div>
+      <div class="memo-summary">
+        <p>
+          <span class="label">수입</span>
+          <span class="income">{{ selectedIncome.toLocaleString() }}원</span>
+        </p>
+        <p>
+          <span class="label">지출</span>
+          <span class="expense">{{ selectedExpense.toLocaleString() }}원</span>
+        </p>
+      </div>
+      <div class="memo-list">
+        <div class="memo-item" v-for="item in selectedHistory" :key="item.id">
+          <div class="memo-header-row">
+            <span class="memo-category">{{ item.category }}</span>
+            <span
+              class="memo-amount"
+              :class="{
+                income: item.type === 'income',
+                expense: item.type === 'expense',
+              }"
             >
-          </p>
-        </div>
-        <div class="memo-list">
-          <div class="memo-item" v-for="item in selectedHistory" :key="item.id">
-            <div class="memo-header-row">
-              <span class="memo-category">{{ item.category }}</span>
-              <span
-                class="memo-amount"
-                :class="{
-                  income: item.type === 'income',
-                  expense: item.type === 'expense',
-                }"
-              >
-                {{ item.type === 'income' ? '+' : '-'
-                }}{{ item.amount.toLocaleString() }}원
-              </span>
-            </div>
-            <div class="memo-title">{{ item.title }}</div>
-            <div class="memo-details">{{ item.details }}</div>
-            <div class="memo-bank">{{ item.bank }}</div>
-            <button class="delete-btn" @click="deleteItem(item.id)">
-              삭제
-            </button>
+              {{ item.type === 'income' ? '+' : '-'
+              }}{{ item.amount.toLocaleString() }}원
+            </span>
           </div>
+          <div class="memo-title">{{ item.title }}</div>
+          <div class="memo-details">{{ item.details }}</div>
+          <div class="memo-bank">{{ item.bank }}</div>
+          <button class="delete-btn" @click="deleteItem(item.id)">삭제</button>
+        </div>
 
-          <div class="memo-plus">
-            <button class="toggle-form-btn" @click="showForm = !showForm">
-              {{ showForm ? '닫기' : '새 내역 추가' }}
-            </button>
-            <div class="memo-form" v-if="showForm">
-              <input v-model="newItem.title" placeholder="제목" />
-              <input
-                v-model="newItem.amount"
-                type="number"
-                placeholder="금액"
-              />
-              <input v-model="newItem.category" placeholder="카테고리" />
-              <select v-model="newItem.type">
-                <option value="" disabled>선택하세요</option>
-                <option value="income">수입</option>
-                <option value="expense">지출</option>
-              </select>
-              <div class="category-buttons">
-                <div class="grid-income" v-if="newItem.type === 'income'">
-                  <p @click="selectCategory('월급')">💰 월급</p>
-                  <p @click="selectCategory('부수입')">💵 부수입</p>
-                  <p @click="selectCategory('금융소득')">📈 금융소득</p>
-                  <p @click="selectCategory('용돈')">🤑 용돈</p>
-                  <p @click="selectCategory('상여')">💸 상여</p>
-                  <p @click="selectCategory('기타')">기타</p>
-                </div>
-                <div class="grid-expense" v-if="newItem.type === 'expense'">
-                  <p @click="selectCategory('식비')">🍜 식비</p>
-                  <p @click="selectCategory('교통')">🚗 교통</p>
-                  <p @click="selectCategory('부모님')">👪 부모님</p>
-                  <p @click="selectCategory('회비')">💰 회비</p>
-                  <p @click="selectCategory('건강')">😷 건강</p>
-                  <p @click="selectCategory('구독료')">💱 구독료</p>
-                  <p @click="selectCategory('교육')">📚 교육</p>
-                  <p @click="selectCategory('미용')">💈 미용</p>
-                  <p @click="selectCategory('생활용품')">🏠 생활용품</p>
-                  <p @click="selectCategory('기타')">기타</p>
-                </div>
+        <div class="memo-plus">
+          <button class="toggle-form-btn" @click="showForm = !showForm">
+            {{ showForm ? '닫기' : '새 내역 추가' }}
+          </button>
+          <div class="memo-form" v-if="showForm">
+            <input v-model="newItem.title" placeholder="제목" />
+            <input v-model="newItem.amount" type="number" placeholder="금액" />
+            <input v-model="newItem.category" placeholder="카테고리" />
+            <select v-model="newItem.type">
+              <option value="" disabled>선택하세요</option>
+              <option value="income">수입</option>
+              <option value="expense">지출</option>
+            </select>
+            <div class="category-buttons">
+              <div class="grid-income" v-if="newItem.type === 'income'">
+                <p @click="selectCategory('월급')">💰 월급</p>
+                <p @click="selectCategory('부수입')">💵 부수입</p>
+                <p @click="selectCategory('금융소득')">📈 금융소득</p>
+                <p @click="selectCategory('용돈')">🤑 용돈</p>
+                <p @click="selectCategory('상여')">💸 상여</p>
+                <p @click="selectCategory('기타')">기타</p>
               </div>
-              <br />
-              <input v-model="newItem.bank" placeholder="은행" />
-              <input v-model="newItem.details" placeholder="상세 내용" />
-              <button class="add-btn" @click="addNewItem">내역 추가</button>
+              <div class="grid-expense" v-if="newItem.type === 'expense'">
+                <p @click="selectCategory('식비')">🍜 식비</p>
+                <p @click="selectCategory('교통')">🚗 교통</p>
+                <p @click="selectCategory('부모님')">👪 부모님</p>
+                <p @click="selectCategory('회비')">💰 회비</p>
+                <p @click="selectCategory('건강')">😷 건강</p>
+                <p @click="selectCategory('구독료')">💱 구독료</p>
+                <p @click="selectCategory('교육')">📚 교육</p>
+                <p @click="selectCategory('미용')">💈 미용</p>
+                <p @click="selectCategory('생활용품')">🏠 생활용품</p>
+                <p @click="selectCategory('기타')">기타</p>
+              </div>
             </div>
+            <br />
+            <input v-model="newItem.bank" placeholder="은행" />
+            <input v-model="newItem.details" placeholder="상세 내용" />
+            <button class="add-btn" @click="addNewItem">내역 추가</button>
           </div>
         </div>
       </div>
@@ -339,19 +331,21 @@ onMounted(fetchHistory)
   min-height: 100vh;
   padding: 40px 100px;
   box-sizing: border-box;
+  margin-top: 20px;
 }
 
 .calendar-container {
-  display: flex;
-  gap: 20px;
+  display: grid;
   max-width: 1200px;
   width: 100%;
   justify-content: center;
-  justify-content: space-between;
+  gap: 5px;
 }
 .calendar-box {
+  display: flex;
+  flex-direction: column;
   width: 1000px;
-  flex-shrink: 0;
+  justify-content: center;
 }
 
 .calendar-header {
@@ -462,11 +456,11 @@ onMounted(fetchHistory)
 }
 
 .sidebar {
-  position: absolute;
-  top: 40px;
+  position: sticky;
+  top: 0px;
   right: 0;
-  height: calc(100% - 80px);
-  width: 350px;
+  height: 100vh;
+  width: 345px;
   background: #2b2b2b;
   padding: 20px;
   border-radius: 12px;
