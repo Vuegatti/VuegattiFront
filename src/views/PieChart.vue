@@ -2,7 +2,7 @@
 import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 import { useHistory } from '@/stores/history'
-import { onMounted, ref , computed } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
@@ -66,7 +66,6 @@ const pieOptions = {
 </script>
 
 <template>
-  <p class="pie-title newbie" v-if="isNewbie">이번 달 지출이 없습니다!</p>
   <div class="pie-container">
     <p class="pie-title newbie" v-if="isNewbie">이번 달 지출이 없습니다!</p>
     <div class="pie-chart">
