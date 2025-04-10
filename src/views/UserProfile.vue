@@ -40,7 +40,7 @@ const avatarNumber = ref(1) // 기본값
 
 onMounted(async () => {
   const userID = localStorage.getItem('userID') // 로그인된 사용자 ID
-  const res = await fetch('http://localhost:3000/account')
+  const res = await fetch('http://localhost:5001/account')
   const data = await res.json()
   const user = data.find(u => u.userID === userID)
   if (user && user.avatarNumber) {
