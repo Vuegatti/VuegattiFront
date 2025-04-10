@@ -157,13 +157,12 @@ h2 {
 .history-header {
   display: flex;
   justify-content: space-around;
-  width: 56vi;
+  width: 71vi;
   padding: 0 var(--space-s);
   margin: var(--space-s) auto;
   font-weight: bold;
   background-color: var(--color-text);
   border-radius: var(--space-s);
-
   box-sizing: border-box;
 }
 
@@ -181,7 +180,7 @@ h2 {
   max-height: 60vh;
   padding: 0;
   margin: 0 auto;
-  width: 56vi;
+  width: 71vi;
   overflow-y: auto;
   box-sizing: border-box;
 }
@@ -192,7 +191,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-text);
-  width: 55vi;
+  width: 70vi;
   margin: 0 auto;
   line-height: var(--space-l);
 }
@@ -268,13 +267,13 @@ button {
 
 .circle-button {
   position: relative;
-  font-size: 4rem;
+  font-size: 2.5rem;
   color: var(--success);
   opacity: 0.9;
-  bottom: 1rem;
+  bottom: -1rem;
   left: 50%;
   transform: translateX(-50%);
-  padding: 20px 30px;
+  padding-bottom: 2rem;
   cursor: pointer;
 }
 .circle-button:hover {
