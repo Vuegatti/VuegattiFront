@@ -2,12 +2,14 @@
 import { ref } from 'vue'
 import BaseButton from '@/components/BaseButton.vue'
 import { useAccount } from '@/stores/account.js'
+import { useRouter } from 'vue-router'
 
 const accountStore = useAccount()
 const bank = ref('')
 const accountNumber = ref('')
 const balance = ref('')
 const userId = localStorage.getItem('userId')
+const router = useRouter()
 // 이미지 클릭으로 select 값 설정
 const setBank = name => {
   bank.value = name
@@ -29,6 +31,7 @@ const save = async () => {
 
   accountStore.addAccount(newBank, userId)
   alert('계좌 등록이 완료되었습니다.')
+  router.push('/homepage')
 }
 </script>
 
@@ -63,9 +66,9 @@ const save = async () => {
           </div>
 
           <div class="button-group">
-            <router-link to="/mypage">
+            <router-link to="/homepage">
               <BaseButton color="primary" type="button" class="backBtn"
-                >Back</BaseButton
+                >Homepage</BaseButton
               >
             </router-link>
             <BaseButton color="secondary" class="registerBtn"
