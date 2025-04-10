@@ -1,27 +1,45 @@
 <script setup>
 import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+import { useHistory } from '@/stores/history'
+import { onMounted, ref } from 'vue'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
-const pieData = {
-  labels: ['외식', '쇼핑', '교통비', '기타'],
-  datasets: [
-    {
-      backgroundColor: ['#7de3e1', '#ff7373', '#ffbb55', '#ffe4a1'],
-      data: [25, 20, 15, 40],
-      borderWidth: 0,
-    },
-  ],
-}
+const historyStore = useHistory()
+// 파이차트 데이터
+const pieData = ref({ labels: [], datasets: [] })
 
+// onMounted로 historyStore에서 데이터 가져오고 pieData에 넣기
+onMounted(async () => {
+  await historyStore.fetchHistory()
+  const { labels, data } = historyStore.getCategories('bikdh') // ID 전달
+
+  pieData.value = {
+    labels: labels,
+    datasets: [
+      {
+        backgroundColor: ['#6DE1D2', '#FFD63A', '#FFA955', '#F75A5A'],
+        data: data,
+        borderWidth: 0,
+      },
+    ],
+  }
+})
+
+//파이차트 옵션
 const pieOptions = {
   responsive: true,
   maintainAspectRatio: false, // 비율 유지 비활성화
+  layout: {
+    padding: 20, //차트와 테두리 사이 여백
+  },
   plugins: {
     legend: {
       position: 'right',
       labels: {
+        usePointStyle: true, // 범례에 심볼 스타일 사용
+        pointStyle: 'rectRounded', // 사각형 대신 원형
         color: '#f8f4f2',
         font: {
           size: 20,
@@ -30,6 +48,16 @@ const pieOptions = {
         padding: 20,
       },
     },
+  },
+  //hover 효과
+  elements: {
+    arc: {
+      hoverOffset: 8, // 부드럽게 튀어나오는 정도
+    },
+  },
+  animations: {
+    animateRotate: true,
+    animateScale: true,
   },
 }
 </script>

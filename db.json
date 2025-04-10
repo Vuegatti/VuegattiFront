@@ -240,6 +240,116 @@
       "bank": "Shinhan",
       "details": "아르바이트",
       "date": "2025-04-02"
+    },
+    {
+      "id": "21",
+      "userID": "bikdh",
+      "date": "2025-04-04",
+      "amount": 18000,
+      "type": "expense",
+      "category": "식비",
+      "title": "햄버거",
+      "details": "맥도날드 점심",
+      "bank": "KB"
+    },
+    {
+      "id": "22",
+      "userID": "bikdh",
+      "date": "2025-04-05",
+      "amount": 35000,
+      "type": "expense",
+      "category": "쇼핑",
+      "title": "의류 쇼핑",
+      "details": "티셔츠 구매",
+      "bank": "Shinhan"
+    },
+    {
+      "id": "23",
+      "userID": "bikdh",
+      "date": "2025-04-06",
+      "amount": 10000,
+      "type": "expense",
+      "category": "교통",
+      "title": "버스 충전",
+      "details": "교통카드",
+      "bank": "KB"
+    },
+    {
+      "id": "24",
+      "userID": "bikdh",
+      "date": "2025-04-07",
+      "amount": 4000,
+      "type": "expense",
+      "category": "커피",
+      "title": "이디야",
+      "details": "아메리카노",
+      "bank": "Shinhan"
+    },
+    {
+      "id": "25",
+      "userID": "bikdh",
+      "date": "2025-04-08",
+      "amount": 25000,
+      "type": "expense",
+      "category": "쇼핑",
+      "title": "생활잡화",
+      "details": "문구점에서 구매",
+      "bank": "KB"
+    },
+    {
+      "id": "26",
+      "userID": "bikdh",
+      "date": "2025-04-09",
+      "amount": 150000,
+      "type": "income",
+      "category": "부수입",
+      "title": "중고거래",
+      "details": "노트북 판매",
+      "bank": "Shinhan"
+    },
+    {
+      "id": "27",
+      "userID": "bikdh",
+      "date": "2025-04-10",
+      "amount": 28000,
+      "type": "expense",
+      "category": "식비",
+      "title": "배달음식",
+      "details": "한식 배달",
+      "bank": "KB"
+    },
+    {
+      "id": "28",
+      "userID": "bikdh",
+      "date": "2025-04-11",
+      "amount": 9000,
+      "type": "expense",
+      "category": "영화",
+      "title": "영화 관람",
+      "details": "CGV",
+      "bank": "Shinhan"
+    },
+    {
+      "id": "29",
+      "userID": "bikdh",
+      "date": "2025-04-12",
+      "amount": 22000,
+      "type": "expense",
+      "category": "식비",
+      "title": "술자리",
+      "details": "친구들과 맥주",
+      "bank": "KB"
+    },
+    {
+      "id": "30",
+      "userID": "bikdh",
+      "date": "2025-04-14",
+      "amount": 5000,
+      "type": "expense",
+      "category": "기타",
+      "title": "구독료",
+      "details": "멜론",
+      "bank": "KB"
     }
   ],
   "account": [
