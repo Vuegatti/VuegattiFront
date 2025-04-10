@@ -457,17 +457,24 @@ onMounted(fetchHistory)
 }
 
 .sidebar {
-  position: sticky;
-  top: 0px;
+  position: fixed;
+  top: 0;
   right: 0;
-  height: 75vh;
-  width: 345px;
+  height: 100vh;
+  width: 20vi;
   background: #2b2b2b;
-  padding: 20px;
-  border-radius: 12px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transition: width 0.3s ease;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
   color: var(--color-text);
-  flex-shrink: 0;
+  z-index: 1000;
+  padding: 20px;
+  box-sizing: border-box;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
 }
+
 .memo-summary {
   display: flex;
   justify-content: space-between;
