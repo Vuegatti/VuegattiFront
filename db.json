@@ -220,25 +220,26 @@
       "bank": "Shinhan"
     },
     {
-      "id": "7399",
-      "title": "월급",
-      "amount": 1500000,
-      "category": "월급",
+      "id": "1744250054206",
+      "userID": "bikdh",
+      "date": "2025-04-10",
+      "amount": 1555555,
       "type": "income",
-      "bank": "Shinhan",
-      "details": "신한은행",
-      "date": "2025-04-01"
+      "category": "월급",
+      "title": "ㅌㅌㅌ",
+      "details": "ㅌㅌㅌ",
+      "bank": "KB"
     },
     {
-      "id": "a9f3",
+      "id": "1744250799942",
       "userID": "bikdh",
-      "title": "월급",
-      "amount": 1800000,
-      "category": "월급",
-      "type": "income",
-      "bank": "Shinhan",
-      "details": "아르바이트",
-      "date": "2025-04-02"
+      "amount": 11111,
+      "type": "expense",
+      "category": "회비",
+      "title": "1424124",
+      "details": "124214124",
+      "date": "2025-04-10",
+      "bank": "KB"
     }
   ],
   "account": [

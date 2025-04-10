@@ -50,7 +50,8 @@ const moveToNextMonth = () => {
 }
 
 const filteredHistory = computed(() => {
-  const month = historyList.currentMonth // 현재 월 (0부터 시작)
+  const month = historyList.currentMonth
+  console.log('함수') // 현재 월 (0부터 시작)
   return historyList.getHistoryByMonth(month)
 })
 
@@ -61,9 +62,9 @@ onMounted(() => {
 
 <template>
   <h2>
-    <button class="move-month" @click="moveToPreviousMonth">◀</button>
+    <span class="move-month" @click="moveToPreviousMonth">←</span>
     {{ historyList.currentMonthName }}
-    <button class="move-month" @click="moveToNextMonth">▶</button>
+    <span class="move-month" @click="moveToNextMonth">→</span>
   </h2>
 
   <div class="text-container">

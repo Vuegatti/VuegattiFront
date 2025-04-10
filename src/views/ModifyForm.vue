@@ -10,8 +10,7 @@ const props = defineProps({
 })
 
 const historyList = useHistory()
-const AccountInfo = useAccount()
-
+const { modifyHistory } = historyList
 const id = ref(props.list.id)
 const amount = ref(props.list.amount)
 const type = ref(props.list.type)
@@ -21,6 +20,7 @@ const selectedCategory = ref(props.list.category)
 const date = ref(props.list.date)
 const bank = ref(props.list.bank || 'KB')
 const emit = defineEmits(['close'])
+const userID = historyList.ID
 
 onMounted(() => {
   document.body.style.overflow = 'hidden'
@@ -67,6 +67,7 @@ const handleSubmit = async () => {
   try {
     const newData = {
       id: id.value,
+      userID: userID,
       amount: amount.value,
       type: type.value,
       category: selectedCategory.value,
@@ -75,7 +76,7 @@ const handleSubmit = async () => {
       date: date.value,
       bank: bank.value,
     }
-    await historyList.modifyHistory(newData)
+    await modifyHistory(newData)
     emit('close', true)
   } catch (err) {
     console.log(err)
@@ -108,7 +109,11 @@ const handleClose = () => {
       <label for="">은행 : </label>
       <select name="bank" id="bank" v-model="bank">
         <option value="no">은행을 선택하세요</option>
-        <option value="KB">KB</option>
+        <option value="KB">국민은행</option>
+        <option value="Shinhan">신한은행</option>
+        <option value="Woori">우리은행</option>
+        <option value="Hana">하나은행</option>
+        <option value="Nonghyup">농협은행</option>
       </select>
 
       <label for="">카테고리</label>

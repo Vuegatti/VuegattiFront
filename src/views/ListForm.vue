@@ -6,7 +6,7 @@ import { useAccount } from '@/stores/account'
 import { onMounted, ref, onUnmounted } from 'vue'
 
 const historyList = useHistory()
-const AccountInfo = useAccount()
+const accountStore = useAccount()
 
 const amount = ref('')
 const type = ref('')
@@ -14,9 +14,13 @@ const title = ref('')
 const details = ref('')
 
 const emit = defineEmits(['close'])
+const userid = historyList.ID
+const bank = ref('')
+
+console.log('id는', userid)
 
 onMounted(() => {
-  AccountInfo.fetchAccount()
+  accountStore.fetchAccount()
   document.body.style.overflow = 'hidden'
 })
 onUnmounted(() => {
@@ -60,7 +64,7 @@ const handleSubmit = async () => {
 
     const newData = {
       id: Date.now().toString(),
-      username: 'bikdh',
+      userID: userid,
       date: date
         .replace(/\.\s?/g, '-')
         .replace(/-\s?$/, '')
@@ -74,6 +78,7 @@ const handleSubmit = async () => {
       details: details.value,
       bank: 'KB',
     }
+
     await historyList.updateHistory(newData)
     emit('close', true)
     amount.value = ''
@@ -113,9 +118,13 @@ const handleClose = () => {
       />
 
       <label for="">은행 : </label>
-      <select name="bank" id="bank">
+      <select name="bank" id="bank" v-model="bank">
         <option value="no">은행을 선택하세요</option>
-        <option value="KB">KB</option>
+        <option value="KB">국민은행</option>
+        <option value="Shinhan">신한은행</option>
+        <option value="Woori">우리은행</option>
+        <option value="Hana">하나은행</option>
+        <option value="Nonghyup">농협은행</option>
       </select>
 
       <label for="">카테고리</label>
