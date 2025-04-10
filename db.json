@@ -285,6 +285,17 @@
       "title": "주식",
       "details": "비트코인",
       "bank": "KB"
+    },
+    {
+      "id": "1744291456065",
+      "userID": "bikdh",
+      "date": "2025-04-10",
+      "amount": 124124,
+      "type": "expense",
+      "category": "교육",
+      "title": "1242",
+      "details": "412424",
+      "bank": "KB"
     }
   ],
   "account": [

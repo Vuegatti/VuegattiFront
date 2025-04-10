@@ -126,7 +126,7 @@ onMounted(() => {
 
 <style scoped>
 .consumption-page {
-  max-height: 70vh;
+  max-height: 60vh;
 }
 h2 {
   color: var(--color-text);
@@ -175,7 +175,7 @@ h2 {
   background-color: var(--color-text);
 }
 .history-list {
-  max-height: 350px;
+  max-height: 50vh;
   padding: 0;
   margin: 0 auto;
   width: 56vi;
@@ -264,12 +264,13 @@ button {
 }
 
 .circle-button {
+  font-size: 4rem;
   color: var(--color-primary);
   opacity: 0.8;
   position: fixed;
   bottom: 20px;
   right: 20px;
-  padding: 10px 20px;
+  padding: 20px 30px;
   cursor: pointer;
 }
 .circle-button:hover {
