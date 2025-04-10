@@ -10,16 +10,28 @@ const route = useRoute()
 <template>
   <div class="layout">
     <header>
-      <HomeHeader />
+      <HomeHeader
+        v-if="
+          !route.path.startsWith('/login') && !route.path.startsWith('/signIn')
+        "
+      />
     </header>
 
     <main>
-      <SideBar v-if="!route.path.startsWith('/login')" />
+      <SideBar
+        v-if="
+          !route.path.startsWith('/login') && !route.path.startsWith('/signIn')
+        "
+      />
       <RouterView />
     </main>
 
     <footer>
-      <HomeFooter />
+      <HomeFooter
+        v-if="
+          !route.path.startsWith('/login') && !route.path.startsWith('/signIn')
+        "
+      />
     </footer>
   </div>
 </template>

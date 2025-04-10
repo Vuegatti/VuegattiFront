@@ -1,7 +1,7 @@
 {
   "history": [
     {
-      "id": "1",
+      "id": 1,
       "userID": "bikdh",
       "date": "2025-03-01",
       "amount": 15000,
@@ -12,7 +12,7 @@
       "bank": "KB"
     },
     {
-      "id": "2",
+      "id": 2,
       "userID": "bikdh",
       "date": "2025-03-03",
       "amount": 2500000,
@@ -23,7 +23,7 @@
       "bank": "Shinhan"
     },
     {
-      "id": "3",
+      "id": 3,
       "userID": "bikdh",
       "date": "2025-03-05",
       "amount": 20000,
@@ -34,7 +34,7 @@
       "bank": "KB"
     },
     {
-      "id": "4",
+      "id": 4,
       "userID": "bikdh",
       "date": "2025-03-06",
       "amount": 8000,
@@ -45,7 +45,7 @@
       "bank": "Shinhan"
     },
     {
-      "id": "5",
+      "id": 5,
       "userID": "bikdh",
       "date": "2025-03-08",
       "amount": 100000,
@@ -56,7 +56,7 @@
       "bank": "KB"
     },
     {
-      "id": "6",
+      "id": 6,
       "userID": "bikdh",
       "date": "2025-03-10",
       "amount": 15000,
@@ -67,7 +67,7 @@
       "bank": "Shinhan"
     },
     {
-      "id": "7",
+      "id": 7,
       "userID": "bikdh",
       "date": "2025-03-11",
       "amount": 30000,
@@ -78,7 +78,7 @@
       "bank": "KB"
     },
     {
-      "id": "8",
+      "id": 8,
       "userID": "bikdh",
       "date": "2025-03-13",
       "amount": 35000,
@@ -89,7 +89,7 @@
       "bank": "Shinhan"
     },
     {
-      "id": "9",
+      "id": 9,
       "userID": "bikdh",
       "date": "2025-03-15",
       "amount": 55000,
@@ -100,7 +100,7 @@
       "bank": "KB"
     },
     {
-      "id": "10",
+      "id": 10,
       "userID": "bikdh",
       "date": "2025-03-17",
       "amount": 7000,
@@ -111,7 +111,7 @@
       "bank": "Shinhan"
     },
     {
-      "id": "11",
+      "id": 11,
       "userID": "bikdh",
       "date": "2025-03-19",
       "amount": 60000,
@@ -122,7 +122,7 @@
       "bank": "KB"
     },
     {
-      "id": "12",
+      "id": 12,
       "userID": "bikdh",
       "date": "2025-03-21",
       "amount": 42000,
@@ -133,7 +133,7 @@
       "bank": "Shinhan"
     },
     {
-      "id": "13",
+      "id": 13,
       "userID": "bikdh",
       "date": "2025-03-23",
       "amount": 12000,
@@ -144,7 +144,7 @@
       "bank": "KB"
     },
     {
-      "id": "14",
+      "id": 14,
       "userID": "bikdh",
       "date": "2025-03-25",
       "amount": 7500,
@@ -155,7 +155,7 @@
       "bank": "Shinhan"
     },
     {
-      "id": "15",
+      "id": 15,
       "userID": "bikdh",
       "date": "2025-03-27",
       "amount": 33000,
@@ -166,7 +166,7 @@
       "bank": "KB"
     },
     {
-      "id": "16",
+      "id": 16,
       "userID": "bikdh",
       "date": "2025-03-29",
       "amount": 200000,
@@ -177,7 +177,7 @@
       "bank": "Shinhan"
     },
     {
-      "id": "17",
+      "id": 17,
       "userID": "bikdh",
       "date": "2025-04-01",
       "amount": 13000,
@@ -188,7 +188,7 @@
       "bank": "KB"
     },
     {
-      "id": "18",
+      "id": 18,
       "userID": "bikdh",
       "date": "2025-04-03",
       "amount": 4500,
@@ -199,7 +199,7 @@
       "bank": "Shinhan"
     },
     {
-      "id": "19",
+      "id": 19,
       "userID": "kxxheehxxn",
       "date": "2025-03-30",
       "amount": 23000,
@@ -210,7 +210,7 @@
       "bank": "KB"
     },
     {
-      "id": "20",
+      "id": 20,
       "userID": "kxxheehxxn",
       "date": "2025-04-04",
       "amount": 1500000,
@@ -229,22 +229,10 @@
       "bank": "Shinhan",
       "details": "신한은행",
       "date": "2025-04-01"
-    },
-    {
-      "id": "a9f3",
-      "userID": "bikdh",
-      "title": "월급",
-      "amount": 1800000,
-      "category": "월급",
-      "type": "income",
-      "bank": "Shinhan",
-      "details": "아르바이트",
-      "date": "2025-04-02"
     }
   ],
   "account": [
     {
-      "id": "1",
       "userID": "bikdh",
       "password": "123123",
       "username": "김도현",
@@ -253,60 +241,10 @@
       "avatarNumber": 1,
       "bank": {
         "KB": 1000000,
-        "Shinhan": 1000000,
-        "Woori": 500000,
-        "Hana": 300000,
-        "Nonghyup": 390000
+        "Shinhan": 1000000
       }
     },
     {
-      "id": "2",
-      "userID": "kxxheehxxn",
-      "password": "123456",
-      "username": "구석현",
-      "email": "ksh456@example.com",
-      "bank": {
-        "KB": 500000,
-        "Shinhan": 750000
-      },
-      "phoneNumber": "010-7623-9951",
-      "avatarNumber": 1
-    },
-    {
-      "id": "3",
-      "userID": "ych789",
-      "password": "123789",
-      "username": "유채현",
-      "email": "ych789@example.com",
-      "bank": {
-        "Hana": 820000,
-        "Woori": 430000
-      }
-    },
-    {
-      "id": "4",
-      "userID": "asy101",
-      "password": "101101",
-      "username": "안세연",
-      "email": "asy101@example.com",
-      "bank": {
-        "Nonghyup": 390000,
-        "KB": 600000
-      }
-    },
-    {
-      "id": "5",
-      "userID": "kky202",
-      "password": "202202",
-      "username": "김규연",
-      "email": "kky202@example.com",
-      "bank": {
-        "Shinhan": 900000,
-        "Woori": 300000
-      }
-    },
-    {
-      "id": "6",
       "userID": "saeyeon",
       "password": "123123",
       "username": "안세연",
