@@ -4,34 +4,43 @@ import axios from 'axios'
 import Avatar from '@/components/AvatarPicture.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+
 const ID = localStorage.getItem('userId')
 
 const username = ref('')
 const password = ref('')
 const email = ref('')
 const phonenumber = ref('')
-const avatarNumber = ref('')
 const userIdInDB = ref(null)
 
+const avatarNumber = ref(1) ////
+
 onMounted(async () => {
-  try {
-    const { data } = await axios.get(
-      `http://localhost:5001/account?userID=${ID}`,
-    )
-    console.log('GET 결과:', data)
-    const user = data[0]
-    if (user) {
-      userIdInDB.value = user.id
-      username.value = user.username
-      password.value = user.password
-      email.value = user.email
-      phonenumber.value = user.phoneNumber || ''
-      avatarNumber.value = user.avatarNumber
-    } else {
-      alert('사용자 정보를 찾을 수 없습니다.')
+  if (route.query.avatar) {
+    avatarNumber.value = parseInt(route.query.avatar)
+  } else {
+    try {
+      const { data } = await axios.get(
+        `http://localhost:5001/account?userID=${ID}`,
+      )
+      console.log('GET 결과:', data)
+      const user = data[0]
+      if (user) {
+        userIdInDB.value = user.id
+        username.value = user.username
+        password.value = user.password
+        email.value = user.email
+        phonenumber.value = user.phoneNumber || ''
+        avatarNumber.value = user.avatarNumber
+      } else {
+        alert('사용자 정보를 찾을 수 없습니다.')
+      }
+    } catch (error) {
+      console.error('GET 요청 실패:', error)
     }
-  } catch (error) {
-    console.error('GET 요청 실패:', error)
   }
 })
 
@@ -50,8 +59,6 @@ const save = async () => {
         `http://localhost:5001/account/${userIdInDB.value}`,
         updateData,
       )
-
-      localStorage.setItem('userId', username.value)
     } catch (error) {
       console.error('PATCH 요청 실패:', error)
     }
@@ -67,19 +74,11 @@ const save = async () => {
       <h2>My page</h2>
       <p>Edit your information</p>
 
-      <Avatar :toyNumber="avatarNumber" :size="150" :rounded="24" />
+      <router-link :to="`/mypageprofile`">
+        <Avatar :toyNumber="avatarNumber" :size="150" :rounded="24" />
+      </router-link>
 
       <form @submit.prevent="save">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            v-model="username"
-            type="text"
-            id="username"
-            placeholder="Username"
-          />
-        </div>
-
         <div class="form-group">
           <label for="password">Password</label>
           <input
@@ -107,7 +106,11 @@ const save = async () => {
 
         <div class="button-group">
           <BaseButton color="primary" @click="save">Confirm</BaseButton>
-          <BaseButton color="secondary">Edit Account</BaseButton>
+          <BaseButton
+            color="secondary"
+            @click="$router.push('/BankAccountSelect')"
+            >Edit Account</BaseButton
+          >
         </div>
       </form>
     </div>
@@ -119,6 +122,7 @@ const save = async () => {
   color: var(--color-text);
 }
 .mypage-container {
+  padding-top: 8vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -133,7 +137,7 @@ const save = async () => {
   border-radius: 10px;
   text-align: center;
   width: 50%;
-  height: 60%;
+  height: 70vh;
   padding: var(--space-l);
 }
 .mypage-box h2 {
@@ -144,27 +148,31 @@ const save = async () => {
   color: #ccc;
   margin-bottom: 20px;
 }
-form input {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid var(--color-text);
-  color: var(--color-background);
-  border-radius: 6px;
-}
-form div {
-  display: inline-block;
-  width: 100%;
+
+form .form-group {
+  display: flex;
+  align-items: center;
   margin: 10px 0;
   padding: 5px;
   color: var(--color-text);
 }
-form div > * {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
+
+form .form-group label {
+  width: 120px;
+  text-align: left;
+  padding-right: 10px;
+  font-weight: bold;
 }
+
+form .form-group input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--color-text);
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--color-text);
+}
+
 input::placeholder {
   color: #aaa;
 }

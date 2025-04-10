@@ -21,6 +21,7 @@
     "json-server": "^1.0.0-beta.3",
     "pinia": "^3.0.1",
     "swiper": "^11.2.6",
+    "swiper.js": "^1.0.0",
     "vite-plugin-vuetify": "^2.1.1",
     "vue": "^3.5.13",
     "vue-chartjs": "^5.3.2",

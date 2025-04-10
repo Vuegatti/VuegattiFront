@@ -221,51 +221,98 @@
       "bank": "Shinhan"
     },
     {
-      "id": "1744269730294",
+      "id": "21",
       "userID": "bikdh",
-      "date": "2025-04-10",
-      "amount": 150000,
+      "date": "2025-04-04",
+      "amount": 23000,
+      "type": "expense",
+      "category": "식비",
+      "title": "저녁",
+      "details": "삼겹살",
+      "bank": "Shinhan"
+    },
+    {
+      "id": "23",
+      "userID": "bikdh",
+      "amount": 12500,
+      "type": "expense",
+      "category": "교통",
+      "title": "교통비",
+      "details": "택시비",
+      "date": "2025-04-05",
+      "bank": "KB"
+    },
+    {
+      "id": "24",
+      "userID": "bikdh",
+      "date": "2025-04-05",
+      "amount": 7500,
+      "type": "expense",
+      "category": "구독료",
+      "title": "쿠팡와우",
+      "details": "쿠팡구독",
+      "bank": "KB"
+    },
+    {
+      "id": "25",
+      "userID": "bikdh",
+      "amount": 300000,
+      "type": "expense",
+      "category": "부모님",
+      "title": "부모님 생신",
+      "details": "생신선물",
+      "date": "2025-04-06",
+      "bank": "KB"
+    },
+    {
+      "id": "26",
+      "userID": "bikdh",
+      "date": "2025-04-07",
+      "amount": 20000,
+      "type": "expense",
+      "category": "미용",
+      "title": "미용실",
+      "details": "머리 손질",
+      "bank": "KB"
+    },
+    {
+      "id": "27",
+      "userID": "bikdh",
+      "date": "2025-04-08",
+      "amount": 125000,
       "type": "income",
-      "category": "월급",
-      "title": "월급",
-      "details": "월급",
+      "category": "금융소득",
+      "title": "주식",
+      "details": "비트코인",
       "bank": "KB"
     }
   ],
   "account": [
     {
-      "userID": "bikdh",
+      "id": "bikdh",
       "password": "123123",
-      "username": "김도현",
+      "email": "sking1109s@gmail.com",
+      "phoneNumber": "010-1234-5678",
+      "avatarNumber": 15,
+      "bank": {
+        "KB": 3032500,
+        "Shinhan": 2435000,
+        "Woori": 369800,
+        "Hana": 1000000,
+        "Nonghyup": 500000,
+        "Kakao": 200000
+      }
+    },
+    {
+      "id": "saeyeon",
+      "password": "123123",
       "email": "sking1109s@gmail.com",
       "phoneNumber": "010-1234-5678",
       "avatarNumber": 1,
       "bank": {
         "KB": 1000000,
         "Shinhan": 1000000
-      },
-      "id": "e73d"
-    },
-    {
-      "userID": "saeyeon",
-      "password": "123123",
-      "username": "안세연",
-      "email": "sking1109s@gmail.com",
-      "phoneNumber": "010-1234-5678",
-      "avatarNumber": 1,
-      "bank": {
-        "KB": 1000000,
-        "Shinhan": 1000000
-      },
-      "id": "fc4d"
-    },
-    {
-      "id": "b3a4",
-      "username": "구석현",
-      "password": "123456",
-      "email": "fpqk7099@gmail.com",
-      "phoneNumber": "010-7623-9951",
-      "avatarNumber": 17
+      }
     }
   ]
 }
