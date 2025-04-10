@@ -82,7 +82,7 @@ const bottomMenu = [
   width: 50px;
   height: 100vh;
   overflow-y: auto;
-  background-color: #383838;
+  background-color: #383838f0;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   transition: width 0.2s;
