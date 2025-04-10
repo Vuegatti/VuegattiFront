@@ -8,6 +8,7 @@ import LogInView from '@/views/LogInView.vue'
 import SignInView from '@/views/SignInView.vue'
 import AccountReg from '@/views/AccountReg.vue'
 import BankAccountSelect from '@/views/BankAccountSelect.vue'
+// import HistoryList from '@/views/HistoryList.vue'
 import MainView from '@/views/MainView.vue'
 
 const router = createRouter({
