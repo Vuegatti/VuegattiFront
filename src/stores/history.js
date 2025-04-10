@@ -18,10 +18,11 @@ export const useHistory = defineStore('historyStore', () => {
       const prefix = `${year}-${month}`
 
       const response = await apiClient.get(`/history`)
-      history.value = response.data.filter(
-        h => h.userID === ID.value && h.date.startsWith(prefix),
 
-        .sort((a, b) => new Date(b.date) - new Date(a.date))
+      history.value = response.data
+      .filter(h => h.userID === ID.value && h.date.startsWith(prefix))
+      .sort((a, b) => new Date(b.date) - new Date(a.date))
+
     } catch (err) {
       console.log('거래내역 로딩 에러: ', err)
     }

@@ -52,29 +52,34 @@ onMounted(async () => {
 
 <template>
   <div class="profile-container">
-    <div class="profile">
-      <!-- 아바타 -->
-      <div class="user-profile">
-        <Avatar :toyNumber="avatarNumber" :size="230" :rounded="24" />
+    <div class="profile-wrapper">
+      <div class="profile">
+        <!-- 아바타 -->
+        <div class="user-profile">
+          <Avatar :toyNumber="avatarNumber" :size="230" :rounded="24" />
+        </div>
+
+        <!-- 월 -->
+        <h3 class="month">{{ currentMonth }}<span>의 내 소비</span></h3>
+
+        <!-- 수입/지출 -->
+        <div class="summary">
+          <p>+ {{ monthlyIncome }}</p>
+          <p>- {{ monthlyExpense }}</p>
+        </div>
+
+        <!-- 남은 금액 -->
+        <div class="total">{{ totalAmountText }}<span>₩</span></div>
       </div>
-
-      <!-- 월 -->
-      <h3 class="month">{{ currentMonth }}<span>의 내 소비</span></h3>
-
-      <!-- 수입/지출 -->
-      <div class="summary">
-        <p>+ {{ monthlyIncome }}</p>
-        <p>- {{ monthlyExpense }}</p>
-      </div>
-
-      <!-- 남은 금액 -->
-      <div class="total">{{ totalAmountText }}<span>₩</span></div>
     </div>
 
     <!-- 카드 슬라이드 -->
-    <CardSlide />
+    <div class="card-wrapper">
+      <CardSlide />
+    </div>
   </div>
 </template>
+
 
 <style scoped>
 /* 프로필 + 카드 합친 영역 */
@@ -82,13 +87,31 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1rem;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+  gap: 4vh; /* 카드와 프로필 사이 여백 */
   color: var(--color-text);
   transform: scale(0.85);
   transform-origin: top center;
-  margin-left: 150px;
-  margin-top: -50px;
 }
+
+.profile-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.card-wrapper {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
 
 /* 프로필 내용 */
 .profile {
@@ -99,32 +122,21 @@ onMounted(async () => {
 }
 
 .user-profile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 2rem 0 1rem;
+  margin: 4vh 0 2vh;
 }
 
 .month {
-  font-size: 3.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: -5px;
+  font-size: 3vw;
+  margin: 0 0 1vh 0;
 }
 
 .summary {
-  font-size: 1.8rem;
-  text-align: center;
-  margin-top: -50px;
-  margin-bottom: 1rem;
-  border-bottom: 1px solid var(--color-text);
+  font-size: 1.6vw;
+  margin-bottom: 1vh;
+  border-bottom: 0.1vh solid var(--color-text);
 }
 
 .total {
-  font-size: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 2.5vw;
 }
 </style>
