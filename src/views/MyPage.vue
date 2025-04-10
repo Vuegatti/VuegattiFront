@@ -4,16 +4,9 @@ import axios from 'axios'
 import Avatar from '@/components/AvatarPicture.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
-import { useRouter } from 'vue-router'
+import { useRoute } from 'vue-router'
 
-const route = useRouter()
-
-onMounted(() => {
-  const selectedAvatar = route.query.avatar
-  if (selectedAvatar !== undefined) {
-    avatarNumber.value = selectedAvatar
-  }
-})
+const route = useRoute()
 
 const ID = localStorage.getItem('userId')
 
@@ -21,28 +14,35 @@ const username = ref('')
 const password = ref('')
 const email = ref('')
 const phonenumber = ref('')
-const avatarNumber = ref('')
 const userIdInDB = ref(null)
 
+const avatarNumber = ref(1) ////
+
 onMounted(async () => {
-  try {
-    const { data } = await axios.get(
-      `http://localhost:5001/account?userID=${ID}`,
-    )
-    console.log('GET 결과:', data)
-    const user = data[0]
-    if (user) {
-      userIdInDB.value = user.id
-      username.value = user.username
-      password.value = user.password
-      email.value = user.email
-      phonenumber.value = user.phoneNumber || ''
-      avatarNumber.value = user.avatarNumber
-    } else {
-      alert('사용자 정보를 찾을 수 없습니다.')
+  // 1. 쿼리로 아바타가 넘어온 경우 → 그걸 우선 적용
+  if (route.query.avatar) {
+    avatarNumber.value = parseInt(route.query.avatar)
+  } else {
+    // 2. 쿼리가 없으면 DB에서 정보 불러오기
+    try {
+      const { data } = await axios.get(
+        `http://localhost:5001/account?userID=${ID}`,
+      )
+      console.log('GET 결과:', data)
+      const user = data[0]
+      if (user) {
+        userIdInDB.value = user.id
+        username.value = user.username
+        password.value = user.password
+        email.value = user.email
+        phonenumber.value = user.phoneNumber || ''
+        avatarNumber.value = user.avatarNumber
+      } else {
+        alert('사용자 정보를 찾을 수 없습니다.')
+      }
+    } catch (error) {
+      console.error('GET 요청 실패:', error)
     }
-  } catch (error) {
-    console.error('GET 요청 실패:', error)
   }
 })
 
@@ -77,7 +77,7 @@ const save = async () => {
       <h2>My page</h2>
       <p>Edit your information</p>
 
-      <router-link :to="`/mypage${avatarNumber}`">
+      <router-link :to="`/mypageprofile`">
         <Avatar :toyNumber="avatarNumber" :size="150" :rounded="24" />
       </router-link>
 
