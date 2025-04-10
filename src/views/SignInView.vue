@@ -3,7 +3,6 @@ import AvartarPicker from '@/components/AvartarPicker.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import { useAccount } from '@/stores/account.js'
 import { ref } from 'vue'
-import Avatar from '@/components/AvatarPicture.vue'
 
 const accountStore = useAccount()
 
