@@ -212,12 +212,12 @@
     {
       "id": "20",
       "userID": "kxxheehxxn",
-      "date": "2025-04-04",
       "amount": 1500000,
       "type": "income",
       "category": "월급",
       "title": "아르바이트 정산",
       "details": "카페 알바 월급",
+      "date": "2025-04-04",
       "bank": "Shinhan"
     },
     {
@@ -312,6 +312,16 @@
       "bank": {
         "KB": 1000000,
         "Shinhan": 1000000
+      }
+    },
+    {
+      "id": "kxxheehxxn",
+      "password": "123123",
+      "email": "kxxheehxxn@sample.com",
+      "phoneNumber": "010-1234-5678",
+      "avatarNumber": 18,
+      "bank": {
+        "Kakao": 123123
       }
     }
   ]

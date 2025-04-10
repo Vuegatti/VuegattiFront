@@ -28,7 +28,8 @@ const getBankIcon = bankKey => {
 }
 
 onMounted(async () => {
-  await accountStore.fetchAccount() // 계좌 정보 가져오기
+  accountStore.userID = localStorage.getItem('userId') || ''
+  await accountStore.fetchAccount()
 
   if (
     Array.isArray(accountStore.bankInfo) &&
