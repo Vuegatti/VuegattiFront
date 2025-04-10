@@ -1,7 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import apiClient from '@/utils/axios'
-import { applescript } from 'globals'
 
 export const useHistory = defineStore('historyStore', () => {
   const history = ref([])
@@ -89,6 +88,26 @@ export const useHistory = defineStore('historyStore', () => {
       .reduce((sum, item) => sum + item.amount, 0)
   })
 
+  const beforemonthlyIncome = computed(() => {
+    return history.value
+      .filter(
+        item =>
+          item.type === 'income' &&
+          new Date(item.date).getMonth() === currentMonth.value - 1,
+      )
+      .reduce((sum, item) => sum + item.amount, 0)
+  })
+
+  const beforemonthlyExpense = computed(() => {
+    return history.value
+      .filter(
+        item =>
+          item.type === 'expense' &&
+          new Date(item.date).getMonth() === currentMonth.value - 1,
+      )
+      .reduce((sum, item) => sum + item.amount, 0)
+  })
+
   // 특정 사용자의 지출 내역 카테고리별로 그룹핑 및 상위 3개 + 기타 카테고리 반환
   const getCategories = userID => {
     // 현재 월의 지출 내역만 필터링
@@ -150,5 +169,7 @@ export const useHistory = defineStore('historyStore', () => {
     currentMonth,
     getCategories,
     currentDate,
+    beforemonthlyIncome,
+    beforemonthlyExpense,
   }
 })

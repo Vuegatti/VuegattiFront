@@ -1,6 +1,7 @@
 <script setup>
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import 'swiper/css'
+import 'swiper/css/navigation'
 import { ref, onMounted } from 'vue'
 import { useAccount } from '@/stores/account' //pinia store에서 계좌 정보 가져오기
 
@@ -15,18 +16,25 @@ const bankNames = {
   Woori: '우리은행',
   Hana: '하나은행',
   Nonghyup: '농협은행',
+  IBK: '기업은행',
+  Toss: '토스뱅크',
+  Kakao: '카카오뱅크',
+  MG: '새마을금고',
+}
+
+// 은행 로고 경로 반환 함수
+const getBankIcon = bankKey => {
+  return new URL(`../assets/bankicon/${bankKey}_icon.png`, import.meta.url).href
 }
 
 onMounted(async () => {
   await accountStore.fetchAccount() // 계좌 정보 가져오기
-  console.log('💜bankInfo:', accountStore.bankInfo[0])
 
   if (
     Array.isArray(accountStore.bankInfo) &&
     accountStore.bankInfo.length > 0
   ) {
     const accountData = accountStore.bankInfo[0].bank
-    console.log('💜accountData:', accountData)
 
     // Object.entries()를 사용해서 bank 객체를 배열로 바꾸고, .map()을 사용해서 카드에 표시할 데이터 반복 출력하는 코드
     cards.value = Object.entries(accountData).map(([key, value]) => {
@@ -36,20 +44,27 @@ onMounted(async () => {
         bankClass: key.toLowerCase(), // 클래스 이름으로 쓰려고 소문자로 변환
       }
     })
-  } else {
-    console.log('👻 bank정보 없음', accountStore.bankInfo)
   }
 })
 // const userId = 'bikdh' 만 가져오고있음(account.js에서)
 </script>
 
 <template>
-  <div class="card-slide">
+  <div class="card-slide-wrapper">
     <swiper :slides-per-view="2" :space-between="16" class="mySwiper">
       <swiper-slide v-for="(data, index) in cards" :key="index">
         <div :class="['card', data.bankClass]">
-          <p class="bank">{{ data.bank }}</p>
-          <p class="balance">{{ data.balance.toLocaleString() }}</p>
+          <div class="card-content">
+            <div class="text-content">
+              <p class="bank">{{ data.bank }}</p>
+              <p class="balance">{{ data.balance.toLocaleString() }}</p>
+            </div>
+            <img
+              :src="getBankIcon(data.bankClass)"
+              class="bank-icon"
+              :alt="data.bank + ' 로고'"
+            />
+          </div>
         </div>
       </swiper-slide>
 
@@ -63,22 +78,62 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-.card-slide {
-  padding: 1rem 0;
-  overflow: hidden;
-  width: 960px;
+.card-slide-wrapper {
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  overflow: visible;
 }
 
 .mySwiper {
   width: 100%;
-  /* max-width: 100%;
-  overflow: hidden;  */
 }
 
 .swiper-slide {
   display: flex;
   justify-content: center;
-  padding: 0; /* 혹시 패딩 들어가 있으면 제거 */
+}
+
+.card {
+  width: 220px;
+  height: 120px;
+  background: linear-gradient(to right, #fed4b4, #ff7576);
+  border-radius: 16px;
+  padding: 1.5rem;
+  color: #f8f4f2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.text-content .bank {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.bank-icon {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.plus {
+  width: 220px;
+  height: 120px;
+  border-radius: 16px;
+  background: #444;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
 }
 
 .card {
@@ -91,7 +146,7 @@ onMounted(async () => {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
 
   /* 효과 */
   transition:
@@ -101,6 +156,26 @@ onMounted(async () => {
   cursor: pointer;
 }
 
+.card-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.bank-icon {
+  width: 48px;
+  height: 48 px;
+  object-fit: contain;
+}
+
+/* hover 효과 */
 .card:hover {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* 그림자 */
   filter: brightness(0.9); /* 살짝 어둡게 */
@@ -109,11 +184,11 @@ onMounted(async () => {
 
 /* 은행별 그라데이션 배경 */
 .card.kb {
-  background: linear-gradient(to right, #f6d365, #fda085);
+  background: linear-gradient(to left, #fed4b4, #ff7576);
 }
 
 .card.shinhan {
-  background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+  background: linear-gradient(to left, #fed4b4, #3bb9a1);
 }
 
 .card.woori {
@@ -137,5 +212,6 @@ onMounted(async () => {
   border-radius: 16px;
   color: #f8f4f2;
   height: 120px;
+  width: 100%;
 }
 </style>
