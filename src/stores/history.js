@@ -17,7 +17,6 @@ export const useHistory = defineStore('historyStore', () => {
       const prefix = `${year}-${month}`
 
       const response = await apiClient.get(`/history`)
-      console.log(ID)
       history.value = response.data
         .filter(h => h.userID === ID && h.date.startsWith(prefix))
         .sort((a, b) => new Date(b.date) - new Date(a.date))

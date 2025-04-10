@@ -52,8 +52,8 @@ const filteredHistory = computed(() => {
   return historyList.getHistoryByMonth(month)
 })
 
-onMounted(() => {
-  fetchHistory()
+onMounted(async () => {
+  await fetchHistory()
 })
 </script>
 

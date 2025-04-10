@@ -324,6 +324,20 @@
         "KB": 1000000,
         "Shinhan": 1000000
       }
+    },
+    {
+      "id": "recy1",
+      "password": "123123",
+      "email": "sadsd@gmail.com",
+      "phoneNumber": "010-4017-8408",
+      "avatarNumber": 11
+    },
+    {
+      "id": "kxxheehxxn",
+      "password": "123123",
+      "email": "kxxheehxxn@sample.com",
+      "phoneNumber": "010-1234-5678",
+      "avatarNumber": 18
     }
   ]
 }
