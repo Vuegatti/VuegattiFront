@@ -255,6 +255,14 @@
         "KB": 1000000,
         "Shinhan": 1000000
       }
+    },
+    {
+      "id": "b3a4",
+      "username": "구석현",
+      "password": "123456",
+      "email": "fpqk7099@gmail.com",
+      "phoneNumber": "010-7623-9951",
+      "avatarNumber": 17
     }
   ]
 }
