@@ -2,9 +2,6 @@
 import BarChart from './BarChart.vue'
 import PieChart from './PieChart.vue'
 import UserProfile from './UserProfile.vue'
-// import HomeHeader from '../components/HomeHeader.vue'
-// import HomeFooter from '../components/HomeFooter.vue'
-// import SideBar from '../components/SideBar.vue'
 </script>
 
 <template>
