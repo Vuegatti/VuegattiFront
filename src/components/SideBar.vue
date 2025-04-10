@@ -1,10 +1,15 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { useAccount } from '@/stores/account'
+import { useHistory } from '@/stores/history'
 
 const isExpanded = ref(false)
 const router = useRouter()
 const route = useRoute()
+
+const accountStore = useAccount()
+const historyStore = useHistory()
 
 const handleMouseEnter = () => {
   isExpanded.value = true
@@ -15,7 +20,9 @@ const handleMouseLeave = () => {
 
 const handleLogout = () => {
   localStorage.removeItem('userId')
-  router.push('/logIn')
+  accountStore.$reset()
+  historyStore.$reset()
+  router.push('/main')
 }
 
 const topMenu = [
@@ -26,7 +33,7 @@ const topMenu = [
 
 const bottomMenu = [
   { to: '/mypage', label: 'My Page', icon: 'fa fa-user' },
-  { to: '/login', label: 'Logout', icon: 'fa fa-sign-out-alt', logout: true },
+  { to: '/main', label: 'Logout', icon: 'fa fa-sign-out-alt', logout: true },
 ]
 </script>
 
