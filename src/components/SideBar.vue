@@ -77,10 +77,9 @@ const bottomMenu = [
 <style scoped>
 .sidebar-wrapper {
   position: fixed;
-  top: 60px;
   left: 0;
   width: 50px;
-  height: calc(100vh - 60px);
+  height: 100vh;
   overflow-y: auto;
   background-color: #383838;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
