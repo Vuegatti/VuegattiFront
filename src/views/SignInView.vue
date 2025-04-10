@@ -3,9 +3,10 @@ import AvartarPicker from '@/components/AvartarPicker.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import { useAccount } from '@/stores/account.js'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const accountStore = useAccount()
-
+const router = useRouter()
 const Username = ref('')
 const Password = ref('')
 const ConfirmPassword = ref('')
@@ -37,6 +38,8 @@ const updateUser = () => {
   }
 
   accountStore.updateAccount(user)
+  alert('회원가입이 완료되었습니다.')
+  router.push('/logIn')
 }
 
 const validateUsername = () => {

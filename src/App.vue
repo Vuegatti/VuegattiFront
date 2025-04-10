@@ -12,7 +12,7 @@ const route = useRoute()
     <header>
       <HomeHeader
         v-if="
-          !route.path.startsWith('/login') && !route.path.startsWith('/signIn')
+          !route.path.startsWith('/logIn') && !route.path.startsWith('/signIn')
         "
       />
     </header>
@@ -20,7 +20,7 @@ const route = useRoute()
     <main>
       <SideBar
         v-if="
-          !route.path.startsWith('/login') && !route.path.startsWith('/signIn')
+          !route.path.startsWith('/logIn') && !route.path.startsWith('/signIn')
         "
       />
       <RouterView />
@@ -29,7 +29,7 @@ const route = useRoute()
     <footer>
       <HomeFooter
         v-if="
-          !route.path.startsWith('/login') && !route.path.startsWith('/signIn')
+          !route.path.startsWith('/logIn') && !route.path.startsWith('/signIn')
         "
       />
     </footer>
