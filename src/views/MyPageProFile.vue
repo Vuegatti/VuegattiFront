@@ -1,12 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 import axios from 'axios'
 import AvartarPicker from '@/components/AvartarPicker.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
 const router = useRouter()
-const route = useRoute()
 
 // 현재 로그인된 사용자 ID
 const userId = localStorage.getItem('userId')
@@ -44,7 +43,6 @@ const saveAvatar = async () => {
     // MyPage로 이동 + avatar 쿼리로 전달
     router.push({
       path: '/mypage',
-      query: { avatar: selectedAvatar.value },
     })
   } catch (err) {
     console.error('아바타 저장 실패:', err)

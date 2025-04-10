@@ -80,16 +80,6 @@ const save = async () => {
 
       <form @submit.prevent="save">
         <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            v-model="username"
-            type="text"
-            id="username"
-            placeholder="Username"
-          />
-        </div>
-
-        <div class="form-group">
           <label for="password">Password</label>
           <input
             v-model="password"
@@ -132,6 +122,7 @@ const save = async () => {
   color: var(--color-text);
 }
 .mypage-container {
+  padding-top: 8vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -146,7 +137,7 @@ const save = async () => {
   border-radius: 10px;
   text-align: center;
   width: 50%;
-  height: 60%;
+  height: 70vh;
   padding: var(--space-l);
 }
 .mypage-box h2 {
