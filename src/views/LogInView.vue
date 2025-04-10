@@ -91,7 +91,12 @@ onMounted(async () => {
   align-items: center;
   border: 1px solid rgba(248, 244, 242, 0.503);
   border-radius: 10px;
-  width: 30vw;
+
+  width: 100%;
+  max-width: 22vw;
+  min-width: 17vw;
+
+
   height: 60vh;
   padding: var(--space-l);
 }
