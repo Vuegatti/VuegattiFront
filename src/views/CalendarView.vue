@@ -110,7 +110,6 @@ const newItem = ref({
 
 const selectCategory = category => {
   newItem.value.category = category
-  newItem.value.type = ''
 }
 
 const addNewItem = async () => {
@@ -334,7 +333,7 @@ onMounted(fetchHistory)
 .calendar-box {
   display: flex;
   flex-direction: column;
-  min-height: 85vh;
+  min-height: 80vh;
   width: 1000px;
   background: white;
   padding: 20px;
@@ -422,7 +421,8 @@ onMounted(fetchHistory)
   color: #333;
   border-radius: 10px;
   padding: 8px;
-  aspect-ratio: 1 / 0.7;
+  width: 125px;
+  height: 70px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -458,7 +458,7 @@ onMounted(fetchHistory)
   position: fixed;
   right: 0;
   height: 77.5vh;
-  width: 20vw;
+  width: 15vw;
   background: #1e1e1e;
   padding: 20px;
   border-top-left-radius: 12px;
