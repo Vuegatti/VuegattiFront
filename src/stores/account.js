@@ -19,6 +19,17 @@ export const useAccount = defineStore('account', () => {
       console.log('회원정보 로딩 에러: ', err)
     }
   }
+  // 특정 회원정보 불러오기
+  const fetchAccountById = async userId => {
+    try {
+      const response = await apiClient.get(`/account/${userId}`)
+      console.log('특정 회원정보 로딩 성공: ', response.data)
+      return response.data
+    } catch (err) {
+      console.log('특정 회원정보 로딩 에러: ', err)
+    }
+  }
+
   // 3. 회원정보 업데이트
   const updateAccount = async accountData => {
     console.log('updateAccount 함수 호출됨', accountData) //
@@ -31,6 +42,15 @@ export const useAccount = defineStore('account', () => {
     }
   }
 
+  const addAccount = async (accountData, userId) => {
+    try {
+      const response = await apiClient.patch(`/account/${userId}`, accountData)
+      console.log('회원정보 추가 성공: ', response.data)
+    } catch (err) {
+      console.log('회원정보 업데이트 에러: ', err)
+    }
+  }
+
   const logIn = logInUsername => {
     localStorage.setItem('userId', logInUsername)
     console.log('로그인 성공: ', logInUsername)
@@ -38,16 +58,14 @@ export const useAccount = defineStore('account', () => {
 
   // 4. 외부에서 사용할 수 있도록 반환
   // bank정보만 불러오게
-  const userID = ref('bikdh') // userID는 로그인 시 받아온 값으로 설정해야 함
+  const userID = ref(localStorage.getItem('userId') || '')// userID는 로그인 시 받아온 값으로 설정해야 함
   // 로그인 시 받아온 userID를 사용하여 필터링
 
   const bankInfo = computed(() => {
     const bankInfo = accountInfo.value.filter(item => {
-      // console.log('🧡userID:', userID.value) // userID 확인용
-      // console.log('🧡item:', item.userID) // bankInfo 확인용
-      return item.userID === userID.value
+      return item.id === userID.value
     })
-    // console.log('🧡bankInfo:', bankInfo) // bankInfo 확인용
+
     return bankInfo
   })
 
@@ -57,5 +75,7 @@ export const useAccount = defineStore('account', () => {
     bankInfo,
     updateAccount,
     logIn,
+    addAccount,
+    fetchAccountById,
   }
 })

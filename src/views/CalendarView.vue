@@ -110,7 +110,6 @@ const newItem = ref({
 
 const selectCategory = category => {
   newItem.value.category = category
-  newItem.value.type = ''
 }
 
 const addNewItem = async () => {
@@ -337,7 +336,7 @@ onMounted(fetchHistory)
 .calendar-box {
   display: flex;
   flex-direction: column;
-  min-height: 85vh;
+  min-height: 80vh;
   width: 1000px;
   background: white;
   padding: 20px;
@@ -425,10 +424,10 @@ onMounted(fetchHistory)
   color: #333;
   border-radius: 10px;
   padding: 8px;
-  aspect-ratio: 1 / 0.7;
+  width: 125px;
+  height: 70px;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   transition: background 0.2s ease;
   border: 1px solid #eee;
@@ -449,11 +448,11 @@ onMounted(fetchHistory)
   font-weight: bold;
 }
 .daily-income {
-  font-size: 12px;
+  font-size: 10px;
   color: #1e88e5;
 }
 .daily-expense {
-  font-size: 12px;
+  font-size: 10px;
   color: #e53935;
 }
 
@@ -461,7 +460,7 @@ onMounted(fetchHistory)
   position: fixed;
   right: 0;
   height: 77.5vh;
-  width: 20vw;
+  width: 15vw;
   background: #1e1e1e;
   padding: 20px;
   border-top-left-radius: 12px;

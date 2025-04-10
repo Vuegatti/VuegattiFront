@@ -1,14 +1,37 @@
 <script setup>
 import { ref } from 'vue'
 import BaseButton from '@/components/BaseButton.vue'
+import { useAccount } from '@/stores/account.js'
+import { useRouter } from 'vue-router'
 
+const accountStore = useAccount()
 const bank = ref('')
 const accountNumber = ref('')
 const balance = ref('')
-
+const userId = localStorage.getItem('userId')
+const router = useRouter()
 // 이미지 클릭으로 select 값 설정
 const setBank = name => {
   bank.value = name
+}
+
+const save = async () => {
+  const bankName = bank.value
+  const balanceValue = balance.value
+  const currentDB = await accountStore.fetchAccountById(userId)
+  const currentBank = currentDB.bank || {}
+
+  console.log('Current Bank:', currentBank)
+
+  currentBank[bankName] = balanceValue
+
+  const newBank = {
+    bank: currentBank,
+  }
+
+  accountStore.addAccount(newBank, userId)
+  alert('계좌 등록이 완료되었습니다.')
+  router.push('/homepage')
 }
 </script>
 
@@ -18,19 +41,19 @@ const setBank = name => {
       <div class="register-box">
         <h2>Account registration</h2>
 
-        <form>
+        <form @submit.prevent="save">
           <div class="form-group">
             <select v-model="bank" required>
               <option disabled value="">Bank Name</option>
-              <option>국민</option>
-              <option>농협</option>
-              <option>새마을</option>
-              <option>신한</option>
-              <option>우리</option>
-              <option>카카오</option>
-              <option>토스</option>
-              <option>하나</option>
-              <option>IBK</option>
+              <option value="KB">국민</option>
+              <option value="Nonghyup">농협</option>
+              <option value="MG">새마을</option>
+              <option value="Woori">우리</option>
+              <option value="Shinhan">신한</option>
+              <option value="Kakao">카카오</option>
+              <option value="Toss">토스</option>
+              <option value="Hana">하나</option>
+              <option value="IBK">IBK</option>
             </select>
           </div>
 
@@ -43,28 +66,40 @@ const setBank = name => {
           </div>
 
           <div class="button-group">
-            <BaseButton color="secondary" @click="save">Register</BaseButton>
-            <BaseButton color="primary">Back</BaseButton>
+            <router-link to="/homepage">
+              <BaseButton color="primary" type="button" class="backBtn"
+                >Homepage</BaseButton
+              >
+            </router-link>
+            <BaseButton color="secondary" class="registerBtn"
+              >Register</BaseButton
+            >
           </div>
         </form>
       </div>
 
       <!-- 오른쪽: 은행 이미지 -->
       <div class="bank-images">
-        <img src="@/assets/image/BankIcon_국민.png" @click="setBank('국민')" />
-        <img src="@/assets/image/BankIcon_농협.png" @click="setBank('농협')" />
+        <img src="@/assets/image/BankIcon_국민.png" @click="setBank('KB')" />
+        <img
+          src="@/assets/image/BankIcon_농협.png"
+          @click="setBank('Nonghyup')"
+        />
         <img
           src="@/assets/image/BankIcon_새마을.png"
           @click="setBank('새마을')"
         />
-        <img src="@/assets/image/BankIcon_신한.png" @click="setBank('신한')" />
-        <img src="@/assets/image/BankIcon_우리.png" @click="setBank('우리')" />
+        <img
+          src="@/assets/image/BankIcon_신한.png"
+          @click="setBank('Shinhan')"
+        />
+        <img src="@/assets/image/BankIcon_우리.png" @click="setBank('Woori')" />
         <img
           src="@/assets/image/BankIcon_카카오.png"
-          @click="setBank('카카오')"
+          @click="setBank('Kakao')"
         />
-        <img src="@/assets/image/BankIcon_토스.png" @click="setBank('토스')" />
-        <img src="@/assets/image/BankIcon_하나.png" @click="setBank('하나')" />
+        <img src="@/assets/image/BankIcon_토스.png" @click="setBank('Toss')" />
+        <img src="@/assets/image/BankIcon_하나.png" @click="setBank('Hana')" />
         <img src="@/assets/image/BankIcon_IBK.png" @click="setBank('IBK')" />
       </div>
     </div>
@@ -90,7 +125,10 @@ const setBank = name => {
   align-items: center;
   color: white;
   gap: 5vw;
+  align-items: center;
+  padding: 8vh;
 }
+
 .register-box {
   display: flex;
   flex-direction: column;
@@ -99,7 +137,7 @@ const setBank = name => {
   border-radius: 10px;
   text-align: center;
   width: 50%;
-  height: 60%;
+  height: 70vh;
   padding: var(--space-l);
 }
 .register-box h2 {
@@ -119,8 +157,9 @@ form input {
   margin: 10px 0;
   padding: 10px;
   border: 1px solid var(--color-text);
-  color: var(--color-background);
+  color: var(--color-text);
   border-radius: 6px;
+  background-color: transparent;
 }
 
 form select {
@@ -129,8 +168,9 @@ form select {
   margin: 10px 0;
   padding: 10px;
   border: 1px solid var(--color-text);
-  color: var(--color-background);
+  color: var(--color-text);
   border-radius: 6px;
+  background-color: transparent;
 }
 
 form div {
@@ -146,7 +186,7 @@ form div > * {
   box-sizing: border-box;
 }
 input::placeholder {
-  color: #aaa;
+  color: var(--color-text);
 }
 .button-group {
   display: flex;
@@ -173,5 +213,11 @@ input::placeholder {
 }
 .bank-images img:hover {
   transform: scale(1.1);
+}
+.backBtn {
+  width: 100%;
+}
+.registerBtn {
+  margin: 10px;
 }
 </style>

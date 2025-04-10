@@ -10,74 +10,104 @@ import {
   LinearScale,
 } from 'chart.js'
 
+// store에서 수입/지출 데이터 가져오기
+import { useHistory } from '@/stores/history'
+import { computed, onMounted } from 'vue'
+
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
-const chartData = {
-  labels: ['3월', '4월'],
+const historyStore = useHistory()
+
+onMounted(async () => {
+  await historyStore.fetchpreHistory() // 데이터 가져오기
+})
+
+// 수입 데이터: 3월(이전 달), 4월(현재 달)
+const incomeData = computed(() => [
+  historyStore.beforemonthlyIncome,
+  historyStore.monthlyIncome,
+])
+
+// 지출 데이터: 3월(이전 달), 4월(현재 달)
+const expenseData = computed(() => [
+  historyStore.beforemonthlyExpense,
+  historyStore.monthlyExpense,
+])
+
+// 차트 데이터 정의 (반응형 computed 사용)
+const chartData = computed(() => ({
+  labels: ['3월', '4월'], // x축 라벨
   datasets: [
     {
       label: '수입',
       backgroundColor: '#5cd1c7',
-      data: [2500000, 1500000],
+      data: incomeData.value,
       borderRadius: 6,
       barThickness: 40,
     },
     {
-      label: '지출',
+      label: '소비',
       backgroundColor: '#ff5b5d',
-      data: [400000, 300000],
+      data: expenseData.value,
       borderRadius: 6,
       barThickness: 40,
     },
   ],
-}
+}))
 
+// 소비 비교해서 메시지 텍스트만 반환
+const spendingMessage = computed(() => {
+  if (historyStore.monthlyExpense > historyStore.beforemonthlyExpense) {
+    return '더 많아요!'
+  } else if (historyStore.monthlyExpense < historyStore.beforemonthlyExpense) {
+    return '더 적어요!'
+  } else {
+    return '같아요!'
+  }
+})
+
+// 차트 옵션 (스타일 포함)
 const chartOptions = {
   responsive: true,
+  maintainAspectRatio: false, // 비율 유지 비활성화
+  layout: {
+    padding: {
+      right: 20,
+    },
+  },
   animations: {
-    duration: 1000,
-    easing: 'easeInBounce',
+    duration: 1000, // 애니메이션 시간
+    easing: 'easeInBounce', // 애니메이션 효과
   },
   plugins: {
     legend: {
-      position: 'bottom',
+      position: 'right', // 범례 위치
       labels: {
-        color: '#f8f4f2',
+        usePointStyle: true, // 범례에 심볼 스타일 사용
+        pointStyle: 'rectRounded', // 사각형 대신 원형
+        color: '#f8f4f2', // 범례 텍스트 색상
         font: {
           size: 14,
-          family: 'Pretendard',
+          family: 'Pretendard', // 폰트 지정
         },
-      },
-    },
-    title: {
-      display: true,
-      text: '월별 수입/지출 현황',
-      color: '#f8f4f2',
-      font: {
-        size: 20,
-        family: 'Pretendard',
-        weight: 'bold',
-      },
-      padding: {
-        bottom: 16,
       },
     },
   },
   scales: {
     x: {
       grid: {
-        color: 'rgba(255, 255, 255, 0.1)',
+        color: 'rgba(255, 255, 255, 0.1)', // x축 그리드 라인 색상
       },
       ticks: {
-        color: '#f8f4f2',
+        color: '#f8f4f2', // x축 글씨 색상
       },
     },
     y: {
       grid: {
-        color: 'rgba(255, 255, 255, 0.1)',
+        color: 'rgba(255, 255, 255, 0.1)', // y축 그리드 라인 색상
       },
       ticks: {
-        color: '#f8f4f2',
+        color: '#f8f4f2', // y축 글씨 색상
       },
     },
   },
@@ -87,18 +117,20 @@ const chartOptions = {
 <template>
   <div class="bar-chart">
     <div class="chart-container">
+      <!-- 차트 박스 -->
       <div class="chart-box">
         <Bar :data="chartData" :options="chartOptions" />
       </div>
+      <!-- ✅ 메시지 박스 -->
       <div class="message-box" style="text-align: center">
         <div>지난 달에 비해...</div>
         <div>
+          소비가
           <span
             class="subtle-glitter"
             style="color: var(--color-primary); font-weight: bold"
+            >{{ spendingMessage }}</span
           >
-            소비 </span
-          >가 많아요!
         </div>
       </div>
     </div>
@@ -114,27 +146,30 @@ const chartOptions = {
 }
 
 .chart-container {
-  display: flex; /* ✅ 가로 배치 */
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  width: 100%;
+  max-width: 880px; /* ✅ 전체 너비 줄임 */
+  transform: scale(0.95);
+  transform-origin: top center;
+  overflow: visible; /* ✅ 잘림 방지 */
   padding: 1rem;
   border: 1px solid var(--color-text);
   border-radius: 20px;
-  width: 960px;
-  max-width: 100%;
-  gap: 2rem; /* ✅ 두 요소 사이 간격 */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
 }
-
 .chart-box {
   flex: 1;
-  max-width: 480px; /* ✅ 막대 차트 너비 제한 */
+  height: 230px; /* 차트 높이 */
+  position: relative;
 }
 
 .message-box {
   flex: 1;
   display: flex;
-  flex-direction: column; /* 줄바꿈 허용!!!!! 이거때문에 줄바꿈 안됐음 */
+  flex-direction: column; /* 줄바꿈 허용!! 이거 안해주면 줄바꿈 안됨*/
   align-items: center;
   justify-content: center;
   color: var(--color-text);
@@ -142,6 +177,7 @@ const chartOptions = {
   font-weight: bold;
   text-align: center;
 }
+
 @keyframes subtle-glitter {
   0%,
   100% {

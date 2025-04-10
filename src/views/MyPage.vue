@@ -19,11 +19,9 @@ const userIdInDB = ref(null)
 const avatarNumber = ref(1) ////
 
 onMounted(async () => {
-  // 1. 쿼리로 아바타가 넘어온 경우 → 그걸 우선 적용
   if (route.query.avatar) {
     avatarNumber.value = parseInt(route.query.avatar)
   } else {
-    // 2. 쿼리가 없으면 DB에서 정보 불러오기
     try {
       const { data } = await axios.get(
         `http://localhost:5001/account?userID=${ID}`,
@@ -61,7 +59,6 @@ const save = async () => {
         `http://localhost:5001/account/${userIdInDB.value}`,
         updateData,
       )
-      localStorage.setItem('userId', username.value)
     } catch (error) {
       console.error('PATCH 요청 실패:', error)
     }
@@ -82,16 +79,6 @@ const save = async () => {
       </router-link>
 
       <form @submit.prevent="save">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input
-            v-model="username"
-            type="text"
-            id="username"
-            placeholder="Username"
-          />
-        </div>
-
         <div class="form-group">
           <label for="password">Password</label>
           <input
@@ -118,8 +105,14 @@ const save = async () => {
         </div>
 
         <div class="button-group">
-          <BaseButton color="primary" @click="save">Confirm</BaseButton>
-          <BaseButton color="secondary">Edit Account</BaseButton>
+          <router-link to="/mypage">
+            <BaseButton color="primary" @click="save">Confirm</BaseButton>
+          </router-link>
+          <BaseButton
+            color="secondary"
+            @click="$router.push('/BankAccountSelect')"
+            >Edit Account</BaseButton
+          >
         </div>
       </form>
     </div>
@@ -131,6 +124,7 @@ const save = async () => {
   color: var(--color-text);
 }
 .mypage-container {
+  padding-top: 8vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -146,7 +140,7 @@ const save = async () => {
   border-radius: 10px;
   text-align: center;
   width: 50%;
-  height: 60%;
+  height: 70vh;
   padding: var(--space-l);
 }
 .mypage-box h2 {
