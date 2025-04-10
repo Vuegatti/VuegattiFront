@@ -19,6 +19,17 @@ export const useAccount = defineStore('account', () => {
       console.log('회원정보 로딩 에러: ', err)
     }
   }
+  // 특정 회원정보 불러오기
+  const fetchAccountById = async userId => {
+    try {
+      const response = await apiClient.get(`/account/${userId}`)
+      console.log('특정 회원정보 로딩 성공: ', response.data)
+      return response.data
+    } catch (err) {
+      console.log('특정 회원정보 로딩 에러: ', err)
+    }
+  }
+
   // 3. 회원정보 업데이트
   const updateAccount = async accountData => {
     console.log('updateAccount 함수 호출됨', accountData) //
@@ -26,6 +37,15 @@ export const useAccount = defineStore('account', () => {
       const response = await apiClient.post('/account', accountData)
       accountInfo.value = response.data
       console.log('회원정보 업데이트 성공: ', response.data)
+    } catch (err) {
+      console.log('회원정보 업데이트 에러: ', err)
+    }
+  }
+
+  const addAccount = async (accountData, userId) => {
+    try {
+      const response = await apiClient.patch(`/account/${userId}`, accountData)
+      console.log('회원정보 추가 성공: ', response.data)
     } catch (err) {
       console.log('회원정보 업데이트 에러: ', err)
     }
@@ -55,5 +75,7 @@ export const useAccount = defineStore('account', () => {
     bankInfo,
     updateAccount,
     logIn,
+    addAccount,
+    fetchAccountById,
   }
 })

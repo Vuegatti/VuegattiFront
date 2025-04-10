@@ -19,7 +19,7 @@ const handleLogout = () => {
 }
 
 const topMenu = [
-  { to: '/', label: 'Home', icon: 'fa fa-home' },
+  { to: '/homepage', label: 'Home', icon: 'fa fa-home' },
   { to: '/calendar', label: 'Calendar', icon: 'fa fa-calendar' },
   { to: '/consumption', label: 'Consumption', icon: 'fa fa-wallet' },
 ]
