@@ -43,11 +43,9 @@ export const useAccount = defineStore('account', () => {
 
   const bankInfo = computed(() => {
     const bankInfo = accountInfo.value.filter(item => {
-      // console.log('🧡userID:', userID.value) // userID 확인용
-      // console.log('🧡item:', item.userID) // bankInfo 확인용
       return item.userID === userID.value
     })
-    // console.log('🧡bankInfo:', bankInfo) // bankInfo 확인용
+
     return bankInfo
   })
 
