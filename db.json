@@ -212,12 +212,12 @@
     {
       "id": "20",
       "userID": "kxxheehxxn",
-      "date": "2025-04-04",
       "amount": 1500000,
       "type": "income",
       "category": "월급",
       "title": "아르바이트 정산",
       "details": "카페 알바 월급",
+      "date": "2025-04-04",
       "bank": "Shinhan"
     },
     {
@@ -300,7 +300,8 @@
         "Woori": 369800,
         "Hana": 1000000,
         "Nonghyup": 500000,
-        "Kakao": 200000
+        "Kakao": 200000,
+        "MG": 123
       }
     },
     {

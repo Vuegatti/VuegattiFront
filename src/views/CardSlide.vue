@@ -28,7 +28,8 @@ const getBankIcon = bankKey => {
 }
 
 onMounted(async () => {
-  await accountStore.fetchAccount() // 계좌 정보 가져오기
+  accountStore.userID = localStorage.getItem('userId') || ''
+  await accountStore.fetchAccount()
 
   if (
     Array.isArray(accountStore.bankInfo) &&
@@ -68,8 +69,8 @@ onMounted(async () => {
         </div>
       </swiper-slide>
 
-      <swiper-slide>
-        <router-link to="/BankAccountSelect">
+      <swiper-slide style="width: 220px">
+        <router-link to="/BankAccountSelect" style="width: 100%">
           <div class="plus">
             <span style="width: 220px; text-align: center">+</span>
           </div>
