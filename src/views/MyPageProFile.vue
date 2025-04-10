@@ -1,17 +1,29 @@
 <script setup>
 import AvartarPicker from '@/components/AvartarPicker.vue'
-import { ref } from 'vue'
 
-// const handleSelectedAvatar = value => {
-//   avatarNumber.value = value
-//   console.log('선택된 아바타 번호:', value)
-// }
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const selectedAvatar = ref(null)
+
+const handleSelectedAvatar = value => {
+  selectedAvatar.value = value
+}
+
+const goBackWithAvatar = () => {
+  router.push({
+    path: '/mypage',
+    query: { avatar: selectedAvatar.value },
+  })
+}
 </script>
 
 <template>
   <div class="container">
     <h2>My Profile</h2>
-    <div><AvartarPicker @update:selectedAvatar="handleSelectedAvatar" /></div>
+    <AvartarPicker @update:selectedAvatar="handleSelectedAvatar" />
+    <BaseButton color="primary" @click="goBackWithAvatar">Confirm</BaseButton>
   </div>
 </template>
 
