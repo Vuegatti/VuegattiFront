@@ -190,11 +190,10 @@
     {
       "id": "18",
       "userID": "bikdh",
-      "date": "2025-04-03",
       "amount": 4500,
       "type": "expense",
       "category": "식비",
-      "title": "편의점 간식",
+      "title": "편의점 간식을 샀어요!!",
       "details": "삼각김밥",
       "bank": "KB"
     },
@@ -210,6 +209,7 @@
       "bank": "KB"
     },
     {
+      "id": "20",
       "id": "20",
       "userID": "kxxheehxxn",
       "date": "2025-04-04",
