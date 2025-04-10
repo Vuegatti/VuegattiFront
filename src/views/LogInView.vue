@@ -57,7 +57,7 @@ onMounted(async () => {
           <BaseButton color="primary" type="submit">Log In</BaseButton>
         </form>
         <p style="text-align: center">
-          Don't have an account? <a href="#">Sign Up</a>
+          Don't have an account? <router-link to="/signIn">Sign Up</router-link>
         </p>
       </div>
     </div>
