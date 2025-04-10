@@ -1,7 +1,7 @@
 <script setup>
 import { useHistory } from '@/stores/history'
-import { useAccount } from '@/stores/account'
 import ListForm from './ListForm.vue'
+import ModifyForm from './ModifyForm.vue'
 import { onMounted, computed, ref } from 'vue'
 
 const historyList = useHistory()
@@ -25,6 +25,17 @@ const closeForm = isSubmitted => {
   }
 }
 
+const selectedItem = ref(null)
+
+const openModify = item => {
+  selectedItem.value = item
+}
+const closeModify = isSubmitted => {
+  if (isSubmitted) {
+    selectedItem.value = null
+  }
+}
+
 const deleteItem = async id => {
   console.log(id)
   await deleteHistory(id)
@@ -38,7 +49,8 @@ const moveToNextMonth = () => {
 }
 
 const filteredHistory = computed(() => {
-  const month = historyList.currentMonth // 현재 월 (0부터 시작)
+  const month = historyList.currentMonth
+  console.log('함수') // 현재 월 (0부터 시작)
   return historyList.getHistoryByMonth(month)
 })
 
@@ -48,75 +60,81 @@ onMounted(() => {
 </script>
 
 <template>
-  <h2>
-    <button class="move-month" @click="moveToPreviousMonth">◀</button>
-    {{ historyList.currentMonthName }}
-    <button class="move-month" @click="moveToNextMonth">▶</button>
-  </h2>
-
-  <div class="text-container">
-    <div class="text-income">
-      <p>총 수입은</p>
-      <p>{{ monthlyIncome }} 원 입니다.</p>
+  <div class="consumption-page">
+    <h2>
+      <span class="move-month" @click="moveToPreviousMonth">←</span>
+      {{ historyList.currentMonthName }}
+      <span class="move-month" @click="moveToNextMonth">→</span>
+    </h2>
+    <div class="text-container">
+      <div class="text-income">
+        <span>총 수입은 </span>
+        <span class="income-text">{{ monthlyIncome }} 원</span>
+      </div>
+      <div class="text-expense">
+        <span>총 지출은 </span>
+        <span class="expense-text">{{ monthlyExpense }} 원</span>
+      </div>
     </div>
-    <div class="text-expense">
-      <p>총 지출은</p>
-      <p>{{ monthlyExpense }} 원 입니다.</p>
-    </div>
-  </div>
-  <ListForm v-if="showModal" @close="closeForm" />
-  <div class="historypage">
-    <div class="history-header">
-      <button>유형</button>
-      <p>날짜</p>
-      <p>카테고리</p>
-      <p>제목</p>
-      <p>금액</p>
-      <p>상세</p>
-      <div style="visibility: hidden">icon</div>
-    </div>
-
-    <ul>
-      <li
-        v-for="list in filteredHistory"
-        :key="list.id"
-        class="history-container"
-      >
-        <button
-          :class="list.type === 'expense' ? 'expense-button' : 'income-button'"
+    <ListForm v-if="showModal" @close="closeForm" />
+    <ModifyForm v-if="selectedItem" :list="selectedItem" @close="closeModify" />
+    <div class="historypage">
+      <div class="history-header">
+        <button>유형</button>
+        <p>날짜</p>
+        <p>카테고리</p>
+        <p>제목</p>
+        <p>금액</p>
+        <p>상세</p>
+        <div style="visibility: hidden">icon</div>
+        <div style="visibility: hidden">scroll</div>
+      </div>
+      <ul class="history-list">
+        <li
+          v-for="list in filteredHistory"
+          :key="list.id"
+          class="history-container"
         >
-          {{ list.type === 'expense' ? '지출' : '수입' }}
-        </button>
-        <p>{{ list.date }}</p>
-        <p>{{ list.category }}</p>
-        <p>{{ list.title }}</p>
-        <p :class="list.type === 'expense' ? 'primary' : 'secondary'">
-          {{ list.amount.toLocaleString() }}
-        </p>
-
-        <p>{{ list.details }}</p>
-        <div class="icon-zip">
-          <i class="fa-solid fa-pen-to-square"></i>
-          <i class="fa-solid fa-trash" @click="deleteItem(list.id)"></i>
-        </div>
-      </li>
-    </ul>
-    <i
-      class="fa-solid fa-circle-plus fa-2xl circle-button"
-      @click="openForm"
-    ></i>
+          <button
+            :class="
+              list.type === 'expense' ? 'expense-button' : 'income-button'
+            "
+          >
+            {{ list.type === 'expense' ? '지출' : '수입' }}
+          </button>
+          <p>{{ list.date }}</p>
+          <p>{{ list.category }}</p>
+          <p>{{ list.title }}</p>
+          <p :class="list.type === 'expense' ? 'primary' : 'secondary'">
+            {{ list.amount.toLocaleString() }}
+          </p>
+          <p>{{ list.details }}</p>
+          <div class="icon-zip">
+            <i
+              class="fa-solid fa-pen-to-square"
+              @click.stop="openModify(list)"
+            ></i>
+            <i class="fa-solid fa-trash" @click="deleteItem(list.id)"></i>
+          </div>
+        </li>
+      </ul>
+      <i
+        class="fa-solid fa-circle-plus fa-2xl circle-button"
+        @click="openForm"
+      ></i>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.consumption-page {
+  max-height: 70vh;
+}
 h2 {
   color: var(--color-text);
   text-align: center;
   font-size: 80px;
   margin: 0;
-}
-.listHead {
-  display: flex;
 }
 .text-container {
   display: flex;
@@ -138,12 +156,14 @@ h2 {
 .history-header {
   display: flex;
   justify-content: space-around;
-  width: 900px;
+  width: 56vi;
   padding: 0 var(--space-s);
   margin: var(--space-s) auto;
   font-weight: bold;
   background-color: var(--color-text);
   border-radius: var(--space-s);
+
+  box-sizing: border-box;
 }
 
 .history-header p {
@@ -156,6 +176,14 @@ h2 {
   font-weight: bold;
   background-color: var(--color-text);
 }
+.history-list {
+  max-height: 350px;
+  padding: 0;
+  margin: 0 auto;
+  width: 56vi;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
 
 .history-container {
   padding: var(--space-s);
@@ -163,7 +191,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   background-color: var(--color-text);
-  width: 900px;
+  width: 55vi;
   margin: 0 auto;
   line-height: var(--space-l);
 }
@@ -184,12 +212,21 @@ h2 {
   gap: 1rem;
 }
 .fa-trash {
+  cursor: pointer;
   transition: 0.3s;
 }
 
 .fa-trash:hover {
   color: var(--color-primary);
   opacity: 0.8;
+}
+.fa-pen-to-square {
+  cursor: pointer;
+  transition: 0.3s;
+}
+.fa-pen-to-square:hover {
+  color: var(--success);
+  opacity: 0.9;
 }
 
 button {
@@ -239,5 +276,13 @@ button {
 }
 .circle-button:hover {
   opacity: 1;
+}
+
+.income-text {
+  color: var(--color-accent-blue);
+}
+
+.expense-text {
+  color: var(--color-accent-red);
 }
 </style>
