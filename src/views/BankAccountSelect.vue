@@ -114,9 +114,9 @@ const save = async () => {
 .register-layout {
   display: flex;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   gap: 40px;
-  position: relative;
+  height: 100vh;
 }
 
 .register-container {
@@ -142,6 +142,13 @@ const save = async () => {
 }
 .register-box h2 {
   margin-bottom: 5px;
+}
+
+.register-box form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 form input {

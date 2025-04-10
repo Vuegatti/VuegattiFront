@@ -128,6 +128,7 @@ const save = async () => {
   align-items: center;
   color: white;
   gap: 5vw;
+  height: 100vh;
 }
 .mypage-box {
   display: flex;
