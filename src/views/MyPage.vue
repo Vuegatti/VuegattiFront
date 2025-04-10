@@ -77,6 +77,7 @@ const save = async () => {
       <router-link :to="`/mypageprofile`">
         <Avatar :toyNumber="avatarNumber" :size="150" :rounded="24" />
       </router-link>
+      -->
 
       <form @submit.prevent="save">
         <div class="form-group">
