@@ -6,6 +6,8 @@ import MyPage from '@/views/MyPage.vue'
 
 import LogInView from '@/views/LogInView.vue'
 import SignInView from '@/views/SignInView.vue'
+import AccountReg from '@/views/AccountReg.vue'
+import BankAccountSelect from '@/views/BankAccountSelect.vue'
 
 const router = createRouter({
   history: createWebHistory(),
@@ -37,7 +39,16 @@ const router = createRouter({
       name: 'MyPage',
       component: MyPage,
     },
-
+    {
+      path: '/AccountReg',
+      name: 'AccountReg',
+      component: AccountReg,
+    },
+    {
+      path: '/BankAccountSelect',
+      name: 'BankAccountSelect',
+      component: BankAccountSelect,
+    },
     {
       path: '/logIn',
       name: 'LogIn',
