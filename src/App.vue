@@ -1,9 +1,10 @@
 <script setup>
+import { useRoute } from 'vue-router'
 import SideBar from './components/SideBar.vue'
 import HomeHeader from './components/HomeHeader.vue'
 import HomeFooter from './components/HomeFooter.vue'
-import HomePage from './views/HomePage.vue'
-import LogIn from './views/LogInView.vue'
+
+const route = useRoute()
 </script>
 
 <template>
@@ -13,8 +14,7 @@ import LogIn from './views/LogInView.vue'
     </header>
 
     <main>
-      <SideBar />
-
+      <SideBar v-if="!route.path.startsWith('/login')" />
       <RouterView />
     </main>
 
@@ -27,7 +27,10 @@ import LogIn from './views/LogInView.vue'
 <style scoped>
 .layout > header {
   position: sticky;
+  top: 0;
+  z-index: 100;
 }
+
 .layout {
   display: flex;
   flex-direction: column;
