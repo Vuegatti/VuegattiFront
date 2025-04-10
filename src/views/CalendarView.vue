@@ -110,7 +110,6 @@ const newItem = ref({
 
 const selectCategory = category => {
   newItem.value.category = category
-  newItem.value.type = ''
 }
 
 const addNewItem = async () => {

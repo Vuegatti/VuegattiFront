@@ -29,6 +29,7 @@ onMounted(async () => {
   }
 })
 
+console.log('지출', historyStore.monthlyExpense)
 //파이차트 옵션
 const pieOptions = {
   responsive: true,
@@ -65,6 +66,7 @@ const pieOptions = {
 </script>
 
 <template>
+  <p class="pie-title newbie" v-if="isNewbie">이번 달 지출이 없습니다!</p>
   <div class="pie-container">
     <p class="pie-title newbie" v-if="isNewbie">이번 달 지출이 없습니다!</p>
     <div class="pie-chart">
