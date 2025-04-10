@@ -50,6 +50,8 @@ const save = async () => {
         `http://localhost:5001/account/${userIdInDB.value}`,
         updateData,
       )
+
+      localStorage.setItem('userId', username.value)
     } catch (error) {
       console.error('PATCH 요청 실패:', error)
     }
