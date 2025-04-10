@@ -168,6 +168,8 @@ onMounted(fetchHistory)
                 지출:
                 <span>{{ expense.toLocaleString() }}원</span>
               </p>
+            </div>
+            <div>
               <p class="total">
                 총 결산:
                 <span> {{ (income - expense).toLocaleString() }}원</span>
@@ -328,8 +330,7 @@ onMounted(fetchHistory)
   align-items: flex-start;
   background: var(--color-background);
   color: var(--color-text);
-  min-height: 100vh;
-  padding: 40px 100px;
+
   box-sizing: border-box;
   margin-top: 20px;
 }
@@ -361,7 +362,7 @@ onMounted(fetchHistory)
 
 .summary {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   font-size: 14px;
   flex-wrap: wrap;
   padding: 0 20px;
@@ -421,7 +422,7 @@ onMounted(fetchHistory)
   padding: 10px;
   border-radius: 8px;
   cursor: pointer;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1/0.7;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -459,7 +460,7 @@ onMounted(fetchHistory)
   position: sticky;
   top: 0px;
   right: 0;
-  height: 100vh;
+  height: 75vh;
   width: 345px;
   background: #2b2b2b;
   padding: 20px;
