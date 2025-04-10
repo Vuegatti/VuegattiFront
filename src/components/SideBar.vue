@@ -76,6 +76,7 @@ const bottomMenu = [
 
 <style scoped>
 .sidebar-wrapper {
+  top: 0px;
   position: fixed;
   left: 0;
   width: 50px;
