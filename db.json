@@ -335,24 +335,6 @@
       "bank": {
         "MG": 3000
       }
-    },
-    {
-      "id": "seyeon",
-      "password": "123123",
-      "email": "sad@ased.ccc",
-      "phoneNumber": "010-0000-0000",
-      "avatarNumber": 1,
-      "bank": {
-        "Woori": 123123123,
-        "Nonghyup": 123123123
-      }
-    },
-    {
-      "id": "se",
-      "password": "123123",
-      "email": "adksfj@akdsf.bbb",
-      "phoneNumber": "010-0000-0000",
-      "avatarNumber": 1
     }
   ]
 }
