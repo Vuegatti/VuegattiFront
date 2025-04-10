@@ -38,12 +38,12 @@ export const useAccount = defineStore('account', () => {
 
   // 4. 외부에서 사용할 수 있도록 반환
   // bank정보만 불러오게
-  const userID = ref('bikdh') // userID는 로그인 시 받아온 값으로 설정해야 함
+  const userID = ref(localStorage.getItem('userId') || '')// userID는 로그인 시 받아온 값으로 설정해야 함
   // 로그인 시 받아온 userID를 사용하여 필터링
 
   const bankInfo = computed(() => {
     const bankInfo = accountInfo.value.filter(item => {
-      return item.userID === userID.value
+      return item.id === userID.value
     })
 
     return bankInfo
