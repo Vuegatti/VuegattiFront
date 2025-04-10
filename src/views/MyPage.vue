@@ -105,7 +105,9 @@ const save = async () => {
         </div>
 
         <div class="button-group">
-          <BaseButton color="primary" @click="save">Confirm</BaseButton>
+          <router-link to="/mypage">
+            <BaseButton color="primary" @click="save">Confirm</BaseButton>
+          </router-link>
           <BaseButton
             color="secondary"
             @click="$router.push('/BankAccountSelect')"

@@ -69,9 +69,11 @@ onMounted(async () => {
       </swiper-slide>
 
       <swiper-slide>
-        <div class="plus">
-          <span>+</span>
-        </div>
+        <router-link to="/BankAccountSelect">
+          <div class="plus">
+            <span style="width: 220px; text-align: center">+</span>
+          </div>
+        </router-link>
       </swiper-slide>
     </swiper>
   </div>

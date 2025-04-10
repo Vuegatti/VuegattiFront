@@ -63,8 +63,12 @@ const save = async () => {
           </div>
 
           <div class="button-group">
-            <BaseButton color="primary">Back</BaseButton>
-            <BaseButton color="secondary" @click.prevent="save"
+            <router-link to="/mypage">
+              <BaseButton color="primary" type="button" class="backBtn"
+                >Back</BaseButton
+              >
+            </router-link>
+            <BaseButton color="secondary" class="registerBtn"
               >Register</BaseButton
             >
           </div>
@@ -73,20 +77,26 @@ const save = async () => {
 
       <!-- 오른쪽: 은행 이미지 -->
       <div class="bank-images">
-        <img src="@/assets/image/BankIcon_국민.png" @click="setBank('국민')" />
-        <img src="@/assets/image/BankIcon_농협.png" @click="setBank('농협')" />
+        <img src="@/assets/image/BankIcon_국민.png" @click="setBank('KB')" />
+        <img
+          src="@/assets/image/BankIcon_농협.png"
+          @click="setBank('Nonghyup')"
+        />
         <img
           src="@/assets/image/BankIcon_새마을.png"
           @click="setBank('새마을')"
         />
-        <img src="@/assets/image/BankIcon_신한.png" @click="setBank('신한')" />
-        <img src="@/assets/image/BankIcon_우리.png" @click="setBank('우리')" />
+        <img
+          src="@/assets/image/BankIcon_신한.png"
+          @click="setBank('Shinhan')"
+        />
+        <img src="@/assets/image/BankIcon_우리.png" @click="setBank('Woori')" />
         <img
           src="@/assets/image/BankIcon_카카오.png"
-          @click="setBank('카카오')"
+          @click="setBank('Kakao')"
         />
-        <img src="@/assets/image/BankIcon_토스.png" @click="setBank('토스')" />
-        <img src="@/assets/image/BankIcon_하나.png" @click="setBank('하나')" />
+        <img src="@/assets/image/BankIcon_토스.png" @click="setBank('Toss')" />
+        <img src="@/assets/image/BankIcon_하나.png" @click="setBank('Hana')" />
         <img src="@/assets/image/BankIcon_IBK.png" @click="setBank('IBK')" />
       </div>
     </div>
@@ -193,5 +203,11 @@ input::placeholder {
 }
 .bank-images img:hover {
   transform: scale(1.1);
+}
+.backBtn {
+  width: 100%;
+}
+.registerBtn {
+  margin: 10px;
 }
 </style>
