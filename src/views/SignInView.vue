@@ -13,7 +13,7 @@ const Email = ref('')
 const regEmail =
   /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
 const PhoneNumber = ref('')
-const regPhoneNumber = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/
+const regPhoneNumber = /^[0-9]{3}-[0-9]{4}-[0-9]{4}$/
 const avatarNumber = ref(1)
 
 const isUsernameValid = ref(true)
@@ -132,6 +132,7 @@ const validatePhoneNumber = () => {
             <input
               type="password"
               placeholder="Confirm Password"
+              v-model="ConfirmPassword"
               required
               @blur="validateConfirmPassword"
             />
