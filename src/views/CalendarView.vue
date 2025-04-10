@@ -425,7 +425,6 @@ onMounted(fetchHistory)
   height: 70px;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   transition: background 0.2s ease;
   border: 1px solid #eee;
@@ -446,11 +445,11 @@ onMounted(fetchHistory)
   font-weight: bold;
 }
 .daily-income {
-  font-size: 12px;
+  font-size: 10px;
   color: #1e88e5;
 }
 .daily-expense {
-  font-size: 12px;
+  font-size: 10px;
   color: #e53935;
 }
 
