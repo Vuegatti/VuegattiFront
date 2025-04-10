@@ -8,12 +8,12 @@ import { useRouter } from 'vue-router'
 
 const route = useRouter()
 
-onMounted(() => {
-  const selectedAvatar = route.query.avatar
-  if (selectedAvatar !== undefined) {
-    avatarNumber.value = selectedAvatar
-  }
-})
+// onMounted(() => {
+//   const selectedAvatar = route.query.avatar
+//   if (selectedAvatar !== undefined) {
+//     avatarNumber.value = selectedAvatar
+//   }
+// })
 
 const ID = localStorage.getItem('userId')
 
@@ -77,9 +77,9 @@ const save = async () => {
       <h2>My page</h2>
       <p>Edit your information</p>
 
-      <router-link :to="`/mypage${avatarNumber}`">
+      <!-- <router-link :to="`/mypage${avatarNumber}`">
         <Avatar :toyNumber="avatarNumber" :size="150" :rounded="24" />
-      </router-link>
+      </router-link> -->
 
       <form @submit.prevent="save">
         <div class="form-group">
