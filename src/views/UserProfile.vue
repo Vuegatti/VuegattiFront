@@ -59,7 +59,7 @@ onMounted(async () => {
       </div>
 
       <!-- 월 -->
-      <h2 class="month">{{ currentMonth }}<span>의 내 소비</span></h2>
+      <h3 class="month">{{ currentMonth }}<span>의 내 소비</span></h3>
 
       <!-- 수입/지출 -->
       <div class="summary">
@@ -106,7 +106,7 @@ onMounted(async () => {
 }
 
 .month {
-  font-size: 3rem;
+  font-size: 3.5rem;
   display: flex;
   align-items: center;
   justify-content: center;

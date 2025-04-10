@@ -30,7 +30,7 @@ const handleSelectedAvatar = value => {
 
 const updateUser = () => {
   const user = {
-    username: Username.value,
+    id: Username.value,
     password: Password.value,
     email: Email.value,
     phoneNumber: PhoneNumber.value,

@@ -1,14 +1,34 @@
 <script setup>
 import { ref } from 'vue'
 import BaseButton from '@/components/BaseButton.vue'
+import { useAccount } from '@/stores/account.js'
 
+const accountStore = useAccount()
 const bank = ref('')
 const accountNumber = ref('')
 const balance = ref('')
-
+const userId = localStorage.getItem('userId')
 // 이미지 클릭으로 select 값 설정
 const setBank = name => {
   bank.value = name
+}
+
+const save = async () => {
+  const bankName = bank.value
+  const balanceValue = balance.value
+  const currentDB = await accountStore.fetchAccountById(userId)
+  const currentBank = currentDB.bank || {}
+
+  console.log('Current Bank:', currentBank)
+
+  currentBank[bankName] = balanceValue
+
+  const newBank = {
+    bank: currentBank,
+  }
+
+  accountStore.addAccount(newBank, userId)
+  alert('계좌 등록이 완료되었습니다.')
 }
 </script>
 
@@ -18,19 +38,19 @@ const setBank = name => {
       <div class="register-box">
         <h2>Account registration</h2>
 
-        <form>
+        <form @submit.prevent="save">
           <div class="form-group">
             <select v-model="bank" required>
               <option disabled value="">Bank Name</option>
-              <option>국민</option>
-              <option>농협</option>
-              <option>새마을</option>
-              <option>신한</option>
-              <option>우리</option>
-              <option>카카오</option>
-              <option>토스</option>
-              <option>하나</option>
-              <option>IBK</option>
+              <option value="KB">국민</option>
+              <option value="Nonghyup">농협</option>
+              <option value="MG">새마을</option>
+              <option value="Woori">우리</option>
+              <option value="Shinhan">신한</option>
+              <option value="Kakao">카카오</option>
+              <option value="Toss">토스</option>
+              <option value="Hana">하나</option>
+              <option value="IBK">IBK</option>
             </select>
           </div>
 
@@ -43,8 +63,10 @@ const setBank = name => {
           </div>
 
           <div class="button-group">
-            <BaseButton color="secondary" @click="save">Register</BaseButton>
             <BaseButton color="primary">Back</BaseButton>
+            <BaseButton color="secondary" @click.prevent="save"
+              >Register</BaseButton
+            >
           </div>
         </form>
       </div>
@@ -81,6 +103,7 @@ const setBank = name => {
   justify-content: center;
   align-items: start;
   gap: 40px;
+  position: relative;
 }
 
 .register-container {
@@ -89,7 +112,10 @@ const setBank = name => {
   align-items: center;
   color: white;
   gap: 5vw;
+  align-items: center;
+  padding: 8vh;
 }
+
 .register-box {
   display: flex;
   flex-direction: column;
@@ -98,7 +124,7 @@ const setBank = name => {
   border-radius: 10px;
   text-align: center;
   width: 50%;
-  height: 60%;
+  height: 70vh;
   padding: var(--space-l);
 }
 .register-box h2 {
@@ -111,8 +137,9 @@ form input {
   margin: 10px 0;
   padding: 10px;
   border: 1px solid var(--color-text);
-  color: var(--color-background);
+  color: var(--color-text);
   border-radius: 6px;
+  background-color: transparent;
 }
 
 form select {
@@ -121,8 +148,9 @@ form select {
   margin: 10px 0;
   padding: 10px;
   border: 1px solid var(--color-text);
-  color: var(--color-background);
+  color: var(--color-text);
   border-radius: 6px;
+  background-color: transparent;
 }
 
 form div {
@@ -138,7 +166,7 @@ form div > * {
   box-sizing: border-box;
 }
 input::placeholder {
-  color: #aaa;
+  color: var(--color-text);
 }
 .button-group {
   display: flex;
