@@ -18,8 +18,8 @@ ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 const historyStore = useHistory()
 
-onMounted(() => {
-  historyStore.fetchpreHistory() // 데이터 가져오기
+onMounted(async () => {
+  await historyStore.fetchpreHistory() // 데이터 가져오기
 })
 
 // 수입 데이터: 3월(이전 달), 4월(현재 달)
@@ -34,9 +34,6 @@ const expenseData = computed(() => [
   historyStore.monthlyExpense,
 ])
 
-const temp = historyStore.beforemonthlyExpense
-console.log(temp)
-console.log('인컴데이터', incomeData.value)
 // 차트 데이터 정의 (반응형 computed 사용)
 const chartData = computed(() => ({
   labels: ['3월', '4월'], // x축 라벨

@@ -2,13 +2,15 @@
 import { Pie } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 import { useHistory } from '@/stores/history'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref , computed } from 'vue'
 
 ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
 const historyStore = useHistory()
 // 파이차트 데이터
 const pieData = ref({ labels: [], datasets: [] })
+
+const isNewbie = computed(() => historyStore.monthlyExpense === 0)
 
 // onMounted로 historyStore에서 데이터 가져오고 pieData에 넣기
 onMounted(async () => {
@@ -27,6 +29,7 @@ onMounted(async () => {
   }
 })
 
+console.log('지출', historyStore.monthlyExpense)
 //파이차트 옵션
 const pieOptions = {
   responsive: true,
@@ -63,7 +66,9 @@ const pieOptions = {
 </script>
 
 <template>
+  <p class="pie-title newbie" v-if="isNewbie">이번 달 지출이 없습니다!</p>
   <div class="pie-container">
+    <p class="pie-title newbie" v-if="isNewbie">이번 달 지출이 없습니다!</p>
     <div class="pie-chart">
       <Pie :data="pieData" :options="pieOptions" />
     </div>

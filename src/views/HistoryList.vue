@@ -52,8 +52,8 @@ const filteredHistory = computed(() => {
   return historyList.getHistoryByMonth(month)
 })
 
-onMounted(() => {
-  fetchHistory()
+onMounted(async () => {
+  await fetchHistory()
 })
 </script>
 
@@ -126,7 +126,10 @@ onMounted(() => {
 
 <style scoped>
 .consumption-page {
-  max-height: 70vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 h2 {
   color: var(--color-text);
@@ -175,7 +178,7 @@ h2 {
   background-color: var(--color-text);
 }
 .history-list {
-  max-height: 350px;
+  max-height: 60vh;
   padding: 0;
   margin: 0 auto;
   width: 56vi;
@@ -264,12 +267,14 @@ button {
 }
 
 .circle-button {
-  color: var(--color-primary);
-  opacity: 0.8;
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  padding: 10px 20px;
+  position: relative;
+  font-size: 4rem;
+  color: var(--success);
+  opacity: 0.9;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px 30px;
   cursor: pointer;
 }
 .circle-button:hover {

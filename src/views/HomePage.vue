@@ -2,17 +2,11 @@
 import BarChart from './BarChart.vue'
 import PieChart from './PieChart.vue'
 import UserProfile from './UserProfile.vue'
-// import HomeHeader from '../components/HomeHeader.vue'
-// import HomeFooter from '../components/HomeFooter.vue'
-// import SideBar from '../components/SideBar.vue'
+
 </script>
 
 <template>
-  <!-- <div class="page">
-    <SideBar />
-    <div class="main">
-      <HomeHeader /> -->
-
+<div class="main-area">
   <div class="container">
     <div class="left">
       <UserProfile />
@@ -22,19 +16,31 @@ import UserProfile from './UserProfile.vue'
       <PieChart />
     </div>
   </div>
+  </div>
 </template>
 
 <style scoped>
+.main-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 80vh; /* 헤더/푸터 각 10vh 기준 */
+  width: 100vw;
+
+  overflow: hidden; /* 스크롤 방지 */
+  padding: 0;
+  box-sizing: border-box;
+  padding-top: 4vh;
+}
 .container {
   display: flex;
-  /* flex-wrap: wrap; */
   background-color: var(--color-background);
   color: #f8f4f2;
-  width: 100%;
+  width: 90%; /*100%;*/
+  max-height: 100%; /*80vh*/
   padding: 0;
-  max-height: 80vh;
-  /* height: 100vh; */
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 /* 왼쪽 컬럼 */
@@ -59,7 +65,7 @@ import UserProfile from './UserProfile.vue'
   width: 100%;
   position: relative;
   right: 100px;
-  margin-bottom: 50px;
-  /* overflow: hidden; */
+  margin-bottom: 0;
+  justify-content: space-between;
 }
 </style>

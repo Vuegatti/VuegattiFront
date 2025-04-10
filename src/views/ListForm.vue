@@ -2,21 +2,18 @@
 import { useHistory } from '@/stores/history'
 import { useAccount } from '@/stores/account'
 import { onMounted, ref, onUnmounted } from 'vue'
-import BaseButton from '@/components/BaseButton.vue'
 
 const historyList = useHistory()
 const accountStore = useAccount()
 
 const amount = ref('')
-const type = ref('')
+const type = ref('expense')
 const title = ref('')
 const details = ref('')
-
+const calendar = ref('')
 const emit = defineEmits(['close'])
 const userid = historyList.ID
 const bank = ref('')
-
-console.log('id는', userid)
 
 onMounted(() => {
   accountStore.fetchAccount()
@@ -59,12 +56,10 @@ const toggleCategoryGrid = () => {
 
 const handleSubmit = async () => {
   try {
-    const date = new Date().toLocaleDateString()
-
     const newData = {
       id: Date.now().toString(),
       userID: userid,
-      date: date
+      date: calendar.value
         .replace(/\.\s?/g, '-')
         .replace(/-\s?$/, '')
         .split('-')
@@ -75,7 +70,7 @@ const handleSubmit = async () => {
       category: selectedCategory.value,
       title: title.value,
       details: details.value,
-      bank: 'KB',
+      bank: bank.value,
     }
 
     await historyList.updateHistory(newData)
@@ -88,6 +83,8 @@ const handleSubmit = async () => {
     showIncomeGrid.value = false
     showExpenseGrid.value = false
     showCategoryGrid.value = false
+    bank.value = ''
+    calendar.value = ''
   } catch (err) {
     console.log(err)
   }
@@ -117,14 +114,14 @@ const handleClose = () => {
     </div>
 
     <form class="form-container" @submit.prevent="handleSubmit">
-      <label for="">금액 : </label>
+      <label>금액 : </label>
       <input
         type="text"
         placeholder="금액을 입력하세요"
         v-model.number="amount"
       />
 
-      <label for="">은행 : </label>
+      <label>은행 : </label>
       <select name="bank" id="bank" v-model="bank">
         <option value="" selected disabled hidden>은행을 선택해주세요</option>
         <option value="KB">국민은행</option>
@@ -134,7 +131,7 @@ const handleClose = () => {
         <option value="Nonghyup">농협은행</option>
       </select>
 
-      <label for="">카테고리</label>
+      <label>카테고리</label>
       <button type="button" @click="toggleCategoryGrid">
         {{ selectedCategory || '카테고리 선택' }}
       </button>
@@ -165,10 +162,12 @@ const handleClose = () => {
           <p @click="selectCategory('기타')">기타</p>
         </div>
       </div>
-      <label for="">내용 : </label>
+      <label>날짜 : </label>
+      <input type="date" v-model="calendar" />
+      <label>내용 : </label>
       <input type="text" v-model.trim="title" placeholder="내용을 입력하세요" />
 
-      <label for="">세부 정보 : </label>
+      <label>세부 정보 : </label>
       <textarea
         name="details"
         cols="20"
@@ -177,7 +176,7 @@ const handleClose = () => {
         v-model="details"
       ></textarea>
       <div class="button-container">
-        <button type="sumit" class="submit-button">등록</button>
+        <button type="submit" class="submit-button">등록</button>
         <button @click="handleClose" class="close-button">닫기</button>
       </div>
     </form>

@@ -42,12 +42,7 @@ onMounted(async () => {
         <h1>Login</h1>
         <p>Glad you're back!</p>
         <form @submit.prevent="validateUser">
-          <input
-            type="text"
-            placeholder="Username"
-            v-model="Username"
-            required
-          />
+          <input type="text" placeholder="ID" v-model="Username" required />
           <input
             type="password"
             placeholder="Password"
@@ -91,7 +86,12 @@ onMounted(async () => {
   align-items: center;
   border: 1px solid rgba(248, 244, 242, 0.503);
   border-radius: 10px;
-  width: 30vw;
+
+  width: 100%;
+  max-width: 22vw;
+  min-width: 17vw;
+
+
   height: 60vh;
   padding: var(--space-l);
 }

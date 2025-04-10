@@ -69,8 +69,8 @@ onMounted(async () => {
         </div>
       </swiper-slide>
 
-      <swiper-slide>
-        <router-link to="/BankAccountSelect">
+      <swiper-slide style="width: 220px">
+        <router-link to="/BankAccountSelect" style="width: 100%">
           <div class="plus">
             <span style="width: 220px; text-align: center">+</span>
           </div>
