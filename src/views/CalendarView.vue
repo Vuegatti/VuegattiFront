@@ -110,6 +110,7 @@ const newItem = ref({
 
 const selectCategory = category => {
   newItem.value.category = category
+  newItem.value.type = ''
 }
 
 const addNewItem = async () => {
@@ -260,7 +261,6 @@ onMounted(fetchHistory)
           <div class="memo-form" v-if="showForm">
             <input v-model="newItem.title" placeholder="제목" />
             <input v-model="newItem.amount" type="number" placeholder="금액" />
-            <input v-model="newItem.category" placeholder="카테고리" />
             <select v-model="newItem.type">
               <option value="" disabled>선택하세요</option>
               <option value="income">수입</option>
@@ -288,8 +288,19 @@ onMounted(fetchHistory)
                 <p @click="selectCategory('기타')">기타</p>
               </div>
             </div>
-            <br />
-            <input v-model="newItem.bank" placeholder="은행" />
+            <input v-model="newItem.category" placeholder="카테고리" />
+            <select v-model="newItem.bank" placeholder="은행">
+              <option value="" disabled>선택하세요</option>
+              <option value="KB">국민은행</option>
+              <option value="Shinhan">신한은행</option>
+              <option value="Woori">우리은행</option>
+              <option value="Hana">하나은행</option>
+              <option value="Nonghyup">농협은행</option>
+              <option value="IBK">기업은행</option>
+              <option value="Toss">토스뱅크</option>
+              <option value="Kakao">카카오뱅크</option>
+              <option value="MG">새마을금고</option>
+            </select>
             <input v-model="newItem.details" placeholder="상세 내용" />
             <button class="add-btn" @click="addNewItem">내역 추가</button>
           </div>
@@ -300,8 +311,266 @@ onMounted(fetchHistory)
 </template>
 
 <style scoped>
+.calendar-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  color: #333;
+
+  max-height: 60vh;
+
+  box-sizing: border-box;
+}
+
+.calendar-container {
+  max-width: 1200px;
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  gap: 10px;
+}
+
+.calendar-box {
+  display: flex;
+  flex-direction: column;
+  min-height: 85vh;
+  width: 1000px;
+  background: white;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  margin-bottom: 20px;
+}
+
+.month {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+  color: #222;
+}
+
+.header-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.nav-btn {
+  background: #e0e0e0;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.nav-btn:hover {
+  background: #d0d0d0;
+}
+
+.summary {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding: 0 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: #444;
+}
+
+.income > span {
+  color: #0077ff;
+}
+.expense > span {
+  color: #e53935;
+}
+.total > span {
+  color: #2e7d32;
+  font-size: 20px;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #555;
+}
+.weekday.sunday {
+  color: #e53935;
+}
+.weekday.saturday {
+  color: #1e88e5;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.calendar-day {
+  background: #fafafa;
+  color: #333;
+  border-radius: 10px;
+  padding: 8px;
+  aspect-ratio: 1 / 0.7;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background 0.2s ease;
+  border: 1px solid #eee;
+}
+.calendar-day:hover {
+  background: #f0f0f0;
+}
+.calendar-day.empty {
+  background: transparent;
+  cursor: default;
+}
+.calendar-day.selected {
+  border: 2px solid #2e7d32;
+  box-shadow: 0 0 8px #81c784;
+}
+
+.date-label {
+  font-weight: bold;
+}
+.daily-income {
+  font-size: 12px;
+  color: #1e88e5;
+}
+.daily-expense {
+  font-size: 12px;
+  color: #e53935;
+}
+
+.sidebar {
+  position: fixed;
+  right: 0;
+  height: 77.5vh;
+  width: 20vw;
+  background: #1e1e1e;
+  padding: 20px;
+  border-top-left-radius: 12px;
+  border-bottom-left-radius: 12px;
+  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+  color: white;
+  z-index: 1000;
+}
+
+.close {
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  float: right;
+  border: none;
+  cursor: pointer;
+}
+
+.memo-summary {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+  font-size: 14px;
+}
+.memo-summary .label {
+  font-weight: bold;
+}
+
+.memo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.memo-item,
+.memo-plus {
+  background: #2c2c2c;
+  padding: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.memo-header-row {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+.memo-amount.income {
+  color: #64b5f6;
+}
+.memo-amount.expense {
+  color: #ef5350;
+}
+.memo-title {
+  margin-top: 6px;
+  font-size: 14px;
+}
+.memo-details,
+.memo-bank {
+  font-size: 12px;
+  color: #bbb;
+  margin-top: 4px;
+}
+.memo-bank {
+  text-align: right;
+}
+
+.delete-btn {
+  background: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 4px 8px;
+  margin-top: 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  cursor: pointer;
+  float: right;
+}
+.delete-btn:hover {
+  background: #e53935;
+}
+
+.toggle-form-btn {
+  width: 100%;
+  display: block;
+  margin: 0 auto;
+  background: #444;
+  color: white;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.toggle-form-btn:hover {
+  background: #666;
+}
+
+.memo-form input,
+.memo-form select {
+  height: 40px;
+  width: 100%;
+  padding: 6px 10px;
+  margin-top: 15px;
+  background: #2e2e2e;
+  color: white;
+  border: 1px solid #444;
+  border-radius: 6px;
+}
+
 .category-buttons {
-  margin: 10px 0;
+  margin-top: 10px;
 }
 .grid-income,
 .grid-expense {
@@ -312,275 +581,31 @@ onMounted(fetchHistory)
 }
 .grid-income p,
 .grid-expense p {
-  background: #444;
+  background: #333;
   padding: 6px;
   border-radius: 8px;
   text-align: center;
   cursor: pointer;
   color: white;
+  font-size: 13px;
 }
 .grid-income p:hover,
 .grid-expense p:hover {
-  background: #666;
-}
-.calendar-wrapper {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  background: var(--color-background);
-  color: var(--color-text);
-
-  box-sizing: border-box;
-  margin-top: 20px;
+  background: #555;
 }
 
-.calendar-container {
-  display: grid;
-  max-width: 1200px;
+.add-btn {
+  margin-top: 10px;
   width: 100%;
-  justify-content: center;
-  gap: 5px;
-}
-.calendar-box {
-  display: flex;
-  flex-direction: column;
-  width: 1000px;
-  justify-content: center;
-}
-
-.calendar-header {
-  margin-bottom: 20px;
-}
-
-.month {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-.summary {
-  display: flex;
-  justify-content: space-between;
-  font-size: 14px;
-  flex-wrap: wrap;
-  padding: 0 20px;
-}
-
-.income {
-  font-size: 15px;
-  font-weight: bold;
-}
-.income > span {
-  font-size: 15px;
-  color: var(--color-accent-blue);
-}
-.expense {
-  font-weight: bold;
-  font-size: 15px;
-}
-.expense > span {
-  font-size: 15px;
-  color: var(--color-accent-red);
-}
-.total {
-  font-size: 30px;
-  font-weight: bold;
-}
-.total > span {
-  font-size: 30px;
-  font-weight: bold;
-  color: var(--success);
-}
-
-.weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  font-weight: bold;
-  margin-bottom: 5px;
-  text-align: center;
-}
-.weekday.sunday {
-  color: var(--color-accent-red);
-}
-.weekday.saturday {
-  color: var(--color-accent-blue);
-}
-
-.calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
-  width: 100%;
-  opacity: 75%;
-}
-
-.calendar-day {
-  background: var(--color-text);
-  color: var(--color-background);
-  padding: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  aspect-ratio: 1/0.7;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.calendar-day.empty {
-  background: transparent;
-  cursor: default;
-}
-
-.calendar-day.sunday .date-label {
-  color: var(--color-accent-red);
-}
-.calendar-day.saturday .date-label {
-  color: var(--color-accent-blue);
-}
-.calendar-day.selected {
-  border: 2px solid var(--success);
-  box-shadow: 0 0 8px var(--success);
-}
-
-.date-label {
-  font-weight: bold;
-}
-.daily-income {
-  color: var(--color-accent-blue);
-  font-size: 12px;
-}
-.daily-expense {
-  color: var(--color-accent-red);
-  font-size: 12px;
-}
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  width: 20vi;
-  background: #2b2b2b;
-  overflow-x: hidden;
-  overflow-y: auto;
-  transition: width 0.3s ease;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-  color: var(--color-text);
-  z-index: 1000;
-  padding: 20px;
-  box-sizing: border-box;
-  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
-}
-
-.memo-summary {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-.memo-summary .label {
-  font-weight: bold;
-  margin-right: 5px;
-}
-.memo-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.memo-item {
-  background: #1f1f1f;
-  padding: 15px;
-  border-radius: 10px;
-  gap: 10px;
-}
-.memo-header-row {
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-}
-.memo-category {
-  color: var(--color-text);
-}
-.memo-amount.income {
-  color: var(--color-accent-blue);
-}
-.memo-amount.expense {
-  color: var(--color-accent-red);
-}
-.memo-title {
-  font-size: 14px;
-  margin-top: 5px;
-}
-.memo-details {
-  font-size: 12px;
-  color: var(--color-text);
-}
-.memo-bank {
-  font-size: 12px;
-  color: var(--color-text);
-  text-align: right;
-  margin-top: 8px;
-}
-
-.memo-plus {
-  background: #1f1f1f;
-  padding: 15px;
-  border-radius: 10px;
-  gap: 10px;
-}
-.memo-form > input,
-select {
-  color: var(--color-text);
-  opacity: 30%;
-}
-.header-top {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 10px;
-}
-.nav-btn {
-  background: #444;
-  color: var(--color-text);
+  background: #4caf50;
   border: none;
-  padding: 8px 12px;
-  font-size: 16px;
-  border-radius: 6px;
-  cursor: pointer;
-}
-.nav-btn:hover {
-  background: #666;
-}
-.toggle-form-btn {
-  left: -10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px 0;
   padding: 8px;
-  background: #888;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
   color: white;
-}
-.toggle-form-btn:hover {
-  background: #aaa;
-}
-.delete-btn {
-  margin-top: 8px;
-  background: #c62828;
-  color: var(--color-text);
-  border: none;
-  padding: 6px 10px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 12px;
+  font-weight: bold;
 }
-.delete-btn:hover {
-  background: #e53935;
+.add-btn:hover {
+  background: #43a047;
 }
 </style>
