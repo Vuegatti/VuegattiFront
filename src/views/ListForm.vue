@@ -1,9 +1,8 @@
-<script setup></script>
-
 <script setup>
 import { useHistory } from '@/stores/history'
 import { useAccount } from '@/stores/account'
 import { onMounted, ref, onUnmounted } from 'vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 const historyList = useHistory()
 const accountStore = useAccount()
@@ -28,7 +27,7 @@ onUnmounted(() => {
 })
 
 const showIncomeGrid = ref(false) // 수입 그리드 표시 여부
-const showExpenseGrid = ref(false) // 지출 그리드 표시 여부
+const showExpenseGrid = ref(true) // 지출 그리드 표시 여부
 const showCategoryGrid = ref(false) // 카테고리 그리드 표시 여부
 const selectedCategory = ref('')
 const selectCategory = category => {
@@ -101,10 +100,18 @@ const handleClose = () => {
 <template>
   <div class="listform">
     <div class="button-container">
-      <button @click="toggleIncomeGrid" :class="{ active: showIncomeGrid }">
+      <button
+        @click="toggleIncomeGrid"
+        :class="{ active: showIncomeGrid }"
+        class="income-button"
+      >
         수입
       </button>
-      <button @click="toggleExpenseGrid" :class="{ active: showExpenseGrid }">
+      <button
+        @click="toggleExpenseGrid"
+        :class="{ active: showExpenseGrid }"
+        class="expense-button"
+      >
         지출
       </button>
     </div>
@@ -119,7 +126,7 @@ const handleClose = () => {
 
       <label for="">은행 : </label>
       <select name="bank" id="bank" v-model="bank">
-        <option value="no">은행을 선택하세요</option>
+        <option value="" selected disabled hidden>은행을 선택해주세요</option>
         <option value="KB">국민은행</option>
         <option value="Shinhan">신한은행</option>
         <option value="Woori">우리은행</option>
@@ -170,8 +177,8 @@ const handleClose = () => {
         v-model="details"
       ></textarea>
       <div class="button-container">
-        <button type="submit">등록</button>
-        <button @click="handleClose">닫기</button>
+        <button type="sumit" class="submit-button">등록</button>
+        <button @click="handleClose" class="close-button">닫기</button>
       </div>
     </form>
   </div>
@@ -187,9 +194,9 @@ const handleClose = () => {
   margin: 0 auto;
   padding: 2rem;
   background-color: var(--color-background);
+  border: 1px solid rgba(248, 244, 242, 0.503);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  border: 1px solid black;
   z-index: 100;
 }
 
@@ -204,23 +211,56 @@ button {
   padding: 10px 20px;
   font-size: 16px;
   border: none;
-  /* background-color: var(--color-text); */
-  border: 1px solid var(--color-background);
+  background-color: var(--color-background);
+  border: 1px solid rgba(248, 244, 242, 0.503);
+  color: var(--color-text);
   cursor: pointer;
   border-radius: 5px;
   transition: background-color 0.3s;
 }
 
-button:hover {
-  background-color: var(--color-accent-red);
+.income-button:hover {
+  background-color: var(--color-secondary);
   opacity: 0.8;
 }
-
-button.active {
-  background-color: var(--color-accent-red);
+.income-button.active {
+  background-color: var(--color-secondary);
+  font-weight: bold;
+}
+.expense-button:hover {
+  background-color: var(--color-primary);
+  opacity: 0.8;
+}
+.expense-button.active {
+  background-color: var(--color-primary);
   font-weight: bold;
 }
 
+.submit-button,
+.close-button {
+  border-radius: 5px;
+  width: 10vi;
+  cursor: pointer;
+  transition: 0.3;
+}
+.submit-button {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent-blue) 0%,
+    var(--color-background) 90%
+  );
+}
+.close-button {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent-red) 0%,
+    var(--color-background) 90%
+  );
+}
+.submit-button:hover,
+.close-button:hover {
+  filter: brightness(1.2);
+}
 .form-container {
   display: flex;
   flex-direction: column;
@@ -240,13 +280,23 @@ textarea {
   padding: 8px;
   font-size: 14px;
   border-radius: 5px;
-  border: 1px solid #ddd;
+  color: var(--color-text);
   width: 100%;
   box-sizing: border-box;
+  background-color: var(--color-background);
+  border: 1px solid rgba(248, 244, 242, 0.503);
+}
+
+input::placeholder {
+  color: var(--color-text);
+  opacity: 1;
 }
 
 textarea {
   resize: none;
+}
+textare::placeholder {
+  color: var(--color-text);
 }
 
 .grid-container {

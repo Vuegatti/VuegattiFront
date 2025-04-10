@@ -7,7 +7,6 @@ import { ref } from 'vue'
 const accountStore = useAccount()
 
 const Username = ref('')
-const isUsernameValid = ref(true)
 const Password = ref('')
 const ConfirmPassword = ref('')
 const Email = ref('')
@@ -16,6 +15,12 @@ const regEmail =
 const PhoneNumber = ref('')
 const regPhoneNumber = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/
 const avatarNumber = ref(1)
+
+const isUsernameValid = ref(true)
+const isPasswordValid = ref(true)
+const isConfirmPasswordValid = ref(true)
+const isEmailValid = ref(true)
+const isPhoneNumberValid = ref(true)
 
 const handleSelectedAvatar = value => {
   avatarNumber.value = value
@@ -36,41 +41,44 @@ const updateUser = () => {
 
 const validateUsername = () => {
   if (Username.value.length < 3 || Username.value.length > 20) {
-    // alert('Username must be between 3 and 20 characters')
-    isUsernameValid.value = false // 유효하지 않으면 false
+    isUsernameValid.value = false
 
     return false
   }
-  isUsernameValid.value = true // 유효하면 true
+  isUsernameValid.value = true
 
   return true
 }
 const validatePassword = () => {
-  if (Password.value.length < 8 || Password.value.length > 20) {
-    alert('Password must be between 8 and 20 characters')
+  if (Password.value.length < 6 || Password.value.length > 20) {
+    isPasswordValid.value = false
     return false
   }
+  isPasswordValid.value = true
   return true
 }
 const validateConfirmPassword = () => {
   if (ConfirmPassword.value !== Password.value) {
-    alert('Passwords do not match')
+    isConfirmPasswordValid.value = false
     return false
   }
+  isConfirmPasswordValid.value = true
   return true
 }
 const validateEmail = () => {
   if (!regEmail.test(Email.value)) {
-    alert('Invalid email format')
+    isEmailValid.value = false
     return false
   }
+  isEmailValid.value = true
   return true
 }
 const validatePhoneNumber = () => {
   if (!regPhoneNumber.test(PhoneNumber.value)) {
-    alert('Invalid phone number format. Use XXX-XXX-XXXX')
+    isPhoneNumberValid.value = false
     return false
   }
+  isPhoneNumberValid.value = true
   return true
 }
 </script>
@@ -89,20 +97,89 @@ const validatePhoneNumber = () => {
               class="username"
               placeholder="Username"
               v-model="Username"
+              required
+              @blur="validateUsername"
             />
-            <!-- <i
-              class="fa-solid fa-circle-exclamation"
-              style="color: var(--danger); padding: 0.7rem"
-              v-show="!isUsernameValid"
-            ></i> -->
+            <div class="tooltipWrapper" v-if="!isUsernameValid">
+              <i
+                class="fa-solid fa-circle-exclamation"
+                style="color: var(--danger); padding: 0.7rem"
+              />
+              <div class="tooltipBubble">
+                3글자 이상 20글자 이하로 입력해주세요.
+              </div>
+            </div>
           </div>
-          <input type="password" placeholder="Password" v-model="Password" />
-          <input type="password" placeholder="Confirm Password" />
-          <input type="email" placeholder="Email" v-model="Email" />
-          <input type="text" placeholder="Phone Number" v-model="PhoneNumber" />
-          <BaseButton type="primary" @click.prevent="updateUser"
-            >Sign In</BaseButton
-          >
+          <div class="passwordWrapper">
+            <input
+              type="password"
+              placeholder="Password"
+              v-model="Password"
+              required
+              @blur="validatePassword"
+            />
+            <div class="tooltipWrapper" v-if="!isPasswordValid">
+              <i
+                class="fa-solid fa-circle-exclamation"
+                style="color: var(--danger); padding: 0.7rem"
+              />
+              <div class="tooltipBubble">
+                6글자 이상 20글자 이하로 입력해주세요.
+              </div>
+            </div>
+          </div>
+          <div class="comfirmPasswordWrapper">
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              required
+              @blur="validateConfirmPassword"
+            />
+            <div class="tooltipWrapper" v-if="!isConfirmPasswordValid">
+              <i
+                class="fa-solid fa-circle-exclamation"
+                style="color: var(--danger); padding: 0.7rem"
+              />
+              <div class="tooltipBubble">비밀번호가 일치하지 않습니다.</div>
+            </div>
+          </div>
+          <div class="emailWrapper">
+            <input
+              type="email"
+              placeholder="Email"
+              v-model="Email"
+              required
+              @blur="validateEmail"
+            />
+            <div class="tooltipWrapper" v-if="!isEmailValid">
+              <i
+                class="fa-solid fa-circle-exclamation"
+                style="color: var(--danger); padding: 0.7rem"
+              />
+              <div class="tooltipBubble">
+                sample@test.com의 형식으로 입력해주세요.
+              </div>
+            </div>
+          </div>
+          <div class="phoneNumberWrapper">
+            <input
+              type="text"
+              placeholder="Phone Number"
+              v-model="PhoneNumber"
+              required
+              @blur="validatePhoneNumber"
+            />
+            <div class="tooltipWrapper" v-if="!isPhoneNumberValid">
+              <i
+                class="fa-solid fa-circle-exclamation"
+                style="color: var(--danger); padding: 0.7rem"
+              />
+              <div class="tooltipBubble">
+                010-1234-1234의 형식으로 입력해주세요.
+              </div>
+            </div>
+          </div>
+          <BaseButton type="primary" @click="updateUser">Sign In</BaseButton>
         </form>
       </div>
     </div>
@@ -175,7 +252,8 @@ input {
   background-color: transparent;
   color: white;
   font-size: 1rem;
-  outline: none;
+  border: none;
+  flex: 1;
 }
 
 input::placeholder {
@@ -184,11 +262,45 @@ input::placeholder {
 
 /* input 요소 체크 */
 
-.usernameWrapper {
+.usernameWrapper,
+.passwordWrapper,
+.comfirmPasswordWrapper,
+.emailWrapper,
+.phoneNumberWrapper {
   border: 1px solid rgba(248, 244, 242, 0.503);
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.errorIconWrapper {
+  position: relative;
+  margin-left: 8px;
+  color: #e74c3c;
+}
+
+.tooltipBubble {
+  position: absolute;
+  background-color: #fff;
+  color: #333;
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+}
+
+/* 말풍선 화살표 */
+.tooltipBubble::before {
+  content: '';
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent var(--color-text) transparent;
 }
 </style>
