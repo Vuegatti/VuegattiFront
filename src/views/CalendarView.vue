@@ -321,6 +321,9 @@ onMounted(fetchHistory)
   max-height: 60vh;
 
   box-sizing: border-box;
+
+  /* 이거 추가  */
+  width: 100%;
 }
 
 .calendar-container {
