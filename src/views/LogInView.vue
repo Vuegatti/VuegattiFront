@@ -3,34 +3,35 @@ import BaseButton from '@/components/BaseButton.vue'
 import { useAccount } from '@/stores/account.js'
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
+
 const accountStore = useAccount()
 const Username = ref('')
 const Password = ref('')
 const users = ref([])
+const router = useRouter()
 
 const setUser = () => {
   const logInUsername = Username.value
   accountStore.logIn(logInUsername)
 }
+
 const validateUser = () => {
   const foundUser = users.value.find(user => user.userID === Username.value)
   if (!foundUser) {
     alert('아이디가 존재하지 않습니다.')
     return
   }
-  console.log(foundUser)
   if (foundUser.password !== Password.value) {
     alert('비밀번호가 일치하지 않습니다.')
     return
   }
-  console.log('로그인 성공')
   setUser()
+  router.push('/homepage')
 }
 
 onMounted(async () => {
   await accountStore.fetchAccount()
   users.value = accountStore.accountInfo
-  console.log('가져온 회원정보: ', users.value[0].userID)
 })
 </script>
 
@@ -53,11 +54,10 @@ onMounted(async () => {
             v-model="Password"
             required
           />
-          <BaseButton color="primary">Log In</BaseButton>
+          <BaseButton color="primary" type="submit">Log In</BaseButton>
         </form>
         <p style="text-align: center">
           Don't have an account? <a href="#">Sign Up</a>
-          <!-- 기능 구현 추가 필요 -->
         </p>
       </div>
     </div>
