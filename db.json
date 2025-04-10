@@ -222,12 +222,12 @@
     {
       "id": "1744250054206",
       "userID": "bikdh",
-      "date": "2025-04-10",
       "amount": 1555555,
       "type": "income",
       "category": "월급",
-      "title": "ㅌㅌㅌ",
-      "details": "ㅌㅌㅌ",
+      "title": "월급",
+      "details": "월급",
+      "date": "2025-04-10",
       "bank": "KB"
     },
     {
@@ -236,8 +236,8 @@
       "amount": 11111,
       "type": "expense",
       "category": "회비",
-      "title": "1424124",
-      "details": "124214124",
+      "title": "회식",
+      "details": "신나는회식",
       "date": "2025-04-10",
       "bank": "KB"
     }

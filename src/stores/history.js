@@ -84,6 +84,7 @@ export const useHistory = defineStore('historyStore', () => {
     return months[currentMonth.value]
   })
 
+  // 이번 달 수입 총합
   const monthlyIncome = computed(() => {
     return history.value
       .filter(
@@ -105,6 +106,28 @@ export const useHistory = defineStore('historyStore', () => {
       .reduce((sum, item) => sum + item.amount, 0)
   })
 
+  // 지난 달 수입 총합
+  const beforemonthlyIncome = computed(() => {
+    return history.value
+      .filter(
+        item =>
+          item.type === 'income' &&
+          new Date(item.date).getMonth() === currentMonth.value - 1,
+      )
+      .reduce((sum, item) => sum + item.amount, 0)
+  })
+
+  //  지난 달 지출 총합
+  const beforemonthlyExpense = computed(() => {
+    return history.value
+      .filter(
+        item =>
+          item.type === 'expense' &&
+          new Date(item.date).getMonth() === currentMonth.value - 1,
+      )
+      .reduce((sum, item) => sum + item.amount, 0)
+  })
+
   return {
     history,
     fetchHistory,
@@ -118,5 +141,7 @@ export const useHistory = defineStore('historyStore', () => {
     modifyHistory,
     currentMonth,
     ID,
+    beforemonthlyIncome,
+    beforemonthlyExpense,
   }
 })

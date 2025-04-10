@@ -186,7 +186,7 @@ const handleClose = () => {
   width: 40%;
   margin: 0 auto;
   padding: 2rem;
-  background-color: var(--color-text);
+  background-color: var(--color-background);
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   border: 1px solid black;
@@ -231,7 +231,7 @@ button.active {
 
 label {
   font-size: 16px;
-  color: #333;
+  color: var(--color-text);
 }
 
 input,
@@ -274,7 +274,7 @@ textarea {
 .grid-income p {
   margin: 0;
   padding: 10px;
-  background-color: #f1f1f1;
+  background-color: var(--color-text);
   border-radius: 5px;
   text-align: center;
   cursor: pointer;
