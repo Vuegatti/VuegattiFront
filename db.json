@@ -315,15 +315,5 @@
         "Shinhan": 1000000
       }
     },
-    {
-      "id": "kxxheehxxn",
-      "password": "123123",
-      "email": "kxxheehxxn@sample.com",
-      "phoneNumber": "010-1234-5678",
-      "avatarNumber": 18,
-      "bank": {
-        "Kakao": 123123
-      }
-    }
   ]
 }
