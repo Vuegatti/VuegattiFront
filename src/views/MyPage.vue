@@ -23,9 +23,7 @@ onMounted(async () => {
     avatarNumber.value = parseInt(route.query.avatar)
   } else {
     try {
-      const { data } = await axios.get(
-        `http://localhost:5001/account?userID=${ID}`,
-      )
+      const { data } = await axios.get(`http://localhost:5001/account?id=${ID}`)
       console.log('GET 결과:', data)
       const user = data[0]
       if (user) {
@@ -130,6 +128,7 @@ const save = async () => {
   align-items: center;
   color: white;
   gap: 5vw;
+  height: 100vh;
 }
 .mypage-box {
   display: flex;

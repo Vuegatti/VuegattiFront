@@ -41,6 +41,7 @@ import UserProfile from './UserProfile.vue'
   max-height: 100%; /*80vh*/
   padding: 0;
   overflow: hidden;
+  align-items: stretch;
 }
 
 /* 왼쪽 컬럼 */
@@ -49,9 +50,11 @@ import UserProfile from './UserProfile.vue'
   /* max-height: 30vh; */
   padding: 2rem;
   display: flex;
-  flex-direction: column; /* ✅ 추가: 세로 배치! */
-  justify-content: flex-start; /* 위쪽부터 정렬 */
+  flex-direction: column; /*  세로 배치 */
+  justify-content: space-evenly; /* 위쪽부터 정렬 */
   align-items: center; /* 가운데 정렬 (선택사항) */
+  padding: 2vh 2vw;
+  height: 100%; /* 부모 height 채움 */
 }
 
 /* 오른쪽 컬럼 */
