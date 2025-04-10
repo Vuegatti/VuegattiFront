@@ -15,7 +15,7 @@ const handleMouseLeave = () => {
 
 const handleLogout = () => {
   localStorage.removeItem('userId')
-  router.push('/login')
+  router.push('/logIn')
 }
 
 const topMenu = [
