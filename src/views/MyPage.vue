@@ -19,11 +19,9 @@ const userIdInDB = ref(null)
 const avatarNumber = ref(1) ////
 
 onMounted(async () => {
-  // 1. 쿼리로 아바타가 넘어온 경우 → 그걸 우선 적용
   if (route.query.avatar) {
     avatarNumber.value = parseInt(route.query.avatar)
   } else {
-    // 2. 쿼리가 없으면 DB에서 정보 불러오기
     try {
       const { data } = await axios.get(
         `http://localhost:5001/account?userID=${ID}`,
@@ -61,7 +59,6 @@ const save = async () => {
         `http://localhost:5001/account/${userIdInDB.value}`,
         updateData,
       )
-      localStorage.setItem('userId', username.value)
     } catch (error) {
       console.error('PATCH 요청 실패:', error)
     }
@@ -119,7 +116,11 @@ const save = async () => {
 
         <div class="button-group">
           <BaseButton color="primary" @click="save">Confirm</BaseButton>
-          <BaseButton color="secondary">Edit Account</BaseButton>
+          <BaseButton
+            color="secondary"
+            @click="$router.push('/BankAccountSelect')"
+            >Edit Account</BaseButton
+          >
         </div>
       </form>
     </div>
