@@ -179,11 +179,10 @@
     {
       "id": "18",
       "userID": "bikdh",
-      "date": "2025-04-03",
       "amount": 4500,
       "type": "expense",
       "category": "식비",
-      "title": "편의점 간식",
+      "title": "편의점 간식을 샀어요!!",
       "details": "삼각김밥",
       "bank": "KB"
     },
@@ -199,6 +198,7 @@
       "bank": "KB"
     },
     {
+      "id": "20",
       "id": "20",
       "userID": "kxxheehxxn",
       "date": "2025-04-04",
@@ -233,7 +233,7 @@
         "KB": 1000000,
         "Shinhan": 1000000
       },
-      "id": "1ccf"
+      "id": "cb6c"
     },
     {
       "userID": "saeyeon",
@@ -246,7 +246,15 @@
         "KB": 1000000,
         "Shinhan": 1000000
       },
-      "id": "e87a"
+      "id": "85de"
+    },
+    {
+      "id": "b3a4",
+      "username": "구석현",
+      "password": "123456",
+      "email": "fpqk7099@gmail.com",
+      "phoneNumber": "010-7623-9951",
+      "avatarNumber": 17
     }
   ]
 }
