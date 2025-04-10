@@ -4,6 +4,14 @@ import axios from 'axios'
 import Avatar from '@/components/AvatarPicture.vue'
 import BaseButton from '@/components/BaseButton.vue'
 
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goToProfile = () => {
+  router.push('/mypage/profile')
+}
+
 const ID = localStorage.getItem('userId')
 
 const username = ref('')
@@ -50,7 +58,6 @@ const save = async () => {
         `http://localhost:5001/account/${userIdInDB.value}`,
         updateData,
       )
-
       localStorage.setItem('userId', username.value)
     } catch (error) {
       console.error('PATCH 요청 실패:', error)
@@ -67,7 +74,9 @@ const save = async () => {
       <h2>My page</h2>
       <p>Edit your information</p>
 
-      <Avatar :toyNumber="avatarNumber" :size="150" :rounded="24" />
+      <router-link :to="`/mypage/profile?avatar=${avatarNumber}`">
+        <Avatar :toyNumber="avatarNumber" :size="150" :rounded="24" />
+      </router-link>
 
       <form @submit.prevent="save">
         <div class="form-group">
@@ -144,27 +153,31 @@ const save = async () => {
   color: #ccc;
   margin-bottom: 20px;
 }
-form input {
-  display: block;
-  width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid var(--color-text);
-  color: var(--color-background);
-  border-radius: 6px;
-}
-form div {
-  display: inline-block;
-  width: 100%;
+
+form .form-group {
+  display: flex;
+  align-items: center;
   margin: 10px 0;
   padding: 5px;
   color: var(--color-text);
 }
-form div > * {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
+
+form .form-group label {
+  width: 120px;
+  text-align: left;
+  padding-right: 10px;
+  font-weight: bold;
 }
+
+form .form-group input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid var(--color-text);
+  border-radius: 6px;
+  background-color: transparent;
+  color: var(--color-text);
+}
+
 input::placeholder {
   color: #aaa;
 }
