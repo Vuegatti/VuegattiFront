@@ -330,7 +330,10 @@
       "password": "123123",
       "email": "sadsd@gmail.com",
       "phoneNumber": "010-4017-8408",
-      "avatarNumber": 11
+      "avatarNumber": 11,
+      "bank": {
+        "KB": 11242412
+      }
     },
     {
       "id": "kxxheehxxn",

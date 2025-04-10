@@ -2,20 +2,6 @@
 import BarChart from './BarChart.vue'
 import PieChart from './PieChart.vue'
 import UserProfile from './UserProfile.vue'
-import { ref, onMounted } from 'vue'
-import { useHistory } from '@/stores/history'
-
-const isNewbie = ref(false)
-const historyStore = useHistory()
-console.log('데이터로딩', historyStore.history)
-
-onMounted(async () => {
-  await historyStore.fetchHistory()
-  console.log('길이', historyStore.history.length)
-  if (historyStore.history.length === 0) {
-    isNewbie.value = true
-  }
-})
 </script>
 
 <template>
@@ -33,7 +19,6 @@ onMounted(async () => {
       <PieChart />
     </div>
   </div>
-  <h2 class="newbie" v-if="isNewbie">계좌 등록을 해주세요!</h2>
 </template>
 
 <style scoped>
@@ -73,17 +58,5 @@ onMounted(async () => {
   right: 100px;
   margin-bottom: 50px;
   /* overflow: hidden; */
-}
-
-.newbie {
-  padding: var(--space-l);
-  display: block;
-  text-align: center;
-  color: var(--color-text);
-  font-size: 5rem;
-  position: absolute;
-  left: 25%;
-  bottom: 50%;
-  background-color: var(--color-accent-blue);
 }
 </style>
