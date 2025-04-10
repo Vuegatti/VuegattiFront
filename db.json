@@ -195,8 +195,9 @@
       "type": "expense",
       "category": "식비",
       "title": "편의점 간식",
-      "details": "삼각김밥+우유",
-      "bank": "Shinhan"
+      "details": "삼각김밥",
+      "date": "2025-04-03",
+      "bank": "KB"
     },
     {
       "id": 19,
@@ -221,14 +222,26 @@
       "bank": "Shinhan"
     },
     {
-      "id": "7399",
-      "title": "월급",
-      "amount": 1500000,
-      "category": "월급",
+      "id": "1744250054206",
+      "userID": "bikdh",
+      "amount": 1555555,
       "type": "income",
-      "bank": "Shinhan",
-      "details": "신한은행",
-      "date": "2025-04-01"
+      "category": "월급",
+      "title": "월급",
+      "details": "월급",
+      "date": "2025-04-10",
+      "bank": "KB"
+    },
+    {
+      "id": "1744250799942",
+      "userID": "bikdh",
+      "amount": 11111,
+      "type": "expense",
+      "category": "회비",
+      "title": "회식",
+      "details": "신나는회식",
+      "date": "2025-04-10",
+      "bank": "KB"
     }
   ],
   "account": [

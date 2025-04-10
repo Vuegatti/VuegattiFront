@@ -2,7 +2,7 @@
 
 <template>
   <header>
-    <i class="logo"></i>
+    <router-link to="/homepage"><i class="logo"></i></router-link>
     <div class="iconContainer">
       <i
         class="fa-regular fa-calendar"
