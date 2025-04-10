@@ -285,23 +285,12 @@
       "title": "주식",
       "details": "비트코인",
       "bank": "KB"
-    },
-    {
-      "id": "f6e8",
-      "userID": "kxxheehxxn",
-      "amount": 6000,
-      "type": "expense",
-      "category": "부수입",
-      "title": "ㄷㄷ",
-      "details": "",
-      "date": "2025-04-05",
-      "bank": "Nonghyup"
     }
   ],
   "account": [
     {
       "id": "bikdh",
-      "password": "111111",
+      "password": "123123",
       "email": "sking1109s@gmail.com",
       "phoneNumber": "010-1234-5678",
       "avatarNumber": 3,
@@ -324,16 +313,6 @@
       "bank": {
         "KB": 1000000,
         "Shinhan": 1000000
-      }
-    },
-    {
-      "id": "kxxheehxxn",
-      "password": "123123",
-      "email": "kxxheehxxn@sample.com",
-      "phoneNumber": "010-1234-5678",
-      "avatarNumber": 18,
-      "bank": {
-        "MG": 3000
       }
     }
   ]
