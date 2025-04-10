@@ -228,10 +228,22 @@
       "bank": "Shinhan",
       "details": "신한은행",
       "date": "2025-04-01"
+    },
+    {
+      "id": "a9f3",
+      "userID": "bikdh",
+      "title": "월급",
+      "amount": 1800000,
+      "category": "월급",
+      "type": "income",
+      "bank": "Shinhan",
+      "details": "아르바이트",
+      "date": "2025-04-02"
     }
   ],
   "account": [
     {
+      "id": "1",
       "userID": "bikdh",
       "password": "123123",
       "username": "김도현",
@@ -240,9 +252,70 @@
       "avatarNumber": 1,
       "bank": {
         "KB": 1000000,
-        "Shinhan": 1000000
+        "Shinhan": 1000000,
+        "Woori": 500000,
+        "Hana": 300000,
+        "Nonghyup": 390000
+      }
+    },
+    {
+      "id": "2",
+      "userID": "kxxheehxxn",
+      "password": "123456",
+      "username": "구석현",
+      "email": "ksh456@example.com",
+      "bank": {
+        "KB": 500000,
+        "Shinhan": 750000
       },
-      "id": "68ae"
+      "phoneNumber": "010-7623-9951",
+      "avatarNumber": 1
+    },
+    {
+      "id": "3",
+      "userID": "ych789",
+      "password": "123789",
+      "username": "유채현",
+      "email": "ych789@example.com",
+      "bank": {
+        "Hana": 820000,
+        "Woori": 430000
+      }
+    },
+    {
+      "id": "4",
+      "userID": "asy101",
+      "password": "101101",
+      "username": "안세연",
+      "email": "asy101@example.com",
+      "bank": {
+        "Nonghyup": 390000,
+        "KB": 600000
+      }
+    },
+    {
+      "id": "5",
+      "userID": "kky202",
+      "password": "202202",
+      "username": "김규연",
+      "email": "kky202@example.com",
+      "bank": {
+        "Shinhan": 900000,
+        "Woori": 300000
+      }
+    },
+    {
+      "id": "6",
+      "userID": "saeyeon",
+      "password": "123123",
+      "username": "안세연",
+      "email": "sking1109s@gmail.com",
+      "phoneNumber": "010-1234-5678",
+      "avatarNumber": 1,
+      "bank": {
+        "KB": 1000000,
+        "Shinhan": 1000000
+      }
     }
   ]
 }

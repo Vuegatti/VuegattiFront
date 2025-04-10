@@ -1,19 +1,39 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomePage from '@/views/HomePage.vue'
 import CalendarView from '@/views/CalendarView.vue'
+import MyPage from '@/views/MyPage.vue'
+
+import LogInView from '@/views/LogInView.vue'
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
+      path: '/',
+      name: 'Home',
+      redirect: '/homepage',
+      component: HomePage,
+    },
+    {
       path: '/homepage',
-      name: 'HomePage',
+      name: 'Homepage',
       component: HomePage,
     },
     {
       path: '/calendar',
       name: 'Calendar',
       component: CalendarView,
+    },
+    {
+      path: '/mypage',
+      name: 'MyPage',
+      component: MyPage,
+    },
+
+    {
+      path: '/logIn',
+      name: 'LogIn',
+      component: LogInView,
     },
     // { path: '/', component: () => import('@/views/Home.vue') },
     // { path: '/calendar', component: () => import('@/views/Calendar.vue') },
@@ -29,7 +49,7 @@ const router = createRouter({
     // },
     {
       path: '/consumption',
-      name: 'historyList',
+      name: 'Consumption',
       component: () => import('@/views/HistoryList.vue'),
     },
   ],

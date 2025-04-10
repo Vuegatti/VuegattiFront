@@ -3,7 +3,7 @@ import SideBar from './components/SideBar.vue'
 import HomeHeader from './components/HomeHeader.vue'
 import HomeFooter from './components/HomeFooter.vue'
 import HomePage from './views/HomePage.vue'
-import LogIn from './views/LogInVue.vue'
+import LogIn from './views/LogInView.vue'
 </script>
 
 <template>
@@ -14,6 +14,7 @@ import LogIn from './views/LogInVue.vue'
 
     <main>
       <SideBar />
+
       <RouterView />
     </main>
 
@@ -24,6 +25,9 @@ import LogIn from './views/LogInVue.vue'
 </template>
 
 <style scoped>
+.layout > header {
+  position: sticky;
+}
 .layout {
   display: flex;
   flex-direction: column;

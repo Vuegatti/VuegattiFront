@@ -8,6 +8,7 @@
       <i
         class="fa-regular fa-calendar"
         style="color: var(--color-text); font-size: 1.2rem"
+        @click="$router.push('/calendar')"
       ></i>
       <i
         class="fa-regular fa-bell"
@@ -39,5 +40,8 @@ header {
   gap: var(--space-m);
   height: 30px;
   align-items: center;
+}
+.iconContainer > .fa-regular {
+  cursor: pointer;
 }
 </style>
