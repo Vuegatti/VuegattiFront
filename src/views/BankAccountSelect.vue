@@ -63,8 +63,12 @@ const save = async () => {
           </div>
 
           <div class="button-group">
-            <BaseButton color="primary">Back</BaseButton>
-            <BaseButton color="secondary" @click.prevent="save"
+            <router-link to="/mypage">
+              <BaseButton color="primary" type="button" class="backBtn"
+                >Back</BaseButton
+              >
+            </router-link>
+            <BaseButton color="secondary" class="registerBtn"
               >Register</BaseButton
             >
           </div>
@@ -199,5 +203,11 @@ input::placeholder {
 }
 .bank-images img:hover {
   transform: scale(1.1);
+}
+.backBtn {
+  width: 100%;
+}
+.registerBtn {
+  margin: 10px;
 }
 </style>
