@@ -143,12 +143,6 @@ const deleteItem = async id => {
   selectDate(selectedDate.value)
 }
 
-const deleteItem = async id => {
-  await axios.delete(`http://localhost:5001/history/${id}`)
-  await fetchHistory()
-  selectDate(selectedDate.value)
-}
-
 onMounted(fetchHistory)
 </script>
 
