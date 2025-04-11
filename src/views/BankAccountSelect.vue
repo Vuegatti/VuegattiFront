@@ -10,7 +10,6 @@ const accountNumber = ref('')
 const balance = ref('')
 const userId = localStorage.getItem('userId')
 const router = useRouter()
-// 이미지 클릭으로 select 값 설정
 const setBank = name => {
   bank.value = name
 }
@@ -145,13 +144,6 @@ const save = async () => {
 .register-box h2 {
   margin-bottom: 5px;
 }
-/*
-.register-box form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-} */
 
 form input {
   display: block;

@@ -16,7 +16,7 @@ const email = ref('')
 const phonenumber = ref('')
 const userIdInDB = ref(null)
 
-const avatarNumber = ref(1) ////
+const avatarNumber = ref(1)
 
 onMounted(async () => {
   if (route.query.avatar) {
@@ -138,7 +138,6 @@ const save = async () => {
   border-radius: 10px;
   text-align: center;
   width: 100%;
-  /* height: 70vh; */
   padding: var(--space-l);
 }
 .mypage-box h2 {
@@ -175,7 +174,7 @@ form .form-group input {
 }
 
 input::placeholder {
-  color: #aaaaaa6f;
+  color: #aaa;
 }
 .button-group {
   display: flex;

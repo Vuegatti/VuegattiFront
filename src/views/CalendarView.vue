@@ -321,7 +321,6 @@ onMounted(fetchHistory)
 
   box-sizing: border-box;
 
-  /* 이거 추가  */
   width: 100%;
 }
 

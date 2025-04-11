@@ -8,7 +8,6 @@ import LogInView from '@/views/LogInView.vue'
 import SignInView from '@/views/SignInView.vue'
 import AccountReg from '@/views/AccountReg.vue'
 import BankAccountSelect from '@/views/BankAccountSelect.vue'
-// import HistoryList from '@/views/HistoryList.vue'
 import MainView from '@/views/MainView.vue'
 
 const router = createRouter({
@@ -36,7 +35,6 @@ const router = createRouter({
       component: MyPageProFile,
     },
     {
-      // { path: '/' component: () => import('@/views/Home.vue') },
       path: '/mypage',
       name: 'MyPage',
       component: MyPage,
@@ -66,18 +64,7 @@ const router = createRouter({
       name: 'Main',
       component: MainView,
     },
-    // { path: '/', component: () => import('@/views/Home.vue') },
-    // { path: '/calendar', component: () => import('@/views/Calendar.vue') },
-    // {
-    //   path: '/consumption',
-    //   component: () => import('@/views/Consumption.vue'),
-    // },
-    // { path: '/mypage', component: () => import('@/views/MyPage.vue') },
-    // { path: '/exit', component: () => import('@/views/Exit.vue') },
-    // {
-    //   path: '/',
-    //   name: 'Home',
-    // },
+
     {
       path: '/consumption',
       name: 'Consumption',
