@@ -56,6 +56,15 @@ const toggleCategoryGrid = () => {
 
 const handleSubmit = async () => {
   try {
+    if (
+      !amount.value ||
+      !selectedCategory.value ||
+      !calendar.value ||
+      !bank.value
+    ) {
+      alert('모든 항목을 입력해주세요.')
+      return
+    }
     const newData = {
       id: Date.now().toString(),
       userID: userid,
