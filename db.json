@@ -330,28 +330,6 @@
       "title": "로또",
       "details": "로또 당첨",
       "bank": "KB"
-=======
-      "id": "338a",
-      "userID": null,
-      "title": "qwe",
-      "amount": 111,
-      "category": "",
-      "type": "",
-      "bank": "",
-      "details": "",
-      "date": "2025-03-01"
-    },
-    {
-      "id": "71b7",
-      "userID": null,
-      "title": "111",
-      "amount": 111,
-      "category": "부수입",
-      "type": "income",
-      "bank": "",
-      "details": "",
-      "date": "2025-03-01"
->>>>>>> Stashed changes
     }
   ],
   "account": [
