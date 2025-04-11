@@ -190,12 +190,12 @@
     {
       "id": "18",
       "userID": "bikdh",
-      "date": "2025-04-03",
       "amount": 4500,
       "type": "expense",
       "category": "식비",
-      "title": "편의점 간식",
+      "title": "편의점 간식을 샀어요!!",
       "details": "삼각김밥",
+      "date": "2025-04-03",
       "bank": "KB"
     },
     {
@@ -212,12 +212,12 @@
     {
       "id": "20",
       "userID": "kxxheehxxn",
-      "date": "2025-04-04",
       "amount": 1500000,
       "type": "income",
       "category": "월급",
       "title": "아르바이트 정산",
       "details": "카페 알바 월급",
+      "date": "2025-04-04",
       "bank": "Shinhan"
     },
     {
@@ -230,17 +230,6 @@
       "title": "저녁",
       "details": "삼겹살",
       "bank": "Shinhan"
-    },
-    {
-      "id": "22",
-      "userID": "bikdh",
-      "date": "2025-04-04",
-      "amount": 750000,
-      "type": "income",
-      "category": "부수입",
-      "title": "아르바이트",
-      "details": "카페 알바",
-      "bank": "KB"
     },
     {
       "id": "23",
@@ -298,42 +287,73 @@
       "bank": "KB"
     },
     {
-      "id": "1744336883604",
-      "userID": "saeyeon",
+      "id": "1744337774198",
+      "userID": "bikdh",
       "date": "2025-04-11",
-      "amount": 3000,
+      "amount": 6000,
       "type": "expense",
-      "category": "회비",
-      "title": "",
-      "details": "",
-      "bank": "Woori"
+      "category": "식비",
+      "title": "점심",
+      "details": "짜장면",
+      "bank": "KB"
+    },
+    {
+      "id": "1744337814373",
+      "userID": "bikdh",
+      "date": "2025-04-10",
+      "amount": 50000,
+      "type": "expense",
+      "category": "건강",
+      "title": "병원",
+      "details": "감기",
+      "bank": "KB"
+    },
+    {
+      "id": "1744338506412",
+      "userID": "bikdh",
+      "date": "2025-04-01",
+      "amount": 250000,
+      "type": "income",
+      "category": "상여",
+      "title": "지원금",
+      "details": "KB지원금",
+      "bank": "KB"
+    },
+    {
+      "id": "1744338690732",
+      "userID": "bikdh",
+      "date": "2025-04-05",
+      "amount": 50000,
+      "type": "income",
+      "category": "기타",
+      "title": "로또",
+      "details": "로또 당첨",
+      "bank": "KB"
     }
   ],
   "account": [
     {
-      "userID": "bikdh",
+      "id": "bikdh",
       "password": "123123",
       "email": "sking1109s@gmail.com",
-      "phoneNumber": "010-1234-5678",
-      "avatarNumber": 8,
+      "phoneNumber": "010-3333-5678",
+      "avatarNumber": 4,
       "bank": {
         "KB": 3032500,
-        "Shinhan": 2435000
-      },
-      "id": "e73d",
-      "username": "김도현"
+        "Shinhan": 2435000,
+        "Woori": 369800,
+        "Hana": 1000000,
+        "Nonghyup": 500000,
+        "Kakao": 200000,
+        "MG": 123
+      }
     },
     {
-      "userID": "saeyeon",
+      "id": "saeyeon",
       "password": "123123",
       "email": "sking1109s@gmail.com",
       "phoneNumber": "010-1234-5678",
-      "avatarNumber": 1,
-      "bank": {
-        "KB": 1000000,
-        "Shinhan": 1000000
-      },
-      "id": "fc4d"
+      "avatarNumber": 1
     }
   ]
 }
