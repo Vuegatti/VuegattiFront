@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
 import AvartarPicker from '@/components/AvartarPicker.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import apiClient from '@/utils/axios.js'
 
 const router = useRouter()
 
@@ -20,9 +20,7 @@ const handleSelectedAvatar = value => {
 
 onMounted(async () => {
   try {
-    const { data } = await axios.get(
-      `http://localhost:5001/account?userID=${userId}`,
-    )
+    const { data } = await apiClient.get(`/account?userID=${userId}`)
     const user = data[0]
     if (user) {
       dbId.value = user.id
@@ -36,7 +34,7 @@ onMounted(async () => {
 // 저장 + MyPage로 이동
 const saveAvatar = async () => {
   try {
-    await axios.patch(`http://localhost:5001/account/${dbId.value}`, {
+    await apiClient.patch(`/account/${dbId.value}`, {
       avatarNumber: selectedAvatar.value,
     })
 

@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
 import Avatar from '@/components/AvatarPicture.vue'
 import BaseButton from '@/components/BaseButton.vue'
+import apiClient from '@/utils/axios.js'
 
 import { useRoute } from 'vue-router'
 
@@ -23,7 +23,7 @@ onMounted(async () => {
     avatarNumber.value = parseInt(route.query.avatar)
   } else {
     try {
-      const { data } = await axios.get(`http://localhost:5001/account?id=${ID}`)
+      const { data } = await apiClient.get(`/account?id=${ID}`)
       console.log('GET 결과:', data)
       const user = data[0]
       if (user) {
@@ -53,10 +53,8 @@ const save = async () => {
 
   if (userIdInDB.value !== null) {
     try {
-      await axios.patch(
-        `http://localhost:5001/account/${userIdInDB.value}`,
-        updateData,
-      )
+      await apiClient.patch(`/account/${userIdInDB.value}`, updateData)
+      alert('회원 정보가 저장되었습니다.')
     } catch (error) {
       console.error('PATCH 요청 실패:', error)
     }
@@ -140,7 +138,7 @@ const save = async () => {
   border-radius: 10px;
   text-align: center;
   width: 100%;
-  height: 70vh;
+  /* height: 70vh; */
   padding: var(--space-l);
 }
 .mypage-box h2 {
@@ -177,7 +175,7 @@ form .form-group input {
 }
 
 input::placeholder {
-  color: #aaa;
+  color: #aaaaaa6f;
 }
 .button-group {
   display: flex;

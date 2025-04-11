@@ -92,9 +92,10 @@ onMounted(async () => {
   width: 100%;
 }
 
-.swiper-slide {
+swiper-slide {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .card {

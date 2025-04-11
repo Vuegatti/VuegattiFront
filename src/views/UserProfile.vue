@@ -3,7 +3,9 @@ import { ref, computed, onMounted } from 'vue'
 import Avatar from '@/components/AvatarPicture.vue'
 import { useHistory } from '@/stores/history'
 import CardSlide from '@/views/CardSlide.vue'
+import { useAccount } from '@/stores/account'
 
+const accountStore = useAccount()
 const monthNames = [
   'Jan',
   'Feb',
@@ -40,8 +42,10 @@ const avatarNumber = ref('') // 기본값
 
 onMounted(async () => {
   const userID = localStorage.getItem('userId') // 로그인된 사용자 ID
-  const res = await fetch('http://localhost:5001/account')
-  const data = await res.json()
+  await accountStore.fetchAccount()
+  const data = accountStore.accountInfo
+
+  // const data = await res.json()
   const user = data.find(u => u.id === userID)
   console.log('user', user)
   if (user && user.avatarNumber) {
