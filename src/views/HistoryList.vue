@@ -177,7 +177,7 @@ h2 {
   background-color: var(--color-text);
 }
 .history-list {
-  max-height: 60vh;
+  max-height: 50vh;
   padding: 0;
   margin: 0 auto;
   width: 71vi;
