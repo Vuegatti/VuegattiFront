@@ -343,4 +343,8 @@ textare::placeholder {
 .grid-income p:hover {
   background-color: #e0e0e0;
 }
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  filter: invert(100%) sepia(100%) saturate(500%) hue-rotate(180deg);
+}
 </style>
