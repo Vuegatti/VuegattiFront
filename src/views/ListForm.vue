@@ -56,6 +56,15 @@ const toggleCategoryGrid = () => {
 
 const handleSubmit = async () => {
   try {
+    if (
+      !amount.value ||
+      !selectedCategory.value ||
+      !calendar.value ||
+      !bank.value
+    ) {
+      alert('모든 항목을 입력해주세요.')
+      return
+    }
     const newData = {
       id: Date.now().toString(),
       userID: userid,
@@ -333,5 +342,9 @@ textare::placeholder {
 .grid-expense p:hover,
 .grid-income p:hover {
   background-color: #e0e0e0;
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  filter: invert(100%) sepia(100%) saturate(500%) hue-rotate(180deg);
 }
 </style>
