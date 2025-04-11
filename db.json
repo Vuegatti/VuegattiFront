@@ -285,6 +285,50 @@
       "title": "주식",
       "details": "비트코인",
       "bank": "KB"
+    },
+    {
+      "id": "1744337774198",
+      "userID": "bikdh",
+      "date": "2025-04-11",
+      "amount": 6000,
+      "type": "expense",
+      "category": "식비",
+      "title": "점심",
+      "details": "짜장면",
+      "bank": "KB"
+    },
+    {
+      "id": "1744337814373",
+      "userID": "bikdh",
+      "date": "2025-04-10",
+      "amount": 50000,
+      "type": "expense",
+      "category": "건강",
+      "title": "병원",
+      "details": "감기",
+      "bank": "KB"
+    },
+    {
+      "id": "1744338506412",
+      "userID": "bikdh",
+      "date": "2025-04-01",
+      "amount": 250000,
+      "type": "income",
+      "category": "상여",
+      "title": "지원금",
+      "details": "KB지원금",
+      "bank": "KB"
+    },
+    {
+      "id": "1744338690732",
+      "userID": "bikdh",
+      "date": "2025-04-05",
+      "amount": 50000,
+      "type": "income",
+      "category": "기타",
+      "title": "로또",
+      "details": "로또 당첨",
+      "bank": "KB"
     }
   ],
   "account": [
@@ -293,7 +337,7 @@
       "password": "123123",
       "email": "sking1109s@gmail.com",
       "phoneNumber": "010-3333-5678",
-      "avatarNumber": 9,
+      "avatarNumber": 5,
       "bank": {
         "KB": 3032500,
         "Shinhan": 2435000,
