@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import axios from 'axios'
+import apiClient from '@/utils/axios.js'
 
 const ID = localStorage.getItem('userId')
 console.log(ID)
@@ -27,7 +27,7 @@ const fetchHistory = async () => {
   const month = (currentDate.value.getMonth() + 1).toString().padStart(2, '0')
   const prefix = `${year}-${month}`
 
-  const res = await axios.get('http://localhost:5001/history')
+  const res = await apiClient.get('/history')
   const history = res.data.filter(
     h => h.userID === ID && h.date.startsWith(prefix),
   )
@@ -77,7 +77,7 @@ const fetchHistory = async () => {
 
 const selectDate = date => {
   selectedDate.value = date
-  axios.get('http://localhost:5001/history').then(res => {
+  apiClient.get('/history').then(res => {
     const filtered = res.data.filter(h => h.userID === ID && h.date === date)
     selectedHistory.value = filtered
     selectedIncome.value = filtered
@@ -121,7 +121,7 @@ const addNewItem = async () => {
     date: selectedDate.value,
   }
 
-  await axios.post('http://localhost:5001/history', payload)
+  await apiClient.post('/history', payload)
   await fetchHistory()
   selectDate(selectedDate.value)
 
@@ -139,7 +139,7 @@ const addNewItem = async () => {
 const showForm = ref(false)
 
 const deleteItem = async id => {
-  await axios.delete(`http://localhost:5001/history/${id}`)
+  await apiClient.delete(`/history/${id}`)
   await fetchHistory()
   selectDate(selectedDate.value)
 }
@@ -331,6 +331,7 @@ onMounted(fetchHistory)
   display: grid;
   justify-content: center;
   gap: 10px;
+  height: 70vh;
 }
 
 .calendar-box {

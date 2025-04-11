@@ -285,6 +285,28 @@
       "title": "주식",
       "details": "비트코인",
       "bank": "KB"
+    },
+    {
+      "id": "1744336883604",
+      "userID": "saeyeon",
+      "date": "2025-04-11",
+      "amount": 3000,
+      "type": "expense",
+      "category": "회비",
+      "title": "",
+      "details": "",
+      "bank": "Woori"
+    },
+    {
+      "id": "490b",
+      "userID": "bikdh",
+      "title": "안녕!!",
+      "amount": 3000,
+      "category": "월급",
+      "type": "income",
+      "bank": "KB",
+      "details": "",
+      "date": "2025-04-11"
     }
   ],
   "account": [
@@ -293,7 +315,7 @@
       "password": "123123",
       "email": "sking1109s@gmail.com",
       "phoneNumber": "010-3333-5678",
-      "avatarNumber": 9,
+      "avatarNumber": 4,
       "bank": {
         "KB": 3032500,
         "Shinhan": 2435000,
