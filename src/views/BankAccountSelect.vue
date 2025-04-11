@@ -116,7 +116,10 @@ const save = async () => {
   justify-content: center;
   align-items: center;
   gap: 40px;
-  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .register-container {
@@ -126,7 +129,6 @@ const save = async () => {
   color: white;
   gap: 5vw;
   align-items: center;
-  padding: 8vh;
 }
 
 .register-box {
@@ -143,13 +145,13 @@ const save = async () => {
 .register-box h2 {
   margin-bottom: 5px;
 }
-
+/*
 .register-box form {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100%;
-}
+} */
 
 form input {
   display: block;

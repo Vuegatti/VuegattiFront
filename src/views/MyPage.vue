@@ -122,13 +122,15 @@ const save = async () => {
   color: var(--color-text);
 }
 .mypage-container {
-  padding-top: 8vh;
   display: flex;
   justify-content: center;
   align-items: center;
   color: white;
   gap: 5vw;
-  height: 100vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .mypage-box {
   display: flex;
@@ -137,7 +139,7 @@ const save = async () => {
   border: 1px solid rgba(248, 244, 242, 0.503);
   border-radius: 10px;
   text-align: center;
-  width: 50%;
+  width: 100%;
   height: 70vh;
   padding: var(--space-l);
 }
@@ -146,7 +148,7 @@ const save = async () => {
 }
 .mypage-box p {
   font-size: 0.9rem;
-  color: #ccc;
+  color: var(--color-text);
   margin-bottom: 20px;
 }
 
