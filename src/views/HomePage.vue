@@ -2,20 +2,19 @@
 import BarChart from './BarChart.vue'
 import PieChart from './PieChart.vue'
 import UserProfile from './UserProfile.vue'
-
 </script>
 
 <template>
-<div class="main-area">
-  <div class="container">
-    <div class="left">
-      <UserProfile />
+  <div class="main-area">
+    <div class="container">
+      <div class="left">
+        <UserProfile />
+      </div>
+      <div class="right">
+        <BarChart />
+        <PieChart />
+      </div>
     </div>
-    <div class="right">
-      <BarChart />
-      <PieChart />
-    </div>
-  </div>
   </div>
 </template>
 
@@ -47,14 +46,13 @@ import UserProfile from './UserProfile.vue'
 /* 왼쪽 컬럼 */
 .left {
   flex: 1;
-  /* max-height: 30vh; */
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column; /*  세로 배치 */
   justify-content: space-evenly; /* 위쪽부터 정렬 */
   align-items: center; /* 가운데 정렬 (선택사항) */
-  padding: 2vh 2vw;
-  height: 100%; /* 부모 height 채움 */
+  padding: 0 2vw;
+  height: 60vh; /* 부모 height 채움 */
 }
 
 /* 오른쪽 컬럼 */
@@ -69,6 +67,6 @@ import UserProfile from './UserProfile.vue'
   position: relative;
   right: 100px;
   margin-bottom: 0;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 </style>

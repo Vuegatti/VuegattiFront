@@ -287,26 +287,48 @@
       "bank": "KB"
     },
     {
-      "id": "1744336883604",
-      "userID": "saeyeon",
+      "id": "1744337774198",
+      "userID": "bikdh",
       "date": "2025-04-11",
-      "amount": 3000,
+      "amount": 6000,
       "type": "expense",
-      "category": "회비",
-      "title": "",
-      "details": "",
-      "bank": "Woori"
+      "category": "식비",
+      "title": "점심",
+      "details": "짜장면",
+      "bank": "KB"
     },
     {
-      "id": "490b",
+      "id": "1744337814373",
       "userID": "bikdh",
-      "title": "안녕!!",
-      "amount": 3000,
-      "category": "월급",
+      "date": "2025-04-10",
+      "amount": 50000,
+      "type": "expense",
+      "category": "건강",
+      "title": "병원",
+      "details": "감기",
+      "bank": "KB"
+    },
+    {
+      "id": "1744338506412",
+      "userID": "bikdh",
+      "date": "2025-04-01",
+      "amount": 250000,
       "type": "income",
-      "bank": "KB",
-      "details": "",
-      "date": "2025-04-11"
+      "category": "상여",
+      "title": "지원금",
+      "details": "KB지원금",
+      "bank": "KB"
+    },
+    {
+      "id": "1744338690732",
+      "userID": "bikdh",
+      "date": "2025-04-05",
+      "amount": 50000,
+      "type": "income",
+      "category": "기타",
+      "title": "로또",
+      "details": "로또 당첨",
+      "bank": "KB"
     }
   ],
   "account": [

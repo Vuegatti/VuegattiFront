@@ -206,8 +206,21 @@ const handleClose = () => {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
   z-index: 100;
+  height: 50vh;
+  overflow: auto;
 }
-
+.listform::-webkit-scrollbar {
+  width: 10px;
+}
+.listform::-webkit-scrollbar-thumb {
+  background-color: var(--color-background);
+  border-radius: 10px;
+}
+.listform::-webkit-scrollbar-track {
+  background-color: gray;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+}
 .button-container {
   display: flex;
   justify-content: center;

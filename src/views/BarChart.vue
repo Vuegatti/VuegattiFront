@@ -43,14 +43,14 @@ const chartData = computed(() => ({
       backgroundColor: '#5cd1c7',
       data: incomeData.value,
       borderRadius: 6,
-      barThickness: 40,
+      barThickness: 20,
     },
     {
       label: '소비',
       backgroundColor: '#ff5b5d',
       data: expenseData.value,
       borderRadius: 6,
-      barThickness: 40,
+      barThickness: 20,
     },
   ],
 }))
@@ -162,7 +162,7 @@ const chartOptions = {
 }
 .chart-box {
   flex: 1;
-  height: 230px; /* 차트 높이 */
+  height: 30vh; /* 차트 높이 */
   position: relative;
 }
 
