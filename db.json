@@ -190,12 +190,12 @@
     {
       "id": "18",
       "userID": "bikdh",
+      "date": "2025-04-03",
       "amount": 4500,
       "type": "expense",
       "category": "식비",
-      "title": "편의점 간식을 샀어요!!",
+      "title": "편의점 간식",
       "details": "삼각김밥",
-      "date": "2025-04-03",
       "bank": "KB"
     },
     {
@@ -212,12 +212,12 @@
     {
       "id": "20",
       "userID": "kxxheehxxn",
+      "date": "2025-04-04",
       "amount": 1500000,
       "type": "income",
       "category": "월급",
       "title": "아르바이트 정산",
       "details": "카페 알바 월급",
-      "date": "2025-04-04",
       "bank": "Shinhan"
     },
     {
@@ -230,6 +230,17 @@
       "title": "저녁",
       "details": "삼겹살",
       "bank": "Shinhan"
+    },
+    {
+      "id": "22",
+      "userID": "bikdh",
+      "date": "2025-04-04",
+      "amount": 750000,
+      "type": "income",
+      "category": "부수입",
+      "title": "아르바이트",
+      "details": "카페 알바",
+      "bank": "KB"
     },
     {
       "id": "23",
@@ -300,27 +311,29 @@
   ],
   "account": [
     {
-      "id": "bikdh",
-      "password": "123123",
-      "email": "sking1109s@gmail.com",
-      "phoneNumber": "010-3333-5678",
-      "avatarNumber": 4,
-      "bank": {
-        "KB": 3032500,
-        "Shinhan": 2435000,
-        "Woori": 369800,
-        "Hana": 1000000,
-        "Nonghyup": 500000,
-        "Kakao": 200000,
-        "MG": 123
-      }
-    },
-    {
-      "id": "saeyeon",
+      "userID": "bikdh",
       "password": "123123",
       "email": "sking1109s@gmail.com",
       "phoneNumber": "010-1234-5678",
-      "avatarNumber": 1
+      "avatarNumber": 8,
+      "bank": {
+        "KB": 3032500,
+        "Shinhan": 2435000
+      },
+      "id": "e73d",
+      "username": "김도현"
+    },
+    {
+      "userID": "saeyeon",
+      "password": "123123",
+      "email": "sking1109s@gmail.com",
+      "phoneNumber": "010-1234-5678",
+      "avatarNumber": 1,
+      "bank": {
+        "KB": 1000000,
+        "Shinhan": 1000000
+      },
+      "id": "fc4d"
     }
   ]
 }

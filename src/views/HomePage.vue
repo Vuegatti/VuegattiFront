@@ -34,13 +34,15 @@ import UserProfile from './UserProfile.vue'
 }
 .container {
   display: flex;
+  /* flex-wrap: wrap; */
   background-color: var(--color-background);
   color: #f8f4f2;
   width: 90%;
   max-height: 100%;
   padding: 0;
-  overflow: hidden;
-  align-items: stretch;
+  max-height: 80vh;
+  /* height: 100vh; */
+  /* overflow: hidden; */
 }
 
 /* 왼쪽 컬럼 */
@@ -65,7 +67,7 @@ import UserProfile from './UserProfile.vue'
   width: 100%;
   position: relative;
   right: 100px;
-  margin-bottom: 0;
-  justify-content: space-between;
+  margin-bottom: 50px;
+  /* overflow: hidden; */
 }
 </style>

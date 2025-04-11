@@ -92,7 +92,7 @@ onMounted(async () => {
   justify-content: space-between;
   height: 100%;
   width: 100%;
-  gap: 4vh; /* 카드와 프로필 사이 여백 */
+  gap: 1rem; /* 카드와 프로필 사이 여백 */
   color: var(--color-text);
   transform: scale(0.85);
   transform-origin: top center;
@@ -123,7 +123,7 @@ onMounted(async () => {
 }
 
 .user-profile {
-  margin: 4vh 0 2vh;
+  margin: 1vh 0 1vh;
 }
 
 .month {
@@ -133,7 +133,7 @@ onMounted(async () => {
 
 .summary {
   font-size: 1.6vw;
-  margin-bottom: 1vh;
+  margin-bottom: 0.5vh;
   border-bottom: 0.1vh solid var(--color-text);
 }
 
