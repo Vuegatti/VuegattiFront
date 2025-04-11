@@ -44,7 +44,6 @@ const selectAvatar = i => {
 }
 .selected-avatar {
   margin-bottom: 16px;
-  /* border: 4px solid white; */
   border-radius: 24px;
 }
 .avatar-grid {

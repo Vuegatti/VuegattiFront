@@ -24,7 +24,6 @@ footer {
 
 a {
   color: var(--color-text);
-  /* text-decoration: none; */
 }
 
 i::after {

@@ -296,17 +296,6 @@
       "title": "",
       "details": "",
       "bank": "Woori"
-    },
-    {
-      "id": "490b",
-      "userID": "bikdh",
-      "title": "안녕!!",
-      "amount": 3000,
-      "category": "월급",
-      "type": "income",
-      "bank": "KB",
-      "details": "",
-      "date": "2025-04-11"
     }
   ],
   "account": [

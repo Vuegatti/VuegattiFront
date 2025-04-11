@@ -45,7 +45,6 @@ onMounted(async () => {
   await accountStore.fetchAccount()
   const data = accountStore.accountInfo
 
-  // const data = await res.json()
   const user = data.find(u => u.id === userID)
   console.log('user', user)
   if (user && user.avatarNumber) {
