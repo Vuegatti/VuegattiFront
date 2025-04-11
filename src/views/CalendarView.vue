@@ -424,8 +424,8 @@ onMounted(fetchHistory)
   color: #333;
   border-radius: 10px;
   padding: 8px;
-  width: 125px;
-  height: 70px;
+  width: 9vw;
+  height: 7.5vh;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
