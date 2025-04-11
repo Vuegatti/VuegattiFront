@@ -116,4 +116,7 @@ const pieOptions = {
   position: relative;
   top: 10px;
 }
+.newbie {
+  position: absolute;
+}
 </style>
