@@ -131,6 +131,10 @@ const handleClose = () => {
         <option value="Woori">우리은행</option>
         <option value="Hana">하나은행</option>
         <option value="Nonghyup">농협은행</option>
+        <option value="IBK">기업은행</option>
+        <option value="Toss">토스뱅크</option>
+        <option value="Kakao">카카오뱅크</option>
+        <option value="MG">새마을금고</option>
       </select>
 
       <label for="">카테고리</label>
