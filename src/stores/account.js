@@ -68,6 +68,11 @@ export const useAccount = defineStore('account', () => {
     return bankInfo
   })
 
+  const $reset = () => {
+    accountInfo.value = []
+    userID.value = localStorage.getItem('userId') || ''
+  }
+
   return {
     accountInfo,
     fetchAccount,
@@ -76,5 +81,7 @@ export const useAccount = defineStore('account', () => {
     logIn,
     addAccount,
     fetchAccountById,
+    $reset,
+    userID,
   }
 })
